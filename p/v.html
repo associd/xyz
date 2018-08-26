@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title></title>
+      <style media="screen">
+         *{
+            margin: 0;
+            padding: 0;
+            outline: none;
+            color: skyblue;
+            border: none;
+            line-height: 30px;
+            font-size: 20px;
+         }
+         canvas{
+            display: block;
+         }
+         .wraper{
+            padding: 5px;
+            background-color: #292929;
+            position: fixed;
+            right: 20px;
+            top: 100px;
+            opacity: 0.8;
+            /* display: none; */
+         }
+         .box{
+            margin: 5px 0;
+            text-align: right;
+         }
+         .box input{
+            max-width: 50px;
+         }
+         .play{
+            position: fixed;
+            bottom: 10px;
+            left: -50%;
+            right: -50%;
+            margin: auto;
+         }
+         .left{
+            right: initial;
+            left: 20px;
+         }
+         .list>li:hover{
+            background-color: rgba(255,255,255, 0.6);
+            cursor: pointer;
+         }
+         .spe-box{
+            top: 400px;
+         }
+      </style>
+   </head>
+   <body>
+      <canvas id="canvas" width="300" height="300"></canvas>
+      <div class="wraper left">
+         <ul id="music-list" class="list">
+            <?php foreach($path as $val): ?>
+            <?php echo '<li>'.$val.'</li>'; ?>
+            <?php endforeach; ?>
+         </ul>
+      </div>
+      <div class="wraper">
+         <button type="button" name="button">asdfasdfasdfasdfdasf</button>
+         <div class="box">
+            粒子宽度：
+            <input class="ptc-w" type="number" name="" min="1" max="100" value="20">
+         </div>
+         <div class="box">
+            粒子高度：
+            <input class="ptc-h" type="number" name="" min="1" max="100" value="20">
+         </div>
+         <div class="box">
+            粒子重力加速度：
+            <input class="ptc-a" type="number" name="" min="0" max="100" value="0">
+         </div>
+         <div class="box">
+            粒子生存时间：
+            <input class="ptc-a" type="text" name="" min="1" max="100" value="0">s
+         </div>
+      </div>
+
+      <div class="wraper spe-box">
+         <ul id="spe" class="list">
+            <li>sdfasdfasdf</li>
+         </ul>
+      </div>
+
+      <button class="play" id="switch" val="stop">stop</button>
+
+      <script src="canvas/utils.js"></script>
+      <script src="canvas/function.js"></script>
+      <script src="canvas/animate.js"></script>
+      <script src="canvas/drawImage.js"></script>
+
+      <script src="canvas/cube/dot.js"></script>
+      <script src="canvas/cube/cube.js"></script>
+
+      <script src="canvas/partical/partical.js"></script>
+
+      <script src="canvas/audio/audio.js"></script>
+      <script src="canvas/audio/FrequencySpectrum.js"></script>
+
+      <script src="canvas/main.js"></script>
+
+   </body>
+</html>
