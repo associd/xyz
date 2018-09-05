@@ -1,0 +1,213 @@
+html,a{
+    color: rgba(255,255,255,0.8);
+    font-family: Microsoft Yahei;
+    text-decoration: none;
+}
+html{
+    background-color: #000;
+}
+body{
+   overflow: hidden;
+}
+@media screen and (max-width: 420px){
+    html{
+        font-size: 12px;
+    }
+}
+
+main{
+   width: calc(100% + 17px);
+}
+.scroll-box{
+   overflow: hidden;
+}
+.scroll-box>*{
+   overflow-y: scroll;
+}
+.audio-canvas{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 220px;
+    margin-left: 220px;
+    z-index: -1;
+}
+.albumimg{
+    width: 200px;
+    height: 200px;
+    flex: 0 0 auto;
+}
+.big{
+    height: 30px;
+    line-height: 30px;
+    font-size: 30px;
+}
+.mid{
+    height: 20px;
+    line-height: 20px;
+    font-size: 20px;
+}
+
+.music-list>li{
+    display: flex;
+}
+.music-list>li>ul{
+    width: 0;
+    flex: 1 0 0;
+    display: flex;
+}
+.music-list>li>a{
+   line-height: 30px;
+}
+.music-list>li>ul, .music-list>li>ul *:not(a){
+    pointer-events: none;
+}
+.music-list>li:hover{
+    color: black!important;
+    background-color: rgba(255,255,255,0.5)!important;
+    cursor: pointer!important;
+}
+.music-list>li:nth-child(even){
+    background-color: rgba(255,255,255,0.2);
+}
+.music-list>li:nth-child(odd){
+    background-color: rgba(255,255,255,0.1);
+}
+
+.music-list>li>ul li{
+   width: 0;
+   height: 30px;
+   line-height: 30px;
+   padding-left: 10px;
+   overflow: hidden;
+   -ms-text-overflow: ellipsis;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+}
+.music-list ul>li:nth-child(1){
+    flex: 4 0 0;
+}
+.music-list ul>li:nth-child(2){
+    flex: 2.5 0 0;
+}
+.music-list ul>li:nth-child(3){
+    flex: 2.5 0 0;
+}
+.music-list ul>li:nth-child(4){
+    flex: 1 0 0;
+}
+
+.music-title{
+    height: 32px;
+    line-height: 32px;
+    background-color: rgba(255,255,255,0.3);
+}
+.music-title .col{
+    padding-left:10px;
+}
+
+.control{
+    height: 60px;
+    line-height: 60px;
+}
+.control .imgwraper{
+    height: 100%;
+}
+.control .imgwraper img{
+    object-fit: contain;
+}
+.audiobox{
+    flex: 8;
+}
+.audiobox .l,.audiobox .r{
+   margin: auto 36px;
+   height: 36px;
+}
+.audiobox .c{
+   height: 50px;
+   margin: auto 0;
+}
+.audiobox .c img{
+   display: none;
+}
+.l, .c, .r{
+   cursor: pointer;
+   border-radius: 50%;
+   overflow: hidden;
+   filter: opacity(0.8);
+   transition: all 0.2s;
+}
+.l:hover, .c:hover, .r:hover{
+   filter: opacity(1);
+}
+.vol{
+    flex: 1.5;
+}
+.other{
+    flex: 0.5;
+}
+.progress{
+    position: relative;
+    height: 2px;
+    margin: auto;
+    background-color: #aaa;
+    flex: 1;
+}
+.progress .curprogress{
+    width: 60%;
+    height: 100%;
+    background-color: #fff;
+}
+.progress .cur{
+    width: 20px;
+    height: 20px;
+    margin: auto 0;
+    background-color: gray;
+    border-radius: 50%;
+    border: white solid 2px;
+    position: absolute;
+    left: 0;
+    top: -50%;
+    bottom: -50%;
+    cursor: pointer;
+}
+.vol{
+    padding: 0 20px;
+}
+.volicon{
+    margin-right: 10px;
+}
+.audiobox span{
+    margin: 0 20px;
+    width: 32px;
+}
+
+.html-bg{
+    position: fixed;
+    z-index: -100;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    opacity: 1;
+    transition: all 0.5s;
+    pointer-events: none;
+}
+.html-bg::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(transparent, black);
+}
+.html-bg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: opacity(0.2) blur(10px);
+}
+.html-bg.hide{
+    opacity: 0;
+}
