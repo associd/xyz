@@ -37,19 +37,48 @@
          }
 
          var energy = [
-            rand(0, 200),
-            rand(0, 200),
-            rand(0, 200),
-            rand(0, 200),
-            rand(0, 200),
+            rand(100, 200),
+            rand(100, 200),
+            rand(100, 200),
+            rand(100, 200),
+            rand(100, 200),
          ]
 
          var numberOfEnergy = energy.length
          var energyRotate = 360 / numberOfEnergy
 
          ctxTrans(canvas, center.x, center.y)
-         ctxRotate(canvas, -90 / 180 * Math.PI)
+         drawPoint(canvas, 0, 0, 3, "red")
 
+         //绘制超级nb 的东西
+         for(var index = 0; index < energy.length; index ++) {
+            var angle = energyRotate * index / 180 * Math.PI
+            var x = Math.cos(angle) * energy[index]
+            var y = Math.sin(angle) * energy[index]
+            drawPoint(canvas, x, y, 3, "black")
+
+            var d1x = x
+            var d1y = y
+
+            var d2x = x - Math.sin(angle) * 50
+            var d2y = y + Math.cos(angle) * 50
+
+            index = (index + 1) % energy.length
+            var angle = energyRotate * (index) / 180 * Math.PI
+            var d4x = Math.cos(angle) * energy[index]
+            var d4y = Math.sin(angle) * energy[index]
+
+            var d3x = d4x + Math.sin(angle) * 50
+            var d3y = d4y - Math.cos(angle) * 50
+
+            stroke(curveOfPath(canvas, [
+               {x:d1x, y:d1y},
+               {x:d2x, y:d2y},
+               {x:d3x, y:d3y},
+               {x:d4x, y:d4y},
+            ]), "skyblue")
+
+         }
       }
 
       //base
