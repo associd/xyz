@@ -13,6 +13,9 @@
 </head>
 <body>
     <header>
+      <div class="canvas-wraper" id="canvas-wraper">
+         <canvas class="audio-canvas" id="audio-canvas" height="220"></canvas>
+      </div>
         <div class="flex">
             <div class="imgwraper m10 albumimg">
                 <img class="music-img" src="" alt="">
@@ -21,11 +24,14 @@
                 <div class="music-name big ovfe mb10"></div>
                 <div class="music-album mid ovfe mb10"></div>
                 <div class="music-composer mid ovfe "></div>
-                <div class="canvas-wraper" id="canvas-wraper">
-                    <canvas class="audio-canvas" id="audio-canvas" height="220"></canvas>
-                </div>
             </div>
         </div>
+        <div class="html-bg hide" id="active-albumimg"></div>
+        <div class="slide-box">
+            <div class="btn down" id="slide"></div>
+        </div>
+    </header>
+    <main class="scroll-box">
         <ul class="music-title flex">
             <li class="col f4">标题</li>
             <li class="col f2o5">作者</li>
@@ -33,9 +39,6 @@
             <li class="col f1">时间</li>
             <li class="">操作</li>
         </ul>
-    </header>
-    <div class="html-bg hide" id="active-albumimg"></div>
-    <main class="scroll-box">
         <ul class="music-list">
             <?php   use Music\Music;
                     $music = new Music($DB);
