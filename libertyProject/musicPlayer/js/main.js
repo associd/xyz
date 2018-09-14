@@ -171,7 +171,7 @@ function audio_down(down) {
    sound.timeButtonDown = down
 }
 function audio_set_current_time() {
-   
+
 }
 
 
@@ -183,12 +183,43 @@ function get_data(event) {
    return event.dataTransfer.files[0]
 }
 function upload_music(file) {
+   var d = new Date()
+   var bytesPerPiece = 1024 * 1024 * 2
+   var fileName = file.name
+   var fileSize = file.size
+
+   var start = 0
+   var totalPieces = Math.ceil(fileSize / bytesPerPiece)
+   var count = totalPieces
+   upload_piece(start, --count, file, fileName)
+}
+function upload_piece(start, count, file, fileName) {
+   //土豆丝
+   var bytesPerPiece = 1024 * 1024 * 2
+   var fileSize = file.size
+   var end = start + bytesPerPiece
+   if(end > fileSize) {
+      end = fileSize
+   }
+   var chunk = file.slice(start, end)
+
    var fd = new FormData()
    var xhr = new XMLHttpRequest()
-   fd.append('file', file)
+
+   if(count >= 0) {
+      fd.append('file', chunk, fileName)
+      fd.append("token", "continue")
+   }else {
+      fd.append("token", "end")
+      fd.append("fileName", fileName)
+   }
+
    xhr.open('post', 'musicPlayer/upload_music.php')
    xhr.onload = function() {
       e('.music-list').innerHTML += xhr.responseText
+      if(count >= 0) {
+         upload_piece(end, --count, file, fileName)
+      }
    }
    xhr.upload.onprogress = function(event) {
       log(Math.floor(event.loaded / event.total * 100) + '%')
