@@ -185,6 +185,8 @@ function read_mp3($file, $img_path) {
     return $result;
 }
 
+
+//来自网络
 class MP3File
 {
     protected $filename;
