@@ -27,6 +27,12 @@
                 <div class="music-composer mid ovfe "></div>
             </div>
         </div>
+        <div class="html-bg hide" id="active-albumimg"></div>
+        <div class="slide-box">
+            <div class="btn down" id="slide"></div>
+        </div>
+    </header>
+    <main class="scroll-box">
         <ul class="music-title flex">
             <li class="col f4">标题</li>
             <li class="col f2o5">作者</li>

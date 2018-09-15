@@ -24,12 +24,6 @@
       }
       window.onload = function() {
          var canvas = elementFull(setElement(select(".box"),createCanvas()))
-         var dots = [
-            {x:0, y:0, color:"lightblue"},
-            {x:200, y:200, color:"red"},
-            {x:200, y:300, color:"blue"},
-            {x:300, y:300, color:"lightblue"},
-         ]
 
          var center = {
             x:canvas.width/2,
@@ -63,6 +57,7 @@
          ctxTrans(canvas, center.x, center.y)
          drawPoint(canvas, 0, 0, 3, "red")
 
+         //begin
          //绘制超级nb 的东西
          getContext(canvas).moveTo(
             Math.cos(energyRotate * 0 / 180 * Math.PI) * energy[0],
@@ -95,6 +90,7 @@
             ])
          }
          fill(canvas, "skyblue")
+         //end
       }
 
       //base

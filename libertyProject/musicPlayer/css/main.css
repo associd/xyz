@@ -14,6 +14,9 @@ body{
         font-size: 12px;
     }
 }
+main,header{
+    transition: all 0.2s;
+}
 
 main{
    width: calc(100% + 17px);
@@ -30,6 +33,9 @@ main{
     bottom: 0;
     left: 0;
     z-index: -1;
+}
+.audio-canvas.full{
+
 }
 .albumimg{
     width: 200px;
@@ -214,4 +220,35 @@ main{
 }
 .html-bg.hide{
     opacity: 0;
+}
+
+header{
+    position: relative;
+}
+header:hover .down{
+    bottom: -35px;
+}
+.btn{
+    cursor: pointer;
+}
+.slide-box{
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    margin: auto;
+    overflow: hidden;
+}
+.down{
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    left: -50%;
+    right: -50%;
+    bottom: -60px;
+    margin: auto;
+    border-radius: 50%;
+    background: #4d4d4d url(../img/up.png) no-repeat center 30px;
+    transform: rotateZ(180deg);
+    transition: all 0.2s;
 }
