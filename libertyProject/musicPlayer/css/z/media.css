@@ -1,0 +1,13 @@
+@media screen and (max-width: 960px) {
+   .control .vol, .control .other{
+      display: none;
+   }
+   .audiobox{
+      flex-direction: column;
+      height: 120px;
+   }
+   .play-control{
+      order: 2;
+      justify-content: center;
+   }
+}

@@ -13,6 +13,10 @@
 </head>
 <body>
     <header>
+      <div class="canvas-wraper" id="canvas-wraper">
+         <canvas class="audio-canvas" id="audio-canvas" height="220"></canvas>
+      </div>
+      <div class="html-bg hide" id="active-albumimg"></div>
         <div class="flex">
             <div class="imgwraper m10 albumimg">
                 <img class="music-img" src="" alt="">
@@ -21,9 +25,6 @@
                 <div class="music-name big ovfe mb10"></div>
                 <div class="music-album mid ovfe mb10"></div>
                 <div class="music-composer mid ovfe "></div>
-                <div class="canvas-wraper" id="canvas-wraper">
-                    <canvas class="audio-canvas" id="audio-canvas" height="220"></canvas>
-                </div>
             </div>
         </div>
         <ul class="music-title flex">
@@ -34,7 +35,6 @@
             <li class="">操作</li>
         </ul>
     </header>
-    <div class="html-bg hide" id="active-albumimg"></div>
     <main class="scroll-box">
         <ul class="music-list">
             <?php   use Music\Music;
@@ -45,22 +45,26 @@
     </main>
     <footer class="control flex">
         <div class="audiobox flex">
-            <div class="imgwraper l" id="audio-last">
-                <img title="上一首" src="musicPlayer/img/l.png" alt="">
+            <div class="play-control flex">
+               <div class="imgwraper l" id="audio-last">
+                  <img title="上一首" src="musicPlayer/img/l.png" alt="">
+               </div>
+               <div class="imgwraper c" id="audio-pause">
+                  <img id="play" title="播放" class="dpib" src="musicPlayer/img/play.png" alt="">
+                  <img id="pause" title="暂停" class="" src="musicPlayer/img/pause.png" alt="">
+               </div>
+               <div class="imgwraper r" id="audio-next">
+                  <img title="下一首" src="musicPlayer/img/r.png" alt="">
+               </div>
             </div>
-            <div class="imgwraper c" id="audio-pause">
-                <img id="play" title="播放" class="dpib" src="musicPlayer/img/play.png" alt="">
-                <img id="pause" title="暂停" class="" src="musicPlayer/img/pause.png" alt="">
+            <div class="time flex f1">
+               <span class="current">2:44</span>
+               <div class="progress">
+                  <div class="curprogress"></div>
+                  <div class="cur" id="audio-current-time"></div>
+               </div>
+               <span class="end">5:35</span>
             </div>
-            <div class="imgwraper r" id="audio-next">
-                <img title="下一首" src="musicPlayer/img/r.png" alt="">
-            </div>
-            <span class="current">2:44</span>
-            <div class="progress">
-                <div class="curprogress"></div>
-                <div class="cur" id="audio-current-time"></div>
-            </div>
-            <span class="end">5:35</span>
         </div>
         <div class="vol f1 flex">
             <div class="imgwraper volicon">

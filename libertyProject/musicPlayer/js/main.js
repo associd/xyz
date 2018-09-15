@@ -165,7 +165,7 @@ function set_audio_canvas() {
    var canvas = get_audio_canvas()
    var canvas_wraper = e("#canvas-wraper")
    canvas.width = canvas_wraper.offsetWidth
-   canvas.height = 220
+   canvas.height = 120
 }
 function audio_down(down) {
    sound.timeButtonDown = down

@@ -44,6 +44,7 @@ class Sound{
    }
    connect(obj) {
       obj.Farr = this.frequencyArray
+      obj.Tarr = this.timeArray
       this.element.push(obj)
    }
    connect_currentTime() {}
@@ -54,10 +55,11 @@ class Sound{
     */
    update() {
       this.time++
-      if(this.time % 60 == 0) {
+      if(this.time % 30 == 0) {
          this.connect_currentTime()
       }
       this.analyser.getByteFrequencyData(this.frequencyArray)
+      this.analyser.getByteTimeDomainData(this.timeArray)
       this.element.forEach(function(item, index) {
          item.update()
       })

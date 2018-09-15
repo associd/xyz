@@ -2,23 +2,24 @@ class FrequencySpt {
    constructor(canvas) {
       this.canvas = canvas
       this.ctx = canvas.getContext("2d")
+      this.Farr = []
+      this.Tarr = []
       this.style = {
          rect: {
             property: () => {
                var grd = this.ctx.createLinearGradient(this.canvas.width / 2, this.canvas.height * 0.1, this.canvas.width / 2, this.canvas.height);
-               grd.addColorStop(0,"rgba(255,198,61,0.7)")
-               grd.addColorStop(0.30,"rgba(168,255,0,0.7)")
-               grd.addColorStop(0.45, "rgba(56,255,227,0.7)")
-               grd.addColorStop(0.46, "rgba(56,255,227,0.7)")
-               grd.addColorStop(0.6, "rgba(255,198,61,0.7)")
-               grd.addColorStop(1,"rgba(255,0,0,1)")
+               grd.addColorStop(0,"rgba(255,198,61,1)")
+               grd.addColorStop(0.30,"rgba(168,255,0,0.9)")
+               grd.addColorStop(0.45, "rgba(56,255,227,0.8)")
+               grd.addColorStop(0.6, "rgba(56,255,227,0.4)")
+               grd.addColorStop(1,"rgba(56,255,227,0.2)")
 
-               var count = 100
+               var count = 120
                var o = {
-                  bar_height: this.canvas.height * 0.45,
+                  bar_height: this.canvas.height * 0.8,
                   bar_num: count,
-                  frqcy_min: 64,
-                  frqcy_max: 1024,
+                  frqcy_min: 0,
+                  frqcy_max: 128,
                   w: this.canvas.width / count,
                   grd: grd,
                }
@@ -40,7 +41,7 @@ class FrequencySpt {
                   var w = cw * this.Farr[index] / 100
                   if(l){
                      this.ctx.save()
-                     this.ctx.translate(o.w * i + cw, canvas_ch)
+                     this.ctx.translate(o.w * i + cw, this.canvas.height)
                      this.ctx.moveTo(-w, 0)
                      this.ctx.lineTo(0, -l)
                      this.ctx.lineTo(w, 0)
@@ -50,9 +51,9 @@ class FrequencySpt {
                      this.ctx.restore()
                   }
                }
-               this.ctx.fillStyle = o.grd
+               this.ctx.strokeStyle = o.grd
                this.ctx.globalAlpha = 0.5
-               this.ctx.fill()
+               this.ctx.stroke()
             }
          },
       }

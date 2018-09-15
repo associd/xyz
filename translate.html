@@ -70,23 +70,23 @@
          )
          for(var index = 0; index < energy.length; index ++) {
             var angle = energyRotate * index / 180 * Math.PI
-            var w = 20
+            var fat = 20
             var x = Math.cos(angle) * energy[index]
             var y = Math.sin(angle) * energy[index]
 
             var d1x = x
             var d1y = y
 
-            var d2x = x - Math.sin(angle) * w
-            var d2y = y + Math.cos(angle) * w
+            var d2x = x - Math.sin(angle) * fat
+            var d2y = y + Math.cos(angle) * fat
 
             i = (index + 1) % energy.length
             var angle = energyRotate * (i) / 180 * Math.PI
             var d4x = Math.cos(angle) * energy[i]
             var d4y = Math.sin(angle) * energy[i]
 
-            var d3x = d4x + Math.sin(angle) * w
-            var d3y = d4y - Math.cos(angle) * w
+            var d3x = d4x + Math.sin(angle) * fat
+            var d3y = d4y - Math.cos(angle) * fat
 
             curveOfPath(canvas, [
                {x:d2x, y:d2y},

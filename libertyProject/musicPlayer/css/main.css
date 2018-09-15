@@ -26,11 +26,9 @@ main{
 }
 .audio-canvas{
     display: block;
-    position: absolute;
-    top: 0;
+    position: fixed;
+    bottom: 0;
     left: 0;
-    height: 220px;
-    margin-left: 220px;
     z-index: -1;
 }
 .albumimg{
@@ -108,7 +106,9 @@ main{
 }
 
 .control{
-    height: 60px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     line-height: 60px;
 }
 .control .imgwraper{
@@ -181,6 +181,10 @@ main{
 .audiobox span{
     margin: 0 20px;
     width: 32px;
+}
+.play-control, .time, .vol{
+   height: 60px;
+   line-height: 60px;
 }
 
 .html-bg{
