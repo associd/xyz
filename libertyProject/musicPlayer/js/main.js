@@ -1,6 +1,7 @@
 !function() {
    web_init()
    window.onload = function() {
+      check_window_width()
       set_main_height()
       set_music_list_event()
       set_audio_event()
@@ -11,6 +12,7 @@
    window.addEventListener("resize", function() {
       set_main_height()
       set_audio_canvas()
+      check_window_width()
    })
 }()
 
@@ -35,6 +37,9 @@ function web_init() {
    }
 }
 
+/**
+ * dom
+ */
 function set_main_height() {
    var header = e("header")
    var main = e("main")
@@ -43,6 +48,16 @@ function set_main_height() {
    var mh = window.innerHeight - header.offsetHeight - footer.offsetHeight
    main.style.height = mh + "px"
    ml.style.height = mh + "px"
+}
+function check_window_width(){
+   var header = e("header")
+   if(window.innerWidth < 980) {
+      if(!header.classList.contains("large")) {
+         header.classList.add("large")
+      }
+   }else {
+      header.classList.remove("large")
+   }
 }
 
 /**

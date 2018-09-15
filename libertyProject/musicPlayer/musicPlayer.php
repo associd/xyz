@@ -32,22 +32,23 @@
             <div class="btn down" id="slide"></div>
         </div>
     </header>
-    <main class="scroll-box">
-        <ul class="music-title flex">
+    <main class="scroll-box bg-remind-box">
+         <ul class="music-title flex">
             <li class="col f4">标题</li>
             <li class="col f2o5">作者</li>
             <li class="col f2o5">专辑</li>
             <li class="col f1">时间</li>
             <li class="">操作</li>
-        </ul>
-    </header>
-    <main class="scroll-box">
+         </ul>
         <ul class="music-list">
             <?php   use Music\Music;
                     $music = new Music($DB);
                     $music->get_music($name);
             ?>
         </ul>
+        <div class="bg-reminding">
+           拖拽mp3文件至此上传
+        </div>
     </main>
     <footer class="control flex">
         <div class="audiobox flex">

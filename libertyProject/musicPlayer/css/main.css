@@ -9,6 +9,9 @@ html{
 body{
    overflow: hidden;
 }
+html,body{
+   height: 100%;
+}
 @media screen and (max-width: 420px){
     html{
         font-size: 12px;
@@ -16,6 +19,54 @@ body{
 }
 main,header{
     transition: all 0.2s;
+}
+header{
+    position: relative;
+    height: 220px;
+}
+header:hover .down{
+    bottom: -35px;
+}
+.btn{
+    cursor: pointer;
+}
+.slide-box{
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    margin: auto;
+    overflow: hidden;
+}
+.down{
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    left: -50%;
+    right: -50%;
+    bottom: -60px;
+    margin: auto;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3) url(../img/up.png) no-repeat center 30px;
+    transform: rotateZ(180deg);
+    transition: all 0.2s;
+}
+.bg-remind-box{
+   position: relative;
+}
+.bg-reminding{
+   position: absolute;
+   z-index: -1;
+   height: 60px;
+   line-height: 60px;
+   margin: auto;
+   font-size: 40px;
+   left: 0;
+   right: 0;
+   top: 0;
+   bottom: 0;
+   text-align: center;
+   filter: opacity(0.2);
 }
 
 main{
@@ -55,14 +106,13 @@ main{
 
 .music-list>li{
     display: flex;
+    height: 50px;
+    line-height: 50px;
 }
 .music-list>li>ul{
     width: 0;
     flex: 1 0 0;
     display: flex;
-}
-.music-list>li>a{
-   line-height: 30px;
 }
 .music-list>li>ul, .music-list>li>ul *:not(a){
     pointer-events: none;
@@ -78,11 +128,8 @@ main{
 .music-list>li:nth-child(odd){
     background-color: rgba(255,255,255,0.1);
 }
-
 .music-list>li>ul li{
    width: 0;
-   height: 30px;
-   line-height: 30px;
    padding-left: 10px;
    overflow: hidden;
    -ms-text-overflow: ellipsis;
@@ -101,7 +148,6 @@ main{
 .music-list ul>li:nth-child(4){
     flex: 1 0 0;
 }
-
 .music-title{
     height: 32px;
     line-height: 32px;
@@ -222,33 +268,22 @@ main{
     opacity: 0;
 }
 
-header{
-    position: relative;
+
+
+
+/*
+* 下拉隐藏列表 或屏幕宽度缩小到960px header的样式 你没有玩过的船新版本
+*/
+header.large{
+   height: 100%;
 }
-header:hover .down{
-    bottom: -35px;
+header.large .slide-box{
+   transform: rotate(180deg);
+   bottom: auto;
+   top: 0;
 }
-.btn{
-    cursor: pointer;
-}
-.slide-box{
-    width: 100%;
-    height: 30px;
-    position: absolute;
-    bottom: 0;
-    margin: auto;
-    overflow: hidden;
-}
-.down{
-    width: 60px;
-    height: 60px;
-    position: absolute;
-    left: -50%;
-    right: -50%;
-    bottom: -60px;
-    margin: auto;
-    border-radius: 50%;
-    background: #4d4d4d url(../img/up.png) no-repeat center 30px;
-    transform: rotateZ(180deg);
-    transition: all 0.2s;
+header.large .albumimg{
+   position: fixed;
+   top: 0;
+   left: 0;
 }
