@@ -44,6 +44,7 @@ if($_POST["token"] != "end") {
         $list["Time"] = $duration;
         $list["Path"] = $path;
         $error = $DB->insert($list);
+        $id = $DB->mysqli->insert_id;
         if($error) {
             unlink($path);
             unlink($list["Albumimage"]);
@@ -53,8 +54,7 @@ if($_POST["token"] != "end") {
         $img = $list["Albumimage"];
         $time = $list["Time"];
         $time = floor($time / 60).date(":s", $time);
-
         $music = new Music($DB);
-        $music->get_music_li([$list["Name"], $list["Composer"], $list["Album"], $time], $img, $path, $DB->mysqli->insert_id, "musicPlayer/");
+        $music->get_music_li([$list["Name"], $list["Composer"], $list["Album"], $time], $img, $path, $id, "musicPlayer");
     }
 }
