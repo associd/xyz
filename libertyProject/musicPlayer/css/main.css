@@ -69,13 +69,11 @@ header:hover .down{
    filter: opacity(0.2);
 }
 
-main{
-   width: calc(100% + 17px);
-}
 .scroll-box{
    overflow: hidden;
 }
-.scroll-box>*{
+.scroll-box>.scroll-inner{
+   width: calc(100% + 17px);
    overflow-y: scroll;
 }
 .audio-canvas{
@@ -105,6 +103,7 @@ main{
 }
 
 .music-list>li{
+    padding: 0 10px;
     display: flex;
     height: 50px;
     line-height: 50px;
@@ -130,7 +129,6 @@ main{
 }
 .music-list>li>ul li{
    width: 0;
-   padding-left: 10px;
    overflow: hidden;
    -ms-text-overflow: ellipsis;
    text-overflow: ellipsis;
@@ -151,10 +149,8 @@ main{
 .music-title{
     height: 32px;
     line-height: 32px;
+    padding: 0 10px;
     background-color: rgba(255,255,255,0.3);
-}
-.music-title .col{
-    padding-left:10px;
 }
 
 .control{

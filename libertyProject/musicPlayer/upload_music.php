@@ -6,6 +6,7 @@ use Music\Music as Music;
 
 
 //分片传输
+$tmpName = "a.tmp";
 if($_POST["token"] != "end") {
    //文件错误
    if($_FILES['file']['error'] > 0) {
@@ -13,12 +14,14 @@ if($_POST["token"] != "end") {
    }
    $file = $_FILES["file"];
    $fileName = $file["name"];
-   file_put_contents("resource/$fileName", file_get_contents($file["tmp_name"]), FILE_APPEND);
+
+   if($data = file_get_contents($file["tmp_name"])) {
+      file_put_contents("resource/$tmpName", $data, FILE_APPEND);
+   }
 }else {
     //获取相关信息
     $name = $_POST["fileName"];
     $type = substr($name, strrpos($name, ".") + 1);
-    $url = $name;
 
     //判断本地是否存在与上传文件相同的文件
 
@@ -29,7 +32,7 @@ if($_POST["token"] != "end") {
         $unid = uniqid();
         $path = "resource/". $time . "_" . $unid . ".$type";
 
-        rename("resource/$url", $path);
+        rename("resource/$tmpName", $path);
 
         // 调用方法：
         // 返回的是一个包含时分秒的数组

@@ -201,6 +201,7 @@ function upload_music(file) {
    var d = new Date()
    var bytesPerPiece = 1024 * 1024 * 2
    var fileName = file.name
+   log(fileName)
    var fileSize = file.size
 
    var start = 0

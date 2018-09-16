@@ -40,7 +40,7 @@
             <li class="col f1">时间</li>
             <li class="">操作</li>
          </ul>
-        <ul class="music-list">
+        <ul class="music-list scroll-inner">
             <?php   use Music\Music;
                     $music = new Music($DB);
                     $music->get_music($name);
