@@ -51,13 +51,14 @@ function set_main_height() {
 }
 function check_window_width(){
    var header = e("header")
-   if(window.innerWidth < 980) {
-      if(!header.classList.contains("large")) {
-         header.classList.add("large")
-      }
-   }else {
-      header.classList.remove("large")
-   }
+   //oh my god
+   // if(window.innerWidth < 980) {
+   //    if(!header.classList.contains("large")) {
+   //       header.classList.add("large")
+   //    }
+   // }else {
+   //    header.classList.remove("large")
+   // }
 }
 function set_document_events() {
    set_music_list_event()
