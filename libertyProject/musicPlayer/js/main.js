@@ -2,17 +2,16 @@
    web_init()
    window.onload = function() {
       check_window_width()
+      set_document_events()
       set_main_height()
-      set_music_list_event()
-      set_audio_event()
       set_audio_canvas()
       set_audio_frequency()
       audio_init()
    }
    window.addEventListener("resize", function() {
-      set_main_height()
-      set_audio_canvas()
       check_window_width()
+      set_audio_canvas()
+      set_main_height()
    })
 }()
 
@@ -21,6 +20,7 @@ function web_init() {
    window.e = sel => document.querySelector(sel)
    window.es = sel => document.querySelectorAll(sel)
    window.sound = new Sound()
+   window.frequency = null
 
    HTMLElement.prototype.attr = function(name, value = null) {
       if(value) {
@@ -58,6 +58,38 @@ function check_window_width(){
    }else {
       header.classList.remove("large")
    }
+}
+function set_document_events() {
+   set_music_list_event()
+   set_audio_event()
+   set_slideDown_btn_event()
+}
+function set_slideDown_btn_event() {
+   var header = e("header")
+   var btn = e("#slide")
+   document.addEventListener("click", function(event) {
+      if(event.target.attr("id") == btn.attr("id")) {
+         header.classList.toggle("large")
+
+         //header是large时main会被header压缩 当header切换large时应当重设main的height
+         set_main_height()
+
+         //header是large时canvas将会是一个全新的样式 so canvas的高也要重设
+         set_audio_canvas()
+
+         //该死的header是large时 tmd 画布样式也要刷新
+         if(window.frequency) {
+            frequency.refresh()
+         }
+
+         //当large 是header的class时会发生一些奇妙的事情
+         if(header.classList.contains("large")) {
+            window.frequency.setup_style("circle")
+         }else {
+            window.frequency.setup_style("rect")
+         }
+      }
+   })
 }
 
 /**
@@ -173,14 +205,15 @@ function get_audio_canvas() {
    return canvas
 }
 function set_audio_frequency() {
-   frequency = new FrequencySpt(get_audio_canvas())
+   //全局的变量 写这条注释是为了 方便查找 ^_^
+   window.frequency = new FrequencySpt(get_audio_canvas())
    sound.connect(frequency)
 }
 function set_audio_canvas() {
    var canvas = get_audio_canvas()
    var canvas_wraper = e("#canvas-wraper")
    canvas.width = canvas_wraper.offsetWidth
-   canvas.height = 120
+   canvas.height = canvas_wraper.offsetHeight
 }
 function audio_down(down) {
    sound.timeButtonDown = down

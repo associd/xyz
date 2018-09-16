@@ -21,7 +21,7 @@
             <div class="imgwraper m10 albumimg">
                 <img class="music-img" src="" alt="">
             </div>
-            <div class="mt20 f0 ovfe">
+            <div class="mt20 f0 ovfe music-info">
                 <div class="music-name big ovfe mb10"></div>
                 <div class="music-album mid ovfe mb10"></div>
                 <div class="music-composer mid ovfe "></div>
