@@ -61,6 +61,11 @@ class FrequencySpt {
             property: () => {
                var o = {
                   ctx: this.ctx,
+                  colors: [
+                     "rgba(52,237,237,0.5)",
+                     "rgba(123,228,195,0.5)",
+                     "rgba(135,235,171,0.5)",
+                  ],
                   start : false,
                   m : 2,
                   w : 2,
@@ -106,7 +111,7 @@ class FrequencySpt {
 
                //绘制圆形边框
                o.ctx.beginPath()
-               o.ctx.fillStyle = 'rgba(0,0,0,0.8)'
+               o.ctx.fillStyle = 'rgba(255,255,255,0.1)'
                o.ctx.arc(this.canvas.width / 2, this.canvas.height / 2, 300, 0, Math.PI * 2)
                o.ctx.fill()
                o.ctx.closePath()
@@ -139,7 +144,7 @@ class FrequencySpt {
                      var tiercolor = 135 * tier / o.c
                      var tier_origin = 300 * (1 - (tier / o.c))
                      var w = o.w * (1 - (tier / o.c))
-                     o.ctx.fillStyle = `rgba(${ 135 - tiercolor}, ${ 235 - tiercolor}, ${ 171 - tiercolor}, ${0.8})`
+                     o.ctx.fillStyle = o.colors[tier]
                      o.ctx.fillRect(-o.w / 2, -l - tier_origin, w, l)
                      o.ctx.restore()
                   }
