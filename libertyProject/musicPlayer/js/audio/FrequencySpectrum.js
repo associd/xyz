@@ -64,7 +64,7 @@ class FrequencySpt {
                   start : false,
                   m : 2,
                   w : 2,
-                  c : 4,
+                  c : 3,
                   xw : this.canvas.width / 256,
                   num  : 0,
                   maxh : {},
