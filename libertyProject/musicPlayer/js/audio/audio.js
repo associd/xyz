@@ -20,6 +20,7 @@ class Sound{
       this.audioNode.connect(this.gainNode)
       this.audioNode.connect(this.analyser)
       this.gainNode.connect(this.audioCtx.destination)
+      this.gain = this.gainNode.gain
 
       this.animate()
    }
@@ -49,7 +50,12 @@ class Sound{
    }
    connect_currentTime() {}
    change_volume(vol) {
-      this.audio.volume = vol
+      //科学计数的小数 用toFixed 保留两位小数失败
+      //于是........暴力 ^_^
+      var num = this.gain.maxValue + ""
+      num = parseFloat(num.substr(0, num.indexOf(".") + 3))
+      var v = vol * num
+      this.gain.value = v
    }
 
 

@@ -100,17 +100,20 @@ function audio_init() {
    var cur_time = e(".progress .cur")
    var cur_bar = e(".progress .curprogress")
    sound.connect_currentTime = function() {
-      var s = Math.floor(this.audio.currentTime % 60)
+      var time = this.audio.currentTime
+      var totalTime = this.audio.duration
+      var s = Math.floor(time % 60)
+      var m = Math.floor(time / 60)
       if(s < 10) {
-         s = "0"+s
+         s = "0" + s
       }
-      current_time.innerHTML = Math.floor(this.audio.currentTime / 60) + ":" + s
-      var cur = this.audio.currentTime / this.audio.duration * 100 + "%"
+      current_time.innerHTML = m + ":" + s
+      var cur = time / totalTime * 100 + "%"
       cur_bar.style.width = cur
       cur_time.style.left = cur
    }
    sound.onplaying(function() {
-      duration.innerHTML = Math.floor(this.duration / 60) + ":" + Math.floor(this.duration % 60)
+      duration.innerHTML = Math.floor(sound.audio.duration / 60) + ":" + Math.floor(sound.audio.duration % 60)
    })
 }
 function set_audio_event() {
