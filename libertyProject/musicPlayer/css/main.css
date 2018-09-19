@@ -1,3 +1,6 @@
+*{
+   user-select: none;
+}
 html,a{
     color: rgba(255,255,255,0.8);
     font-family: Microsoft Yahei;
@@ -270,6 +273,7 @@ header:hover .down{
     height: 100%;
     object-fit: cover;
     filter: opacity(0.4) blur(10px);
+    transition: all 0.5s;
 }
 .html-bg.hide{
     opacity: 0;
@@ -302,8 +306,7 @@ header.large .canvas-wraper{
    height: 100%;
 }
 header.large .html-bg img{
-   transition: all 0.5s;
-   filter: opacity(0.6) blur(5px);
+   filter: opacity(0.6) blur(10px);
 }
 @keyframes albumimgMoveCenter {
    0% {
@@ -321,7 +324,7 @@ header.large .html-bg img{
       top: -50%;
       right: -50%;
       bottom: -50%;
-      border: 10px solid rgba(255,255,255, 0.6);
+      border: 5px solid rgba(255,255,255, 0.6);
       border-radius: 50%;
    }
 }
