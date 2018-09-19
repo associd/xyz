@@ -17,7 +17,7 @@
          <canvas class="audio-canvas" id="audio-canvas" height="220"></canvas>
       </div>
       <div class="html-bg hide" id="active-albumimg"></div>
-        <div class="flex">
+      <div class="flex">
             <div class="imgwraper m10 albumimg">
                 <img class="music-img" src="" alt="">
             </div>
@@ -27,8 +27,7 @@
                 <div class="music-composer mid ovfe "></div>
             </div>
         </div>
-        <div class="html-bg hide" id="active-albumimg"></div>
-        <div class="slide-box">
+      <div class="slide-box">
             <div class="btn down" id="slide"></div>
         </div>
     </header>
@@ -77,7 +76,7 @@
             <div class="imgwraper volicon">
                 <img src="musicPlayer/img/v.png" alt="">
             </div>
-            <div class="progress">
+            <div class="progress" id="audio-volume">
                 <div class="curprogress"></div>
                 <div class="cur"></div>
             </div>

@@ -208,9 +208,12 @@ header:hover .down{
     flex: 1;
 }
 .progress .curprogress{
-    width: 60%;
+    width: 100%;
     height: 100%;
     background-color: #fff;
+}
+.time .progress .curprogress{
+   width: 0;
 }
 .progress .cur{
     width: 20px;
@@ -224,6 +227,9 @@ header:hover .down{
     top: -50%;
     bottom: -50%;
     cursor: pointer;
+}
+.vol .cur{
+   left: calc(100% - 10px);
 }
 .vol{
     padding: 0 20px;
@@ -263,7 +269,7 @@ header:hover .down{
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: opacity(0.2) blur(10px);
+    filter: opacity(0.4) blur(10px);
 }
 .html-bg.hide{
     opacity: 0;
@@ -294,6 +300,10 @@ header.large .music-info{
 }
 header.large .canvas-wraper{
    height: 100%;
+}
+header.large .html-bg img{
+   transition: all 0.5s;
+   filter: opacity(0.6) blur(5px);
 }
 @keyframes albumimgMoveCenter {
    0% {

@@ -9,7 +9,6 @@
       audio_init()
    }
    window.addEventListener("resize", function() {
-      check_window_width()
       set_audio_canvas()
       set_main_height()
    })
@@ -51,14 +50,13 @@ function set_main_height() {
 }
 function check_window_width(){
    var header = e("header")
-   //oh my god
-   // if(window.innerWidth < 980) {
-   //    if(!header.classList.contains("large")) {
-   //       header.classList.add("large")
-   //    }
-   // }else {
-   //    header.classList.remove("large")
-   // }
+   if(window.innerWidth < 980) {
+      if(!header.classList.contains("large")) {
+         header.classList.add("large")
+      }
+   }else {
+      header.classList.remove("large")
+   }
 }
 function set_document_events() {
    set_music_list_event()
@@ -127,6 +125,31 @@ function set_audio_event() {
    })
    e("#audio-current-time").addEventListener("mousemove", function() {
       audio_set_current_time()
+   })
+
+   //鼠标按住
+   var v = e("#audio-volume")
+   var cur = e("#audio-volume .cur")
+   var curPro = e("#audio-volume .curprogress")
+   v.mousedown = false
+   v.addEventListener("mousedown", (event) => {
+      v.mousedown = true
+   })
+   document.addEventListener("mouseup", (event) => {
+      v.mousedown = false
+   })
+   document.addEventListener("mousemove", (event) => {
+      var max = v.offsetWidth
+      var x = event.clientX - v.offsetLeft
+      var vol = x / max
+      if(v.mousedown) {
+         if(x > max || x < 0) {
+            return
+         }
+         cur.style.left = x - (cur.offsetWidth / 2) + "px"
+         curPro.style.width = x + "px"
+         sound.change_volume(vol)
+      }
    })
 }
 function set_music_list_event() {

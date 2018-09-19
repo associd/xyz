@@ -62,9 +62,9 @@ class FrequencySpt {
                var o = {
                   ctx: this.ctx,
                   colors: [
-                     "rgba(52,237,237,0.5)",
-                     "rgba(123,228,195,0.5)",
-                     "rgba(135,235,171,0.5)",
+                     "rgba(52,237,237,0.8)",
+                     "rgba(123,228,195,0.8)",
+                     "rgba(135,235,171,0.8)",
                   ],
                   start : false,
                   m : 2,

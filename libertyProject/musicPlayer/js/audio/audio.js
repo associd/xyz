@@ -48,6 +48,9 @@ class Sound{
       this.element.push(obj)
    }
    connect_currentTime() {}
+   change_volume(vol) {
+      this.audio.volume = vol
+   }
 
 
    /**
