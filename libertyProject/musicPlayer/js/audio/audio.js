@@ -57,6 +57,7 @@ class Sound{
       if(num === Infinity) {
          num = 1
       }else {
+         num = num.toString()
          num = parseFloat(num.substr(0, num.indexOf(".") + 3))
       }
       this.gain.value = vol * num
