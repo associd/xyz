@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+   <script src="utils.js"></script>
+   <style media="screen">
+      *{
+         margin: 0;
+         padding: 0;
+      }
+      html,body{
+         height: 100%;
+      }
+      .paddle{
+         width: 200px;
+         height: 100px;
+         background: linear-gradient(to left, rgba(248,228,78,0.5), rgba(240,66,53,0.5));
+         font-size: 30px;
+         line-height: 100px;
+         text-align: center;
+      }
+      .box{
+         width: 500px;
+         height: 500px;
+         position: fixed;
+         left: 0;
+         bottom: 0;
+         right: 0;
+         top: 0;
+         margin: auto;
+         background-color: skyblue;
+      }
+      .drag{
+         position: absolute;
+         left: 0;
+         top: 0;
+         /*margin 必须是0*/
+         margin: 0!important;
+         -moz-user-select: none;
+         user-select: none;
+      }
+      .drag:hover{
+         cursor: grab;
+      }
+   </style>
+</head>
+<body>
+   <div class="box drag">
+      <div class="paddle drag">拖拽</div>
+      <canvas id="canvas" width="300" height="150"></canvas>
+   </div>
+   <script type="text/javascript">
+      webInit()
+      //所有class名中 包含drag类名的html元素 都能拖拽
+      drag()
+
+      function drag() {
+         var drags = es(".drag")
+         var downToElement = {
+            ele: null,
+         }
+         var mouse = {
+            x: 0,
+            y: 0,
+            down: false,
+            downPoint: {
+               x: 0,
+               y: 0,
+            },
+         }
+         document.addEventListener("mousedown", function(event) {
+            if(event.target.classList.contains("drag")) {
+               var ele = event.target
+               downToElement.ele = ele
+               //downPoint 是鼠标移动之前 在ele里按住鼠标左键之后 鼠标的位置
+               //在按住鼠标左键移动时鼠标的位置 相对downPoint 的偏移量 会作为 ele的css 的 left 和 top 赋值
+               //为什么不用event.offsetX,event.offsetY ? 因为mouse的坐标系和ele的坐标系不同
+               mouse.downPoint.x = mouse.x - (ele.offsetLeft ? ele.offsetLeft : 0)
+               mouse.downPoint.y = mouse.y - (ele.offsetTop ? ele.offsetTop : 0)
+            }
+            mouse.down = true
+         })
+         document.addEventListener("mouseup", function(event) {
+            if(downToElement.ele) {
+               downToElement.ele = null
+            }
+            mouse.down = false
+         })
+         document.addEventListener("mousemove", function(event) {
+            mouse.x = event.clientX
+            mouse.y = event.clientY
+            if(downToElement.ele && mouse.down) {
+               var ele = downToElement.ele
+               ele.style.left = mouse.x - mouse.downPoint.x + "px"
+               ele.style.top = mouse.y - mouse.downPoint.y + "px"
+            }
+         })
+      }
+   </script>
+</body>
+</html>
