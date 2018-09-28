@@ -6,6 +6,7 @@
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <title>Document</title>
    <script src="utils.js"></script>
+   <script src="partical.js"></script>
    <style media="screen">
       *{
          margin: 0;
@@ -34,11 +35,14 @@
          background-color: skyblue;
       }
       .drag{
-         position: absolute;
+         position: absolute!important;
          left: 0;
          top: 0;
          /*margin 必须是0*/
          margin: 0!important;
+         transition-property: left,top;
+         transition-duration: 0.025s;
+         transition-timing-function: linear;
          -moz-user-select: none;
          user-select: none;
       }
@@ -50,7 +54,7 @@
 <body>
    <div class="box drag">
       <div class="paddle drag">拖拽</div>
-      <canvas id="canvas" width="300" height="150"></canvas>
+      <canvas class="drag paddle" id="canvas" width="300" height="150"></canvas>
    </div>
    <script type="text/javascript">
       webInit()
