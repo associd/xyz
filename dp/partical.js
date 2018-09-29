@@ -1,4 +1,4 @@
-function CreatePartical(x, y) {
+export function CreatePartical(x, y) {
    var p = {
       x: y,
       y: y,
