@@ -7,6 +7,7 @@
    <title>Document</title>
    <script src="utils.js"></script>
    <script src="drag.js"></script>
+   <script src="partical.js"></script>
    <style media="screen">
       *{
          margin: 0;
@@ -14,6 +15,7 @@
       }
       html,body{
          height: 100%;
+         overflow: hidden;
       }
       .paddle{
          width: 200px;
@@ -55,10 +57,10 @@
 </head>
 <body>
    <canvas id="forefront" width="300" height="300"></canvas>
-   <canvas class="friablePaddle drag" width="200" height="100"></canvas>
-   <div class="box drag">
+   <canvas class="friablePaddle drag" width="200" height="200"></canvas>
+   <!-- <div class="box drag">
       <div class="paddle drag">拖拽</div>
-   </div>
+   </div> -->
    <script type="text/javascript">
 
       webInit()
@@ -74,8 +76,7 @@
       })
 
       //填充画布内容
-      var friablePaddles = es(".friablePaddle")
-      friablePaddles.forEach(function(item) {
+      es(".friablePaddle").forEach(function(item) {
          var ctx = item.getContext("2d")
          var grd = ctx.createLinearGradient(0, 0, item.width, 0)
          var text = "托拽"
@@ -93,7 +94,23 @@
       //所有class名中 包含drag类名的html元素 都能拖拽
       drag(function(ele, x, y) {
          if(ele.classList.contains("friablePaddle")) {
-            CreatePartical()
+            let size = 5
+            let i = 1
+            let j = 1
+      
+            if(x < 0) {
+               x = 0
+            }else if(x > window.innerWidth - ele.offsetWidth) {
+               x = window.innerWidth
+            }else {
+
+            }
+            for(i=1; i<=ele.offsetHeight; i++) {
+               let p = CreatePartical(x, y+i)
+               p.init(rand(-500, 500) / 100, rand(8,10), size)
+               animation.addElement(p)
+            }
+            // log(animation.element)
          }
       })
    </script>

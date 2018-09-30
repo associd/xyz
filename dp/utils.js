@@ -30,16 +30,20 @@ function Animation(canvas) {
    }
    a.constructor = Animation
    a.__proto__ = Animation.prototype
+   Animation.prototype.addElement = function(ele) {
+      this.element.push(ele)
+   }
    Animation.prototype.timer = function() {
       //取余对小数也成立 惊了 不会有bug 吧
       if(this.time++ % (60 / this.fps) == 0) {
+         this.ctx.clearRect(0,0,this.cvs.width,this.cvs.height)
          //每秒按照一定间隔 在canvas上画出 自个element里带有draw()方法的对象 并且更新他们的数据
          for(var i = this.element.length - 1; i >= 0; i--) {
             var item = this.element[i]
             var index = i
             if(item.exist) {
-               item.updata()
-               item.draw(this.canvas, this.ctx)
+               item.draw(this.cvs, this.ctx)
+               item.update(this.cvs, this.ctx)
             }else {
                this.element.splice(index, 1)
             }
@@ -68,10 +72,20 @@ function isOutsideOfWindow(x, y, w, h) {
  * 使一个dom充满window
  */
 function fullWindow(dom) {
-   dom.width = dom.width ? dom.width : dom.offsetWidth
-   dom.height = dom.height ? dom.height : dom.offsetHeight
-   dom.width = window.innerWidth + "px"
-   dom.height = window.innerHeight + "px"
+   if(dom.nodeName == "CANVAS") {
+      dom.width = window.innerWidth
+      dom.height = window.innerHeight
+   }else {
+      dom.width = window.innerWidth + "px"
+      dom.height = window.innerHeight + "px"
+   }
+}
+
+/**
+ * 生成随机数
+ */
+function rand(min, max) {
+   return Math.floor(min + Math.random() * (max - min + 1))
 }
 
 /**
