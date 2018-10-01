@@ -95,22 +95,53 @@
       drag(function(ele, x, y) {
          if(ele.classList.contains("friablePaddle")) {
             let size = 5
+            let count = ele.offsetHeight
             let i = 1
-            let j = 1
-      
+            let px = function() {
+               return x
+            }
+            let py = function() {
+               return y + i
+            }
+            let vx = function() {
+               return rand(-500, 500) / 100
+            }
+            vy = function() {
+               return rand(800, 1000) / 100
+            }
+
             if(x < 0) {
                x = 0
+               vx = function() {
+                  return rand(100, 500) / 100
+               }
             }else if(x > window.innerWidth - ele.offsetWidth) {
                x = window.innerWidth
+               vx = function() {
+                  return rand(-100, -500) / 100
+               }
             }else {
-
+               count = ele.offsetWidth
+               px = function() {
+                  return x + i
+               }
+               py = function() {
+                  return 0
+               }
+               if(y < 0) {
+                  y = 0
+               }else if(y > window.innerHeight - ele.offsetHeight) {
+                  y = window.innerHeight
+               }else {
+                  log("狗屎")
+               }
             }
-            for(i=1; i<=ele.offsetHeight; i++) {
-               let p = CreatePartical(x, y+i)
-               p.init(rand(-500, 500) / 100, rand(8,10), size)
+
+            for(i=1; i <= count; i++) {
+               let p = CreatePartical(px(), py())
+               p.init(vx(), vy(), size)
                animation.addElement(p)
             }
-            // log(animation.element)
          }
       })
    </script>
