@@ -97,6 +97,8 @@
             let size = 5
             let count = ele.offsetHeight
             let i = 1
+            let ax = 0
+            let ay = 0
             let px = function() {
                return x
             }
@@ -107,31 +109,35 @@
                return rand(-500, 500) / 100
             }
             vy = function() {
-               return rand(800, 1000) / 100
+               return rand(500, 1000) / 100
             }
 
             if(x < 0) {
-               x = 0
+               //左
+               px = function() {return -size}
                vx = function() {
                   return rand(100, 500) / 100
                }
             }else if(x > window.innerWidth - ele.offsetWidth) {
+               //右
                x = window.innerWidth
                vx = function() {
                   return rand(-100, -500) / 100
                }
             }else {
+               //在y 方向上溢出
                count = ele.offsetWidth
                px = function() {
                   return x + i
                }
-               py = function() {
-                  return 0
-               }
                if(y < 0) {
-                  y = 0
+                  //上
+                  py = function() {return -size}
                }else if(y > window.innerHeight - ele.offsetHeight) {
-                  y = window.innerHeight
+                  //下
+                  ay = 0.2
+                  py = () => { return window.innerHeight}
+                  vy = () => {return -5}
                }else {
                   log("狗屎")
                }
@@ -139,7 +145,7 @@
 
             for(i=1; i <= count; i++) {
                let p = CreatePartical(px(), py())
-               p.init(vx(), vy(), size)
+               p.init(vx(), vy(), ax, ay, size)
                animation.addElement(p)
             }
          }
