@@ -57,7 +57,7 @@
 </head>
 <body>
    <canvas id="forefront" width="300" height="300"></canvas>
-   <canvas class="friablePaddle drag" width="200" height="200"></canvas>
+   <canvas class="friablePaddle drag" width="200" height="100"></canvas>
    <!-- <div class="box drag">
       <div class="paddle drag">拖拽</div>
    </div> -->
@@ -79,7 +79,7 @@
       es(".friablePaddle").forEach(function(item) {
          var ctx = item.getContext("2d")
          var grd = ctx.createLinearGradient(0, 0, item.width, 0)
-         var text = "托拽"
+         var text = "托拽至边缘"
          grd.addColorStop(0, "rgba(240,66,53,0.5)")
          grd.addColorStop(1, "rgba(248,228,78,0.5)")
          ctx.fillStyle = grd
@@ -93,10 +93,14 @@
 
       //所有class名中 包含drag类名的html元素 都能拖拽
       drag(function(ele, x, y) {
-         if(ele.classList.contains("friablePaddle")) {
-            let size = 5
+         //对于特别的canvas 会有粒子效果
+         if(ele.classList.contains("friablePaddle") && ele.nodeName == "CANVAS") {
+            let ctx = ele.getContext("2d")
+            let size = 10
             let count = ele.offsetHeight
             let i = 1
+
+            //粒子属性 默认在左边
             let ax = 0
             let ay = 0
             let px = function() {
@@ -112,40 +116,62 @@
                return rand(500, 1000) / 100
             }
 
+            //imageData 切割参数
+            let offsetX = -x
+            let offsetY = 0
+            let w = 1
+            let h = ele.height
+
+            //判断ele在window里的什么位置
             if(x < 0) {
                //左
                px = function() {return -size}
                vx = function() {
-                  return rand(100, 500) / 100
+                  return rand(100, 800) / 100
                }
             }else if(x > window.innerWidth - ele.offsetWidth) {
                //右
-               x = window.innerWidth
+               px = () => {return window.innerWidth}
                vx = function() {
                   return rand(-100, -500) / 100
                }
+
+               offsetX = window.innerWidth - x
             }else {
                //在y 方向上溢出
                count = ele.offsetWidth
                px = function() {
                   return x + i
                }
+
+               offsetX = 0
+               w = ele.height
+               h = 1
+
                if(y < 0) {
                   //上
                   py = function() {return -size}
+
+                  offsetY = - y
                }else if(y > window.innerHeight - ele.offsetHeight) {
                   //下
                   ay = 0.2
-                  py = () => { return window.innerHeight}
-                  vy = () => {return -5}
+                  py = () => {return window.innerHeight}
+                  vy = () => {return -rand(500, 1000) / 100}
+
+                  offsetY = window.innerHeight - y
                }else {
                   log("狗屎")
                }
             }
 
-            for(i=1; i <= count; i++) {
+            let imageData = ctx.getImageData(offsetX, offsetY, w, h).data
+
+            for(i=0; i < count; i++) {
+               let color = `rgba(${imageData[i * 4 + 0]}, ${imageData[i * 4 + 1]}, ${imageData[i * 4 + 2]}, ${imageData[i * 4 + 3]})`
                let p = CreatePartical(px(), py())
                p.init(vx(), vy(), ax, ay, size)
+               p.color = color
                animation.addElement(p)
             }
          }
