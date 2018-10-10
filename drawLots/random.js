@@ -18,6 +18,6 @@ function randoming() {
    while (count--) {
       setTimeout(function() {
          text.innerHTML = rand(0, 100)
-      }, (100 - count) * 20)
+      }, (100 - count) * 10)
    }
 }
