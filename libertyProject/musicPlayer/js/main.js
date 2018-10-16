@@ -3,7 +3,7 @@
    window.onload = function() {
       check_window_width()
       set_document_events()
-      set_main_height()
+      fit_main_height()
       set_audio_canvas()
       set_audio_frequency()
       audio_init()
@@ -22,7 +22,7 @@
    }
    window.addEventListener("resize", function() {
       set_audio_canvas()
-      set_main_height()
+      fit_main_height()
    })
 }()
 
@@ -51,14 +51,27 @@ function web_init() {
 /**
  * dom
  */
-function set_main_height() {
-   var header = e("header")
+function main_slide_down(value) {
+   var main = e("main");
+   // var header = e("header")
+   // var footer = e("footer")
+   // var ml = e(".music-list")
+   // var mh = window.innerHeight - header.offsetHeight
+   main.style.transform = `translateY(${value}px)`;
+}
+function fit_main_height(height = undefined) {
    var main = e("main")
-   var footer = e("footer")
-   var ml = e(".music-list")
-   var mh = window.innerHeight - header.offsetHeight - footer.offsetHeight
-   main.style.height = mh + "px"
-   ml.style.height = mh + "px"
+   if(height) {
+      main.style.height = height + "px";
+   }else{
+      var header = e("header")
+      var footer = e("footer")
+      var ml = e(".music-list")
+      var mt = e(".music-title");
+      var mh = window.innerHeight - header.offsetHeight - footer.offsetHeight - mt.offsetHeight;
+      main.style.transform = `translateY(${header.offsetHeight}px)`;
+      ml.style.height = mh + "px"
+   }
 }
 function check_window_width(){
    var header = e("header")
@@ -83,7 +96,8 @@ function set_slideDown_btn_event() {
          header.classList.toggle("large")
 
          //header是large时main会被header压缩 当header切换large时应当重设main的height
-         set_main_height()
+         // main_slide_down(0);
+         fit_main_height()
 
          //header是large时canvas将会是一个全新的样式 so canvas的高也要重设
          set_audio_canvas()

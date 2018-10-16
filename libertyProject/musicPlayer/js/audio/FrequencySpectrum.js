@@ -33,7 +33,7 @@ class FrequencySpt {
                this.ctx.beginPath()
                var cw = o.w / 2
                var canvas_ch = this.canvas.height / 2
-               var t1 = o.bar_height / 250
+               var t1 = o.bar_height / o.h
                var min = o.frqcy_min
                var max = o.frqcy_max
                for (var i = 0; i < o.bar_num; i += 1) {
@@ -63,16 +63,19 @@ class FrequencySpt {
                   ctx: this.ctx,
                   colors: [
                      "rgba(52,237,237,0.8)",
-                     "rgba(123,228,195,0.8)",
-                     "rgba(135,235,171,0.8)",
+                     "rgba(123,210,248,0.8)",
+                     "rgba(135,225,255,0.8)",
                   ],
                   start : false,
-                  m : 2,
+                  bm : 200,
                   w : 2,
                   c : 3,
+                  h : 250,
+
+                  center_margin : 300,
                   xw : this.canvas.width / 256,
                   num  : 0,
-                  maxh : {},
+                  // maxh : {},
                   Farr : this.Farr,
                   Tarr : this.Tarr,
                   rotateArr : [],
@@ -128,7 +131,7 @@ class FrequencySpt {
 
                   var step = o.Farr.length / o.frqcy_num
                   var index = step * ((i % o.frqcy_num) + 1)
-                  var l = (o.Farr[index] / 250) * o.bar_size
+                  var l = (o.Farr[index] / o.h) * o.bar_size
                   if(l){
                      // var l = (o.Farr[(i % o.frqcy_num)] / 100) * o.bar_size
                      // var l = (o.Farr[i] / 100) * 50
@@ -138,11 +141,11 @@ class FrequencySpt {
                      var slope = angle * o.num
                      o.ctx.rotate(slope * Math.PI / 180)
 
-                     var prcent = o.Farr[index] / 200
-                     var op = parseInt( prcent * 200)
+                     var prcent = o.Farr[index] / o.bm
+                     var op = parseInt( prcent * o.bm)
                      var tier = Math.floor(slope / 360)
                      var tiercolor = 135 * tier / o.c
-                     var tier_origin = 300 * (1 - (tier / o.c))
+                     var tier_origin = o.center_margin * (1 - (tier / o.c))
                      var w = o.w * (1 - (tier / o.c))
                      o.ctx.fillStyle = o.colors[tier]
                      o.ctx.fillRect(-o.w / 2, -l - tier_origin, w, l)
@@ -153,6 +156,49 @@ class FrequencySpt {
 
                o.ctx.closePath()
             },
+            control: (o) => {
+               var menu = e("#frequency-setting>.f-menu")
+               menu.innerHTML = "";
+               var data = {
+                  w: {
+                     des: "柱子宽度",
+                     dom: "<input propertyName='w' type='text' value='2'>",
+                  },
+                  c: {
+                     des: "层数",
+                     dom: "<input propertyName='c' type='text' value='3'>",
+                  },
+                  h: {
+                     des: "柱子最大的高度",
+                     dom: "<input propertyName='h' type='text' value='250'>",
+                  },
+                  bar_size: {
+                     des: "柱子高度",
+                     dom: "<input propertyName='bar_size' type='text' value='100'>",
+                  },
+                  // bm: {
+                  //    des: "层间距",
+                  //    dom: "<input propertyName='bm' type='text' value='200'>",
+                  // },
+                  r_speed: {
+                     des: "旋转速度",
+                     dom: "<input propertyName='r_speed' type='text' value='0'>",
+                  },
+                  center_margin: {
+                     des: "中心间距间距",
+                     dom: "<input propertyName='center_margin' type='text' value='300'>",
+                  },
+               }
+
+               for(var key in data) {
+                  menu.innerHTML += `<li>${data[key].des + data[key].dom}</li>`
+               }
+
+               menu.addEventListener("input", (event) => {
+                  var name = event.target.getAttribute("propertyName");
+                  o[name] = Number(event.target.value)
+               })
+            }
          },
       }
       this.setup_style()
@@ -170,6 +216,9 @@ class FrequencySpt {
    setup_style(style = "rect") {
       this.active = this.style[style]
       this.bar = this.active["property"]()
+      if(this.active.control) {
+         this.active.control(this.bar);
+      }
    }
    update() {
       this.num += this.r_speed
