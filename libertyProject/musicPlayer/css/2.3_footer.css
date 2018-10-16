@@ -1,0 +1,91 @@
+.control{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    line-height: 60px;
+}
+.control .imgwraper{
+    height: 100%;
+}
+.control .imgwraper img{
+    object-fit: scale-down;
+}
+.audiobox{
+    flex: 8;
+}
+.audiobox .l,.audiobox .r{
+   margin: auto 36px;
+   height: 36px;
+}
+.audiobox .c{
+   height: 50px;
+   margin: auto 0;
+}
+.audiobox .c img{
+   display: none;
+}
+.l, .c, .r{
+   cursor: pointer;
+   border-radius: 50%;
+   overflow: hidden;
+   filter: opacity(0.8);
+   transition: all 0.2s;
+}
+.l:hover, .c:hover, .r:hover{
+   filter: opacity(1);
+}
+.l:hover{
+   background-image: url(../img/l-light.png);
+}
+.vol{
+    flex: 1.5;
+}
+.other{
+    flex: 0.5;
+}
+.progress{
+    position: relative;
+    height: 2px;
+    margin: auto;
+    background-color: #aaa;
+    flex: 1;
+}
+.progress .curprogress{
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+.time .progress .curprogress{
+   width: 0;
+}
+.progress .cur{
+    width: 20px;
+    height: 20px;
+    margin: auto 0;
+    background-color: gray;
+    border-radius: 50%;
+    border: white solid 2px;
+    position: absolute;
+    left: 0;
+    top: -50%;
+    bottom: -50%;
+    cursor: pointer;
+}
+.vol .cur{
+   left: calc(100% - 10px);
+}
+.vol{
+    padding: 0 20px;
+}
+.volicon{
+    margin-right: 10px;
+    width: 17px;
+}
+.audiobox span{
+    margin: 0 20px;
+    width: 32px;
+}
+.play-control, .time, .vol{
+   height: 60px;
+   line-height: 60px;
+}

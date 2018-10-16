@@ -13,6 +13,9 @@
 </head>
 <body>
     <header>
+      <div class="menu fixed-right" id="frequncy-setting">
+
+      </div>
       <div class="canvas-wraper" id="canvas-wraper">
          <canvas class="audio-canvas" id="audio-canvas" height="220"></canvas>
       </div>
