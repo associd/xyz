@@ -7,6 +7,18 @@
       set_audio_canvas()
       set_audio_frequency()
       audio_init()
+      drag(function(ele, mouse) {
+         var eleW = ele.offsetWidth
+         var elePW = ele.parentElement.offsetWidth
+         var elePL = ele.parentElement.offsetLeft
+         var min = elePL + (eleW / 2)
+         var max = elePL + elePW - (eleW / 2)
+         if(mouse.x <= min || mouse.x >= max ) {
+            return
+         }else {
+            ele.style.left = mouse.x - mouse.downPoint.x + "px";
+         }
+      });
    }
    window.addEventListener("resize", function() {
       set_audio_canvas()

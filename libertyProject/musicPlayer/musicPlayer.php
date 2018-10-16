@@ -13,9 +13,7 @@
 </head>
 <body>
     <header>
-      <div class="menu fixed-right" id="frequncy-setting">
-
-      </div>
+      <div class="menu fixed-right" id="frequncy-setting"></div>
       <div class="canvas-wraper" id="canvas-wraper">
          <canvas class="audio-canvas" id="audio-canvas" height="220"></canvas>
       </div>
@@ -70,7 +68,7 @@
                <span class="current">2:44</span>
                <div class="progress">
                   <div class="curprogress"></div>
-                  <div class="cur" id="audio-current-time"></div>
+                  <div class="cur drag" id="audio-current-time"></div>
                </div>
                <span class="end">5:35</span>
             </div>
@@ -81,7 +79,7 @@
             </div>
             <div class="progress" id="audio-volume">
                 <div class="curprogress"></div>
-                <div class="cur"></div>
+                <div class="cur drag"></div>
             </div>
         </div>
         <div class="other">
