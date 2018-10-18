@@ -7,13 +7,7 @@ class FrequencySpt {
       this.style = {
          rect: {
             property: () => {
-               var grd = this.ctx.createLinearGradient(this.canvas.width / 2, this.canvas.height * 0.1, this.canvas.width / 2, this.canvas.height);
-               grd.addColorStop(0,"rgba(255,198,61,1)")
-               grd.addColorStop(0.30,"rgba(168,255,0,0.9)")
-               grd.addColorStop(0.45, "rgba(56,255,227,0.8)")
-               grd.addColorStop(0.6, "rgba(56,255,227,0.4)")
-               grd.addColorStop(1,"rgba(56,255,227,0.2)")
-
+               var grd = this.refresh()
                var count = 120
                var o = {
                   bar_height: 120 * 0.8,
@@ -25,7 +19,7 @@ class FrequencySpt {
                }
                window.addEventListener("resize", () => {
                   o.w = this.canvas.width / o.bar_num
-                  this.refresh
+                  o.grd = this.refresh()
                })
                return o
             },
@@ -33,7 +27,7 @@ class FrequencySpt {
                this.ctx.beginPath()
                var cw = o.w / 2
                var canvas_ch = this.canvas.height / 2
-               var t1 = o.bar_height / o.h
+               var t1 = o.bar_height / 250
                var min = o.frqcy_min
                var max = o.frqcy_max
                for (var i = 0; i < o.bar_num; i += 1) {
@@ -55,7 +49,8 @@ class FrequencySpt {
                this.ctx.strokeStyle = o.grd
                this.ctx.globalAlpha = 0.5
                this.ctx.stroke()
-            }
+            },
+            control: null,
          },
          circle: {
             property: () => {
@@ -211,7 +206,7 @@ class FrequencySpt {
       grd.addColorStop(0.45, "rgba(56,255,227,0.8)")
       grd.addColorStop(0.6, "rgba(56,255,227,0.4)")
       grd.addColorStop(1,"rgba(56,255,227,0.2)")
-      this.bar.grd = grd
+      return grd;
    }
    setup_style(style = "rect") {
       this.active = this.style[style]
