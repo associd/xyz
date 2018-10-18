@@ -15,27 +15,52 @@
 }
 .audiobox .l,.audiobox .r{
    margin: auto 36px;
+   width: 36px;
    height: 36px;
 }
 .audiobox .c{
+   width: 50px;
    height: 50px;
    margin: auto 0;
-}
-.audiobox .c img{
-   display: none;
 }
 .l, .c, .r{
    cursor: pointer;
    border-radius: 50%;
    overflow: hidden;
    filter: opacity(0.8);
-   transition: all 0.2s;
+   transition: opacity 0.2s;
 }
 .l:hover, .c:hover, .r:hover{
    filter: opacity(1);
 }
-.l:hover{
-   background-image: url(../img/l-light.png);
+.c *{
+   width: 100%;
+   height: 100%;
+   background-image: url(../img/play.png);
+   background-size: 100px 100px;
+   display: none;
+}
+.c #play{
+   background-position: 0 0;
+}
+.c #play:hover{
+   background-position: 0 50px;
+}
+.c #pause{
+   background-position: 50px 0;
+}
+.c #pause:hover{
+   background-position: 50px 50px;
+}
+.l, .r{
+   background-image: url(../img/play-left.png);
+   background-position: center -7px;
+}
+.r{
+   transform: rotateZ(180deg);
+}
+.l:hover, .r:hover{
+   background-position: center 43px;
 }
 .vol{
     flex: 1.5;

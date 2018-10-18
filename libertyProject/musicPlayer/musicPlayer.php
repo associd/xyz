@@ -13,7 +13,11 @@
 </head>
 <body>
     <header>
-      <div class="menu fixed-right" id="frequncy-setting"></div>
+      <div class="frequncy-control fixed-right" id="frequency-setting">
+         <ul class="f-menu">
+            <li></li>
+         </ul>
+      </div>
       <div class="canvas-wraper" id="canvas-wraper">
          <canvas class="audio-canvas" id="audio-canvas" height="220"></canvas>
       </div>
@@ -54,14 +58,14 @@
         <div class="audiobox flex">
             <div class="play-control flex">
                <div class="imgwraper l" id="audio-last">
-                  <img title="上一首" src="musicPlayer/img/l.png" alt="">
+                  <div title="上一首" alt=""></div>
                </div>
                <div class="imgwraper c" id="audio-pause">
-                  <img id="play" title="播放" class="dpib" src="musicPlayer/img/play.png" alt="">
-                  <img id="pause" title="暂停" class="" src="musicPlayer/img/pause.png" alt="">
+                  <div id="play" title="播放" class="dpib"></div>
+                  <div id="pause" title="暂停" class=""></div>
                </div>
                <div class="imgwraper r" id="audio-next">
-                  <img title="下一首" src="musicPlayer/img/r.png" alt="">
+                  <div title="下一首"></div>
                </div>
             </div>
             <div class="time flex f1">

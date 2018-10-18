@@ -20,6 +20,7 @@ html,body{
         font-size: 12px;
     }
 }
-main,header{
+main{
     transition: all 0.2s;
+    transform: translateY(220px);
 }
