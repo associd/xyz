@@ -27,7 +27,7 @@ class FrequencySpt {
                this.ctx.beginPath()
                var cw = o.w / 2
                var canvas_ch = this.canvas.height / 2
-               var t1 = o.bar_height / o.h
+               var t1 = o.bar_height / 250
                var min = o.frqcy_min
                var max = o.frqcy_max
                for (var i = 0; i < o.bar_num; i += 1) {
