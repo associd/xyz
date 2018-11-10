@@ -60,6 +60,8 @@ class FrequencySpt {
                      "rgba(52,237,237,0.8)",
                      "rgba(123,210,248,0.8)",
                      "rgba(135,225,255,0.8)",
+                     "rgba(255,128,128,0.8)",
+                     "rgba(139,87,62,0.8)",
                   ],
                   start : false,
                   bm : 200,
@@ -67,6 +69,7 @@ class FrequencySpt {
                   c : 3,
                   h : 250,
 
+                  slice: true,
                   center_margin : 300,
                   xw : this.canvas.width / 256,
                   num  : 0,
@@ -136,11 +139,16 @@ class FrequencySpt {
                      var slope = angle * o.num
                      o.ctx.rotate(slope * Math.PI / 180)
 
+                     var tier_origin;
                      var prcent = o.Farr[index] / o.bm
                      var op = parseInt( prcent * o.bm)
                      var tier = Math.floor(slope / 360)
                      var tiercolor = 135 * tier / o.c
-                     var tier_origin = o.center_margin * (1 - (tier / o.c))
+                     if(o.slice) {
+                        tier_origin = o.center_margin * (1 - (tier / o.c))
+                     }else{
+                        tier_origin = o.center_margin
+                     }
                      var w = o.w * (1 - (tier / o.c))
                      o.ctx.fillStyle = o.colors[tier]
                      o.ctx.fillRect(-o.w / 2, -l - tier_origin, w, l)
@@ -157,31 +165,27 @@ class FrequencySpt {
                var data = {
                   w: {
                      des: "柱子宽度",
-                     dom: "<input propertyName='w' type='text' value='2'>",
+                     dom: "<input propertyName='w' type='number' value='2'>",
                   },
                   c: {
                      des: "层数",
-                     dom: "<input propertyName='c' type='text' value='3'>",
-                  },
-                  h: {
-                     des: "柱子最大的高度",
-                     dom: "<input propertyName='h' type='text' value='250'>",
+                     dom: "<input propertyName='c' type='number' value='3'>",
                   },
                   bar_size: {
                      des: "柱子高度",
-                     dom: "<input propertyName='bar_size' type='text' value='100'>",
+                     dom: "<input propertyName='bar_size' type='number' value='100'>",
                   },
-                  // bm: {
-                  //    des: "层间距",
-                  //    dom: "<input propertyName='bm' type='text' value='200'>",
-                  // },
                   r_speed: {
                      des: "旋转速度",
-                     dom: "<input propertyName='r_speed' type='text' value='0'>",
+                     dom: "<input propertyName='r_speed' type='number' value='0'>",
                   },
                   center_margin: {
                      des: "中心间距间距",
-                     dom: "<input propertyName='center_margin' type='text' value='300'>",
+                     dom: "<input propertyName='center_margin' type='number' value='300'>",
+                  },
+                  slice: {
+                     des: "是否分层",
+                     dom: "<input propertyName='slice'  type='number' value='1'>",
                   },
                }
 
