@@ -1,12 +1,40 @@
-function utilsInit() {
-   window.log = console.log.bind()
-   window.e = sel => document.querySelector(sel)
+function utils() {
+   window.log = console.log.bind(console);
+   window.e = sel => document.querySelector(sel);
    window.es = sel => document.querySelectorAll(sel)
    window.rand = function(min, max) {
       return Math.floor(min + Math.random() * (max - min + 1))
    }
    window.min = function(a, b) {
       return a-b>0 ? a = b : a
+   }
+
+   /**
+    *    [{},{},{}......]
+    *    {obj: xxx, attr: xxxx, value: xxxxx}
+    */
+   window.give = function(...agr) {
+      agr.forEach(function(item, index) {
+         item.obj[item.attr] = item.value;
+      })
+   }
+   window.full = function(dom, w = "width", h = "height") {
+      let change_1 = {
+         obj:dom,
+         attr:w,
+         value:window.innerWidth,
+      }
+      let change_2 = {
+         obj:dom,
+         attr:h,
+         value:window.innerHeight,
+      }
+      give(change_1, change_2);
+      window.addEventListener("resize", event => {
+         change_1.value = window.innerWidth
+         change_2.value = window.innerHeight
+         give(change_1, change_2);
+      })
    }
 
    HTMLElement.prototype.attr = function(name, value = null) {
@@ -16,10 +44,10 @@ function utilsInit() {
          return this.getAttribute(name)
       }
    }
-   HTMLElement.prototype.nextElement = function() {
+   HTMLElement.prototype.next = function() {
       return this.nextElementSibling
    }
-   HTMLElement.prototype.lastElement = function() {
+   HTMLElement.prototype.last = function() {
       return this.previousElementSibling
    }
 }

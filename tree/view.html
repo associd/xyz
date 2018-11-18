@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>树可视化</title>
+   <style>
+      *{
+         margin: 0;
+         padding: 0;
+      }
+      canvas{
+         display: block;
+      }
+   </style>
+</head>
+<body>
+   <canvas id="canvas" width="300" height="300">fuck</canvas>
+   <script type="text/javascript" src="../js/Utils.js"></script>
+   <script type="text/javascript" src="../dp/partical.js"></script>
+   <script type="text/javascript">
+      utils()
+
+      const cvs = e("#canvas")
+
+      window.full(cvs)
+
+      let origin = {
+         x: cvs.width / 2,
+         y: 10,
+      }
+      let node = {
+         margin: 50;
+      }
+
+      let tree = {
+         0:{
+            value: "root",
+            0:{
+               value: "c1",
+               0:{},
+               1:{},
+            },
+            1:{
+               value: "c2",
+            },
+            2:{
+               value: "c3",
+            },
+         }
+      }
+
+      var p = CreatePartical(100,100)
+      p.draw(cvs, cvs.getContext("2d"))
+   </script>
+</body>
+</html>

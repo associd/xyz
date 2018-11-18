@@ -7,8 +7,8 @@ function CreatePartical(x, y) {
       vy: 0,
       ax: 0,
       ay: 0,
-      w: 1,
-      h: 1,
+      w: 100,
+      h: 100,
       time: 0,
       exist: true,
    }
