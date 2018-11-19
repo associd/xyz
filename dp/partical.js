@@ -32,10 +32,9 @@ function CreatePartical(x, y) {
          context.fillRect(this.x, this.y, this.w, this.h)
       }
       p.__proto__.update = function(canvas, context) {
-         // if(this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-         //    this.exist = false
-         //    // log("in")
-         // }
+         if(this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+            this.outWindow = true;
+         }
          if(this.time++ >= 60 * 2) {
             this.exist = false
          }
