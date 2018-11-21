@@ -1,4 +1,4 @@
-function CreatePartical(x, y, cvs) {
+function CreatePartical(x, y, text, cvs) {
    var p = {
       x: x,
       y: y,
@@ -14,6 +14,13 @@ function CreatePartical(x, y, cvs) {
       shape: "arc",
       canvas: cvs,
       context: cvs.getContext("2d"),
+
+      text: text,
+      font: {
+         size: "30",
+         family: "Consolas",
+         color: "black",
+      }
    }
    p.init = function(size = 30, vx = 0, vy = 0, ax = 0, ay = 0) {
       p.vx = vx
@@ -29,11 +36,6 @@ function CreatePartical(x, y, cvs) {
 
    if(p.__proto__.__DEFINE__ == undefined) {
       p.__proto__.__DEFINE__ = true
-      p.__proto__.draw = function() {
-         this.context.beginPath();
-         this.context.fillStyle = this.color;
-         this[this.shape](this.context);
-      }
 
       p.__proto__.arc = function() {
          this.context.arc(this.x, this.y, this.w, 0, Math.PI * 2);
@@ -44,9 +46,19 @@ function CreatePartical(x, y, cvs) {
          this.context.fillRect(this.x, this.y, this.w, this.h)
       }
 
-      p.__proto__.text = function(text) {
-         this.
-         this.context.fillText(this.x, this.y, this.w, this.h)
+      p.__proto__.drawText = function(text) {
+         this.context.textBaseline = "middle";
+         this.context.textAlign = "center";
+         this.context.font = this.font.size + "px " + this.font.family;
+         this.context.fillStyle = this.font.color;
+         this.context.fillText(text, this.x, this.y);
+      }
+
+      p.__proto__.draw = function() {
+         this.context.beginPath();
+         this.context.fillStyle = this.color;
+         this[this.shape](this.context);
+         this.drawText(this.text);
       }
 
       p.__proto__.update = function() {

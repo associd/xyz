@@ -32,73 +32,85 @@
          y: 10,
       }
       let node = {
-         margin: 50,
+         margin: 100,
       }
 
       let tree = {
-         one: {
-            asdf: "dfsadf",
-            a:"a",
-            b:"b",
-            c:"c",
-            d:"d",
-         },
-         tow: {
-            asdf: "sadf",
-         },
-         v: "sadf",
-         n: null,
-         a: function() {},
-         b: function() {},
-         c: function() {},
-         d: function() {},
-         e: function() {},
+               b:{},
+               e:{},
       }
 
       var active = {
          x:cvs.center.x,
          y:100,
       }
-      var p = CreatePartical(active.x, active.y, cvs);
       traverse(tree, active.x, active.y);
 
-      function traverse(tree, x, y, depth = 1) {
-         var nodeQueue = new Array();
-         var nodeCount = 0;
-         var nodeObject = new Array();
+      function traverse(__tree, x, y, canvas = cvs, __depth = 1) {
+         var __nodeQueue = new Array();
+         var __nodeCount = 0;
+         var __objectNode = new Array();
 
          /*
          *   遍历子节点
          */
-         for(var i in tree) {
-            nodeCount++;
-            nodeQueue.push(i);
-            if( (tree[i] !== null) && (typeof tree[i] == "object") ) {
-               nodeObject.push(i);
+         for(var i in __tree) {
+            __nodeCount++;
+            if( (__tree[i] !== null) && (typeof __tree[i] == "object") ) {
+               __nodeQueue.push({type: "object", nodeName: i});
+            }else{
+               __nodeQueue.push({type: "other", nodeName: i});
             }
          }
 
          // log(nodeQueue + "\n", nodeCount + "\n", nodeObject);
-
-         var index = Math.floor(nodeCount / 2)
-         if(nodeCount % 2) {
-            var lx = x
-            var rx = x
-            var h = depth * node.margin * 2
-            CreatePartical(x, active.y + h, cvs)
-            for(var i = index - 1; i >= 0; i--) {
-               CreatePartical(lx -= node.margin * 2, active.y + h, cvs)
-               CreatePartical(rx += node.margin * 2, active.y + h, cvs)
+         var showInCanvas = function(type = "", index, x, canvas) {
+            var lx = x;
+            var rx = x;
+            var pre = {
+               single: function(){
+                  var node = __nodeQueue[index + 1]
+                  CreatePartical(x, y, node["nodeName"], canvas);
+                  addObject(node, x, y);
+               },
             }
-         }else {
-            for(var i = index; i >= 0; i--) {
-               CreatePartical(lx -= node.margin * 2, active.y + h, cvs)
-               CreatePartical(rx += node.margin * 2, active.y + h, cvs)
+
+            if(typeof pre[type] === "function") {
+               pre[type]();
+            }
+            /*
+            *  ...O...
+            *  ..OOO..
+            *  .OOOOO.
+            */
+            for(; index >= 0; index--) {
+               var nodeL =  __nodeQueue[index];
+               var nodeR =  __nodeQueue[__nodeCount - 1 - index];
+               CreatePartical(lx -= node.margin, y, nodeL["nodeName"], canvas)
+               CreatePartical(rx += node.margin, y, nodeR["nodeName"], canvas)
+               addObject(nodeL, lx, y);
+               addObject(nodeR, rx, y);
+            }
+
+            function addObject(node, x, y) {
+               if(node.type == "object" && Object.keys(__tree[node["nodeName"]]).length) {
+                  node.x = x,
+                  node.y = y,
+                  __objectNode.push(node)
+               }
             }
          }
 
-         nodeObject.forEach(function(item){
-            traverse(item, x, y, ++depth)
+         var index = Math.floor(__nodeCount / 2)
+         if(__nodeCount % 2) {
+            showInCanvas("single", index - 1, x, canvas);
+         }else {
+            log(index)
+            showInCanvas("even", index, x, canvas);
+         }
+
+         __objectNode.forEach(function(item){
+            traverse(__tree[item.nodeName], item.x, item.y + node.margin, canvas, __depth++)
          })
       }
    </script>
