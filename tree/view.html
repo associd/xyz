@@ -22,7 +22,8 @@
    <script type="text/javascript">
       utils()
 
-      const cvs = e("#canvas")
+      const cvs = e("#canvas");
+      const ctx = cvs.getContext("2d");
 
       window.full(cvs)
 
@@ -31,28 +32,75 @@
          y: 10,
       }
       let node = {
-         margin: 50;
+         margin: 50,
       }
 
       let tree = {
-         0:{
-            value: "root",
-            0:{
-               value: "c1",
-               0:{},
-               1:{},
-            },
-            1:{
-               value: "c2",
-            },
-            2:{
-               value: "c3",
-            },
-         }
+         one: {
+            asdf: "dfsadf",
+            a:"a",
+            b:"b",
+            c:"c",
+            d:"d",
+         },
+         tow: {
+            asdf: "sadf",
+         },
+         v: "sadf",
+         n: null,
+         a: function() {},
+         b: function() {},
+         c: function() {},
+         d: function() {},
+         e: function() {},
       }
 
-      var p = CreatePartical(100,100)
-      p.draw(cvs, cvs.getContext("2d"))
+      var active = {
+         x:cvs.center.x,
+         y:100,
+      }
+      var p = CreatePartical(active.x, active.y, cvs);
+      traverse(tree, active.x, active.y);
+
+      function traverse(tree, x, y, depth = 1) {
+         var nodeQueue = new Array();
+         var nodeCount = 0;
+         var nodeObject = new Array();
+
+         /*
+         *   遍历子节点
+         */
+         for(var i in tree) {
+            nodeCount++;
+            nodeQueue.push(i);
+            if( (tree[i] !== null) && (typeof tree[i] == "object") ) {
+               nodeObject.push(i);
+            }
+         }
+
+         // log(nodeQueue + "\n", nodeCount + "\n", nodeObject);
+
+         var index = Math.floor(nodeCount / 2)
+         if(nodeCount % 2) {
+            var lx = x
+            var rx = x
+            var h = depth * node.margin * 2
+            CreatePartical(x, active.y + h, cvs)
+            for(var i = index - 1; i >= 0; i--) {
+               CreatePartical(lx -= node.margin * 2, active.y + h, cvs)
+               CreatePartical(rx += node.margin * 2, active.y + h, cvs)
+            }
+         }else {
+            for(var i = index; i >= 0; i--) {
+               CreatePartical(lx -= node.margin * 2, active.y + h, cvs)
+               CreatePartical(rx += node.margin * 2, active.y + h, cvs)
+            }
+         }
+
+         nodeObject.forEach(function(item){
+            traverse(item, x, y, ++depth)
+         })
+      }
    </script>
 </body>
 </html>

@@ -29,12 +29,19 @@ function utils() {
          attr:h,
          value:window.innerHeight,
       }
-      give(change_1, change_2);
+      domSetup();
       window.addEventListener("resize", event => {
          change_1.value = window.innerWidth
          change_2.value = window.innerHeight
-         give(change_1, change_2);
+         domSetup();
       })
+      function domSetup(){
+         give(change_1, change_2);
+         dom.center = {
+            x: window.innerWidth / 2,
+            y: window.innerHeight / 2,
+         }
+      }
    }
 
    HTMLElement.prototype.attr = function(name, value = null) {
