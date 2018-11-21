@@ -1,4 +1,4 @@
-function CreatePartical(x, y, text, cvs) {
+function CreatePartical(cvs, x, y, text) {
    var p = {
       x: x,
       y: y,
@@ -40,25 +40,44 @@ function CreatePartical(x, y, text, cvs) {
       p.__proto__.arc = function() {
          this.context.arc(this.x, this.y, this.w, 0, Math.PI * 2);
          this.context.fill();
+         return this;
       }
 
       p.__proto__.rect = function() {
          this.context.fillRect(this.x, this.y, this.w, this.h)
+         return this;
       }
 
-      p.__proto__.drawText = function(text) {
+      p.__proto__.line = function(ox = this.x, oy = this.y, dx = this.w, dy = this.h, color = "black") {
+         this.context.beginPath();
+         this.context.strokeStyle = color;
+         this.context.lineWidth = 2;
+         this.context.moveTo(ox, oy);
+         this.context.lineTo(dx, dy);
+         this.context.stroke();
+         return this;
+      }
+
+      p.__proto__.drawText = function() {
          this.context.textBaseline = "middle";
          this.context.textAlign = "center";
          this.context.font = this.font.size + "px " + this.font.family;
          this.context.fillStyle = this.font.color;
-         this.context.fillText(text, this.x, this.y);
+         this.context.fillText(this.text, this.x, this.y);
+         return this;
+      }
+
+      p.__proto__.setShape = function(shape) {
+         this.shape = shape;
+         return this;
       }
 
       p.__proto__.draw = function() {
          this.context.beginPath();
          this.context.fillStyle = this.color;
          this[this.shape](this.context);
-         this.drawText(this.text);
+         this.drawText();
+         return this;
       }
 
       p.__proto__.update = function() {
@@ -72,8 +91,8 @@ function CreatePartical(x, y, text, cvs) {
          this.vy += this.ay
          this.x += this.vx
          this.y += this.vy
+         return this;
       }
    }
-   p.draw()
    return p;
 }

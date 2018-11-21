@@ -36,8 +36,14 @@
       }
 
       let tree = {
-               b:{},
-               e:{},
+         a:{
+            aa:{},
+            bb:{},
+            cc:{},
+         },
+         b:{},
+         c:{},
+         d:{},
       }
 
       var active = {
@@ -46,7 +52,7 @@
       }
       traverse(tree, active.x, active.y);
 
-      function traverse(__tree, x, y, canvas = cvs, __depth = 1) {
+      function traverse(__tree, __x, __y, canvas = cvs, __depth = 1) {
          var __nodeQueue = new Array();
          var __nodeCount = 0;
          var __objectNode = new Array();
@@ -67,17 +73,26 @@
          var showInCanvas = function(type = "", index, x, canvas) {
             var lx = x;
             var rx = x;
+            var y = __y + node.margin;
+            var marginLeft = node.margin;
+            var marginRight = node.margin;
             var pre = {
                single: function(){
                   var node = __nodeQueue[index + 1]
-                  CreatePartical(x, y, node["nodeName"], canvas);
+                  CreatePartical(canvas, x, y, node["nodeName"]).setShape("arc").draw();
+                  CreatePartical(canvas).line(x, __y, lx, y);
                   addObject(node, x, y);
                },
+               even: function() {
+                  marginLeft = node.margin / 2;
+                  marginRight = node.margin / 2;
+               }
             }
 
             if(typeof pre[type] === "function") {
                pre[type]();
             }
+
             /*
             *  ...O...
             *  ..OOO..
@@ -86,10 +101,17 @@
             for(; index >= 0; index--) {
                var nodeL =  __nodeQueue[index];
                var nodeR =  __nodeQueue[__nodeCount - 1 - index];
-               CreatePartical(lx -= node.margin, y, nodeL["nodeName"], canvas)
-               CreatePartical(rx += node.margin, y, nodeR["nodeName"], canvas)
+
+               CreatePartical(canvas, lx -= marginLeft, y, nodeL["nodeName"]).setShape("arc").draw();
+               CreatePartical(canvas, rx += marginRight, y, nodeR["nodeName"]).setShape("arc").draw();
+
+               CreatePartical(canvas).line(x, __y, lx, y);
+               CreatePartical(canvas).line(x, __y, rx, y);
+
                addObject(nodeL, lx, y);
                addObject(nodeR, rx, y);
+
+               marginDefault();
             }
 
             function addObject(node, x, y) {
@@ -99,14 +121,18 @@
                   __objectNode.push(node)
                }
             }
+
+            function marginDefault() {
+               marginLeft = node.margin;
+               marginRight = node.margin;
+            }
          }
 
-         var index = Math.floor(__nodeCount / 2)
+         var index = Math.floor(__nodeCount / 2) - 1
          if(__nodeCount % 2) {
-            showInCanvas("single", index - 1, x, canvas);
+            showInCanvas("single", index, __x, canvas);
          }else {
-            log(index)
-            showInCanvas("even", index, x, canvas);
+            showInCanvas("even", index, __x, canvas);
          }
 
          __objectNode.forEach(function(item){
