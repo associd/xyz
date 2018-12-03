@@ -57,15 +57,15 @@ class FrequencySpt {
                var o = {
                   ctx: this.ctx,
                   colors: [
-                     "rgba(52,237,237,0.8)",
-                     "rgba(123,210,248,0.8)",
-                     "rgba(135,225,255,0.8)",
-                     "rgba(255,128,128,0.8)",
-                     "rgba(139,87,62,0.8)",
+                     "rgba(52,237,237,0.3)",
+                     "rgba(123,210,248,0.3)",
+                     "rgba(135,225,255,0.3)",
+                     "rgba(110,255,200,0.3)",
+                     "rgba(128,255,144,0.3)",
                   ],
                   start : false,
                   bm : 200,
-                  w : 8,
+                  w : 12,
                   c : 5,
                   h : 250,
 
@@ -111,11 +111,14 @@ class FrequencySpt {
                }
 
                //绘制圆形边框
-               o.ctx.beginPath()
-               o.ctx.fillStyle = 'rgba(255,255,255,0.1)'
-               o.ctx.arc(this.canvas.width / 2, this.canvas.height / 2, 300, 0, Math.PI * 2)
-               o.ctx.fill()
-               o.ctx.closePath()
+
+               for(var i = 0; i < o.c; i++) {
+                  o.ctx.beginPath()
+                  o.ctx.arc(this.canvas.width / 2, this.canvas.height / 2, o.center_margin * (1 - i / o.c), 0, 2 * Math.PI)
+                  o.ctx.fillStyle = o.colors[i]
+                  o.ctx.fill()
+               }
+
 
                //频域
 
