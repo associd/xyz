@@ -31,6 +31,8 @@ function drag(mousemoveCallback = function(ele, mouse) {
          //为什么不用event.offsetX,event.offsetY ? 因为mouse的坐标系和ele的坐标系不同
          // mouse.downPoint.x = mouse.x - (ele.offsetLeft ? ele.offsetLeft : 0)
          // mouse.downPoint.y = mouse.y - (ele.offsetTop ? ele.offsetTop : 0)
+         ele.left  = parseInt(ele.style.left ? ele.style.left : "0px")
+         ele.top = parseInt(ele.style.top ? ele.style.top : "0px")
          mouse.downPoint.x = event.screenX
          mouse.downPoint.y = event.screenY
       }
@@ -48,11 +50,12 @@ function drag(mousemoveCallback = function(ele, mouse) {
       if(downToElement.ele && mouse.down) {
          var ele = downToElement.ele
          var pos = mousemoveCallback(ele, mouse)
-         var left = ele.offsetLeft ? ele.offsetLeft : 0
-         var top = ele.offsetTop ? ele.offsetTop : 0
 
-         ele.style.left = pos.left + left
-         ele.style.top = pos.top + top
+         ele.style.left = ele.left + pos.left + "px"
+         ele.style.top = ele.top + pos.top + "px"
+
+         // console.log(pos, ele.top)
+
 
          var eleX = mouse.x - event.offsetX
          var eleY = mouse.y - event.offsetY
