@@ -27,8 +27,10 @@ function drag(mousemoveCallback = function(ele, mouse) {
          //downPoint 是鼠标移动之前 在ele里按住鼠标左键之后 鼠标的位置
          //在按住鼠标左键移动时鼠标的位置 相对downPoint 的偏移量 会作为 ele的css 的 left 和 top 赋值
          //为什么不用event.offsetX,event.offsetY ? 因为mouse的坐标系和ele的坐标系不同
-         mouse.downPoint.x = mouse.x - (ele.offsetLeft ? ele.offsetLeft : 0)
-         mouse.downPoint.y = mouse.y - (ele.offsetTop ? ele.offsetTop : 0)
+         // mouse.downPoint.x = mouse.x - (ele.offsetLeft ? ele.offsetLeft : 0)
+         // mouse.downPoint.y = mouse.y - (ele.offsetTop ? ele.offsetTop : 0)
+         mouse.downPoint.x = event.screenX
+         mouse.downPoint.y = event.screenY
       }
       mouse.down = true
    })
@@ -39,13 +41,13 @@ function drag(mousemoveCallback = function(ele, mouse) {
       mouse.down = false
    })
    document.addEventListener("mousemove", function(event) {
-      mouse.x = event.clientX
-      mouse.y = event.clientY
+      mouse.x = event.screenX
+      mouse.y = event.screenY
       if(downToElement.ele && mouse.down) {
          var ele = downToElement.ele
+         mousemoveCallback(ele, mouse)
          var eleX = mouse.x - event.offsetX
          var eleY = mouse.y - event.offsetY
-         mousemoveCallback(ele, mouse)
          if(isOutsideOfWindow(eleX, eleY, ele.offsetWidth, ele.offsetHeight)) {
             if(outsideCallback) {
                outsideCallback(ele, eleX, eleY)
