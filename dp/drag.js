@@ -43,7 +43,9 @@ function drag(outsideCallBack) {
          var eleX = mouse.x - event.offsetX
          var eleY = mouse.y - event.offsetY
          if(isOutsideOfWindow(eleX, eleY, ele.offsetWidth, ele.offsetHeight)) {
-            outsideCallBack(ele, eleX, eleY)
+            if(outsideCallBack) {
+               outsideCallBack(ele, eleX, eleY)
+            }
          }
       }
    })
