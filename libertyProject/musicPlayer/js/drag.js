@@ -7,7 +7,7 @@ function drag(mousemoveCallback = function(ele, mouse) {
       ele.style.top = mouse.y - mouse.downPoint.y + "px"
    }, outsideCallback = null) {
 
-   var drags = es(".drag")
+   var drags = document.querySelectorAll(".drag")
    var downToElement = {
       ele: null,
    }
