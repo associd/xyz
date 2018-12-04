@@ -2,7 +2,7 @@
  * drag允许你在 目标的一部分超出屏幕外时 做一些事情 通过他的一个函数参数
  */
 function drag(outsideCallBack) {
-   var drags = es(".drag")
+   var drags = document.querySelectorAll(".drag")
    var downToElement = {
       ele: null,
    }
@@ -47,4 +47,15 @@ function drag(outsideCallBack) {
          }
       }
    })
+}
+
+/**
+ * 判定所指定的矩形是否在window里
+ */
+function isOutsideOfWindow(x, y, w, h) {
+    return !( x >= 0
+       && (x + w) <= window.innerWidth
+       && y >= 0
+       && (y + h) <= window.innerHeight
+    )
 }
