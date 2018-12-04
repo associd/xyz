@@ -43,9 +43,9 @@ function drag(mousemoveCallback = function(ele, mouse) {
       mouse.y = event.clientY
       if(downToElement.ele && mouse.down) {
          var ele = downToElement.ele
-         mousemoveCallback(ele, mouse)
          var eleX = mouse.x - event.offsetX
          var eleY = mouse.y - event.offsetY
+         mousemoveCallback(ele, mouse)
          if(isOutsideOfWindow(eleX, eleY, ele.offsetWidth, ele.offsetHeight)) {
             if(outsideCallback) {
                outsideCallback(ele, eleX, eleY)
