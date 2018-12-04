@@ -3,8 +3,10 @@
  * mousemoveCallback(event, mouse)
  */
 function drag(mousemoveCallback = function(ele, mouse) {
-      ele.style.left = mouse.x - mouse.downPoint.x + "px"
-      ele.style.top = mouse.y - mouse.downPoint.y + "px"
+      return {
+         left:mouse.x - mouse.downPoint.x,
+         top:mouse.y - mouse.downPoint.y,
+      }
    }, outsideCallback = null) {
 
    var drags = document.querySelectorAll(".drag")
@@ -45,7 +47,13 @@ function drag(mousemoveCallback = function(ele, mouse) {
       mouse.y = event.screenY
       if(downToElement.ele && mouse.down) {
          var ele = downToElement.ele
-         mousemoveCallback(ele, mouse)
+         var pos = mousemoveCallback(ele, mouse)
+         var left = ele.offsetLeft ? ele.offsetLeft : 0
+         var top = ele.offsetTop ? ele.offsetTop : 0
+
+         ele.style.left = pos.left + left
+         ele.style.top = pos.top + top
+
          var eleX = mouse.x - event.offsetX
          var eleY = mouse.y - event.offsetY
          if(isOutsideOfWindow(eleX, eleY, ele.offsetWidth, ele.offsetHeight)) {
