@@ -155,7 +155,10 @@ function set_audio_event() {
    e("#audio-current-time").addEventListener("mousemove", function() {
       audio_set_current_time()
    })
-
+   e("#confirm").addEventListener("click", event => {
+      sound.audioCtx.resume();
+      e("#userConfirm").classList.add("dpn")
+   })
    //鼠标按住
    var v = e("#audio-volume")
    var cur = e("#audio-volume .cur")

@@ -8,7 +8,7 @@ class Sound{
       this.setup()
    }
    setup() {
-      this.audioCtx = new AudioContext()
+      this.audioCtx = new ( window.webkitAudioContext || window.AudioContext )()
       this.analyser = this.audioCtx.createAnalyser()
       this.analyser.fftSize = 2048
       this.audioNode = this.audioCtx.createMediaElementSource(this.audio)

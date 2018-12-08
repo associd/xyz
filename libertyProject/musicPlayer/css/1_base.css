@@ -5,7 +5,14 @@
     box-sizing: border-box;
 }
 
+.t-center{
+   text-align: center;
+}
+
 .dpn{
+   display: none;
+}
+.dpb{
    display: block!important;
 }
 .dpib{

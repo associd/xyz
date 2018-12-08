@@ -89,6 +89,14 @@
         <div class="other">
             随机
         </div>
+        <div class="userConfirm" id="userConfirm">
+          <div class="">
+             将要播放音频
+          </div>
+          <div class="t-center">
+             <input id="confirm" type="button" name="" value="确定">
+          </div>
+        </div>
     </footer>
 </body>
 </html>

@@ -114,3 +114,11 @@
    height: 60px;
    line-height: 60px;
 }
+
+.userConfirm{
+   position: fixed;
+   right: 0;
+   bottom: 60px;
+   background-color: white;
+   color: black;
+}
