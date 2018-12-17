@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>airWar</title>
+   <style>
+      *{
+         margin: 0;
+         padding: 0;
+      }
+      .p-center{
+         position: absolute;
+         left: 0;
+         top: 0;
+         bottom: 0;
+         right: 0;
+         margin: auto;
+      }
+      .btn{
+         position: relative;
+         font-size: 30px;
+         padding: 5px 8px;
+         background-color: #e7c45c;
+         border: none;
+         border-radius: 3px;
+         transition: all 0.5s;
+      }
+      .btn:hover{
+         background-color: #f39c12;
+      }
+      .btn:hover::after{
+         content: "";
+         width: 0;
+         height: 100%;
+         position: absolute;
+         top: 0;
+         left: 0;
+         right: 0;
+         margin: auto;
+         background-color: white;
+         filter: opacity(0.5);
+         animation: broaden 1s;
+         animation-fill-mode: forwards;
+      }
+      .title-screen{
+         background-image: url(startBackground.jpg);
+         background-size: cover;
+      }
+      .play-screen,.title-screen{
+         transition: all 0.5s;
+      }
+      /* 实现标题界面到游戏界面的切换 采用淡入淡出的效果 */
+      .screen-status-title .title-screen , .screen-status-play .play-screen{
+         filter: opacity(1);
+         z-index: 99;
+      }
+      .screen-status-title .play-screen , .screen-status-play .title-screen{
+         filter: opacity(0);
+         z-index: 1;
+      }
+      {
+         filter: opacity(1);
+         z-index: 99;
+      }
+      #game{
+         width: 1024px;
+         height: 768px;
+
+         border: 1px solid red;
+      }
+      #screen>*{
+         position: absolute;
+         width: 100%;
+         height: 100%;
+      }
+      #airPlane{
+         width: 89px;
+         height: 31px;
+         position: absolute;
+         left: 0;
+         top: 500px;
+         background-image: url(airPlane.png);
+         background-size: contain;
+      }
+      #gameStart{
+         display: block;
+
+         /* 不设置宽高将其水平居中 */
+         white-space: nowrap;
+         transform: translateX(-50%);
+         position: absolute;
+         left: 50%;
+         right: 50%;
+         margin: auto;
+
+         bottom: 60px;
+      }
+      @keyframes broaden {
+         0%{
+            width: 0;
+         }
+         50%{
+            width: 100%;
+         }
+         100%{
+            width: 100%;
+            filter: opacity(0);
+         }
+      }
+   </style>
+</head>
+<body>
+   <div id="game" class="p-center">
+      <div id="screen" class="screen-status-title">
+         <div class="title-screen">
+            <button id="gameStart" class="btn">开始游戏</button>
+         </div>
+         <div class="play-screen">
+            <div id="airPlane"></div>
+         </div>
+      </div>
+   </div>
+   <script>
+      var e = sel => document.querySelector(sel);
+      var log = l => console.log(l);
+
+      (function() {
+
+         //保存按键状态
+         var keyDown = {}
+
+         // 鼠标点击相应的按钮会触发相应的事件
+         var clickAction = {
+            gameStart: function(event) {
+               var cl = e("#screen").classList
+               if(cl.contains("screen-status-title")) {
+                  cl.remove("screen-status-title")
+                  cl.add("screen-status-play")
+                  playGame();
+               }else{
+                  cl.remove("screen-status-play")
+                  cl.add("screen-status-title")
+               }
+            }
+         }
+
+
+         document.addEventListener("keydown", event => {
+            if(hasStarted(e("#game"))){
+               keyDown[event.key] = true;
+            }
+         })
+         document.addEventListener("keyup", event => {
+            if(hasStarted(e("#game"))){
+               keyDown[event.key] = false;
+            }
+         })
+         document.addEventListener("click", event => {
+            if(clickAction[event.target.id]){
+               clickAction[event.target.id](event);
+            }
+         })
+         function started(game) {
+            return game.status == "start";
+         }
+         function playGame() {
+            e("#game").status = "start";
+            setTimeout(e("#game") => {
+
+            }, 1000 / 60)
+         }
+      })()
+   </script>
+</body>
+</html>
