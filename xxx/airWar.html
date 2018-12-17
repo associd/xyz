@@ -128,6 +128,12 @@
 
       (function() {
 
+         //保存众多游戏元素
+         var Game = {
+            status: "stop",
+            elements:[e("#airPlane")],
+         }
+
          //保存按键状态
          var keyDown = {}
 
@@ -138,7 +144,7 @@
                if(cl.contains("screen-status-title")) {
                   cl.remove("screen-status-title")
                   cl.add("screen-status-play")
-                  playGame();
+                  playGame(Game);
                }else{
                   cl.remove("screen-status-play")
                   cl.add("screen-status-title")
@@ -148,7 +154,7 @@
 
 
          document.addEventListener("keydown", event => {
-            if(hasStarted(e("#game"))){
+            if(hasStarted(Game)){
                keyDown[event.key] = true;
             }
          })
@@ -162,16 +168,21 @@
                clickAction[event.target.id](event);
             }
          })
-         function started(game) {
-            return game.status == "start";
-         }
-         function playGame() {
-            e("#game").status = "start";
-            // setTimeout(e("#game") => {
-            //
-            // }, 1000 / 60)
-         }
       })()
+
+      function hasStarted(game) {
+         return game.status == "start";
+      }
+      function playGame(game) {
+         game.status = "start";
+         refresh(game);
+      }
+      function refresh(game) {
+         setTimeout(() => {
+            game.update();
+            regresh(game);
+         }, 1000 / 60)
+      }
    </script>
 </body>
 </html>
