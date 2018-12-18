@@ -64,7 +64,7 @@
          filter: opacity(1);
          z-index: 99;
       }
-      #game{
+      #gameDom{
          width: 1024px;
          height: 768px;
 
@@ -112,7 +112,7 @@
    </style>
 </head>
 <body>
-   <div id="game" class="p-center">
+   <div id="gameDom" class="p-center">
       <div id="screen" class="screen-status-title">
          <div class="title-screen">
             <button id="gameStart" class="btn">开始游戏</button>
@@ -124,18 +124,23 @@
    </div>
    <script>
       var e = sel => document.querySelector(sel);
-      var log = l => console.log(l);
+      var log = console.log.bind(console);
 
       (function() {
 
-         //保存众多游戏元素
-         var Game = {
-            status: "stop",
-            elements:[e("#airPlane")],
-         }
+         var airPlane = createAirPlane();
 
-         //保存按键状态
-         var keyDown = {}
+         //保存众多游戏元素
+         window.game = {
+            keyDown: {},         //保存按键状态
+            status: "stop",
+            elements: [airPlane],
+         }
+         game.update = function() {
+            game.elements.forEach(item => {
+               item.update(game)
+            })
+         }
 
          // 鼠标点击相应的按钮会触发相应的事件
          var clickAction = {
@@ -144,7 +149,7 @@
                if(cl.contains("screen-status-title")) {
                   cl.remove("screen-status-title")
                   cl.add("screen-status-play")
-                  playGame(Game);
+                  playGame(game);
                }else{
                   cl.remove("screen-status-play")
                   cl.add("screen-status-title")
@@ -154,13 +159,14 @@
 
 
          document.addEventListener("keydown", event => {
-            if(hasStarted(Game)){
-               keyDown[event.key] = true;
+            log(game)
+            if(hasStarted(game)){
+               game.keyDown[event.key] = true;
             }
          })
          document.addEventListener("keyup", event => {
             if(hasStarted(e("#game"))){
-               keyDown[event.key] = false;
+               game.keyDown[event.key] = false;
             }
          })
          document.addEventListener("click", event => {
@@ -170,8 +176,8 @@
          })
       })()
 
-      function hasStarted(game) {
-         return game.status == "start";
+      function hasStarted(g) {
+         return g.status;
       }
       function playGame(game) {
          game.status = "start";
@@ -179,9 +185,46 @@
       }
       function refresh(game) {
          setTimeout(() => {
-            game.update();
-            regresh(game);
+            game.update(game);
+            refresh(game);
          }, 1000 / 60)
+      }
+      function createAirPlane() {
+         var o = {};
+         o.dom = e("#airPlane");
+         o.setX = function(x) {
+            this.dom.style.left = `${x}px`;
+         }
+         o.getX = function() {
+            return parseInt(this.dom.style.left);
+         }
+         o.setY = function(y) {
+            this.dom.style.left = `${y}px`;
+         }
+         o.getY = function() {
+            return parseInt(this.dom.style.top)
+         }
+         o.speed = {
+            x: 10,
+            y: 10,
+         }
+         o.action = {
+            ArrowUp: () => {
+
+               o.setX(o.getX() - o.speed.x);
+            },
+            ArrowDown: () => {
+               o.setX(o.getX() + o.speed.x);
+            },
+         }
+         o.update = function(game) {
+            Object.keys(game.keyDown).forEach(item => {
+               if(game.keyDown[item]) {
+                  o.action[item]();
+               }
+            })
+         }
+         return o;
       }
    </script>
 </body>
