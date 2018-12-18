@@ -76,8 +76,8 @@
          height: 100%;
       }
       #airPlane{
-         width: 89px;
-         height: 31px;
+         width: 100px;
+         height: 53px;
          position: absolute;
          left: 0;
          top: 500px;
@@ -113,6 +113,17 @@
             filter: opacity(0);
          }
       }
+      #oil{
+         position: absolute;
+         right: 0;
+         bottom: 0;
+         z-index: -1;
+      }
+      .oil-energy{
+         border-radius: 22px;
+         background: linear-gradient(rgb(0,255,255), rgb(0,128,128));
+         overflow: hidden;
+      }
    </style>
 </head>
 <body>
@@ -125,6 +136,11 @@
          <div class="play-screen">
             <div id="logo-2"></div>
             <div id="airPlane"></div>
+            <div id="oil">
+               <div class="oil-energy">
+                  <img class="oil-cover" src="gas.png">
+               </div>
+            </div>
          </div>
       </div>
    </div>
