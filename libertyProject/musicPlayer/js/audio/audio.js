@@ -53,14 +53,14 @@ class Sound{
       //科学计数的小数 用toFixed 保留两位小数失败
       //于是........暴力 ^_^
       //2018_9_19 为什么gain.maxValue 在火狐里是Infinity?
-      var num = this.gain.maxValue
-      if(num === Infinity) {
-         num = 1
-      }else {
-         num = num.toString()
-         num = parseFloat(num.substr(0, num.indexOf(".") + 3))
-      }
-      this.gain.value = vol * num
+      // var num = this.gain.maxValue
+      // if(num === Infinity) {
+      //    num = 1
+      // }else {
+      //    num = num.toString()
+      //    num = parseFloat(num.substr(0, num.indexOf(".") + 3))
+      // }
+      this.gain.value = vol
    }
 
 
