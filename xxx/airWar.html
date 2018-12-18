@@ -97,6 +97,10 @@
 
          bottom: 60px;
       }
+      #logo-1{
+         margin-top: 70px;
+         margin-left: 20px;
+      }
       @keyframes broaden {
          0%{
             width: 0;
@@ -115,9 +119,11 @@
    <div id="gameDom" class="p-center">
       <div id="screen" class="screen-status-title">
          <div class="title-screen">
+            <img src="SkyAngel.png" alt="" id="logo-1">
             <button id="gameStart" class="btn">开始游戏</button>
          </div>
          <div class="play-screen">
+            <div id="logo-2"></div>
             <div id="airPlane"></div>
          </div>
       </div>
@@ -132,9 +138,16 @@
 
          //保存众多游戏元素
          window.game = {
+            dom: e("#gameDom"),
             keyDown: {},         //保存按键状态
             status: "stop",
             elements: [airPlane],
+         }
+         game.getWidth = function() {
+            return game.dom.offsetWidth;
+         }
+         game.getHeight = function() {
+            return game.dom.offsetHeight;
          }
          game.update = function() {
             game.elements.forEach(item => {
@@ -159,26 +172,23 @@
 
 
          document.addEventListener("keydown", event => {
-            log(game)
             if(hasStarted(game)){
                game.keyDown[event.key] = true;
             }
          })
          document.addEventListener("keyup", event => {
-            if(hasStarted(e("#game"))){
                game.keyDown[event.key] = false;
-            }
          })
          document.addEventListener("click", event => {
             if(clickAction[event.target.id]){
                clickAction[event.target.id](event);
             }
          })
+         function hasStarted(game) {
+            return game.status;
+         }
       })()
 
-      function hasStarted(g) {
-         return g.status;
-      }
       function playGame(game) {
          game.status = "start";
          refresh(game);
@@ -192,37 +202,57 @@
       function createAirPlane() {
          var o = {};
          o.dom = e("#airPlane");
+         o.getWidth = function() {
+            return o.dom.offsetWidth;
+         }
+         o.getHeight = function() {
+            return o.dom.offsetHeight;
+         }
          o.setX = function(x) {
             this.dom.style.left = `${x}px`;
          }
          o.getX = function() {
-            return parseInt(this.dom.style.left);
+            return o.dom.offsetLeft;
          }
          o.setY = function(y) {
-            this.dom.style.left = `${y}px`;
+            this.dom.style.top = `${y}px`;
          }
          o.getY = function() {
-            return parseInt(this.dom.style.top)
+            return o.dom.offsetTop;
          }
          o.speed = {
             x: 10,
             y: 10,
          }
          o.action = {
-            ArrowUp: () => {
-
-               o.setX(o.getX() - o.speed.x);
+            ArrowUp: (game) => {
+               var y = o.getY() - o.speed.y
+               o.setY( y <= 0 ? 0 : y);
             },
-            ArrowDown: () => {
-               o.setX(o.getX() + o.speed.x);
+            ArrowDown: (game) => {
+               var y = o.getY() + o.speed.y
+               o.setY( y+o.getHeight() >= game.getHeight() ? game.getHeight()-o.getHeight() : y);
+            },
+            ArrowLeft: (game) => {
+               var x = o.getX() - o.speed.x
+               o.setX( x <= 0 ? 0 : x);
+            },
+            ArrowRight: (game) => {
+               var x = o.getX() + o.speed.x
+               o.setX( x+o.getWidth() >= game.getWidth() ? game.getWidth()-o.getWidth() : x);
             },
          }
+         o.move = function(direction, wraper) {
+            o.action[direction](wraper);
+         }
          o.update = function(game) {
+            //按键事件
             Object.keys(game.keyDown).forEach(item => {
-               if(game.keyDown[item]) {
-                  o.action[item]();
+               if(game.keyDown[item] && o.action[item]) {
+                  o.move(item, game);
                }
             })
+
          }
          return o;
       }
