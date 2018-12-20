@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="style.css">
+   <title>airWar</title>
+</head>
+<body>
+   <div id="gameDom" class="p-center">
+      <div id="screen" class="screen-status-title">
+         <div class="title-screen">
+            <img src="./img/SkyAngel.png" alt="" id="logo-1">
+            <button id="gameStart" class="btn">开始游戏</button>
+         </div>
+         <div class="play-screen">
+            <div class="game-top">
+               <div id="oil">
+                  <div class="oil-energy"><img class="oil-cover" src="./img/gas_2.png"></div>
+               </div>
+               <div id="star-counter">
+                  <table>
+                     <tbody>
+                        <tr>
+                           <td id="star-icon"></td>
+                           <td id="star-counter-value">0</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+               <div id="game-time"><span id="time-m">00</span>:<span id="time-s">00</span></div>
+               <div id="bgm" class="btn">
+                  <audio id="bgm-source" src="./sound/background.mp3"></audio>
+               </div>
+               <table id="text-font-size">
+                  <tr>
+                     <td id="text-size-description" rowspan="2">T</td>
+                     <td id="text-increase" class="btn">+</td>
+                  </tr>
+                  <tr>
+                     <td id="text-decrease" class="btn">-</td>
+                  </tr>
+               </table>
+               <div id="game-status" class="btn">
+                  <img id="game-pause" src="./img/pause.png" alt="">
+                  <img id="game-play" src="./img/play.png" alt="">
+               </div>
+               <img id="logo-2" src="./img/logo_2.png" alt="" id="star-counter">
+            </div>
+            <div class="game-content">
+               <div id="airPlane"></div>
+
+               <img src="./img/cloud_1.png" alt="" id="cloud-1" class="cloud">
+               <img src="./img/cloud_2.png" alt="" id="cloud-2" class="cloud">
+               <img src="./img/cloud_3.png" alt="" id="cloud-3" class="cloud">
+
+               <img src="./img/star_gold_256.png" id="star" alt="">
+
+               <div id="bird-a"></div>
+
+               <div class="supply"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <script>
+      var e = sel => document.querySelector(sel);
+      var es = sel => document.querySelectorAll(sel);
+      var log = console.log.bind(console);
+
+      (function() {
+
+         var airPlane = createAirPlane();
+
+         //保存众多游戏元素
+         var game = {
+            dom: e("#gameDom"),
+            keyDown: {},         //保存按键状态
+            status: "stop",
+            elements: [airPlane],
+         }
+         game.getWidth = function() {
+            return game.dom.offsetWidth;
+         }
+         game.getHeight = function() {
+            return game.dom.offsetHeight;
+         }
+         game.update = function() {
+            game.elements.forEach(item => {
+               item.update(game)
+            })
+         }
+
+         // 鼠标点击相应的按钮会触发相应的事件
+         var clickAction = {
+            gameStart: function(event) {
+               var cl = e("#screen").classList
+               if(cl.contains("screen-status-title")) {
+                  cl.remove("screen-status-title")
+                  cl.add("screen-status-play")
+                  playGame(game);
+               }else{
+                  cl.remove("screen-status-play")
+                  cl.add("screen-status-title")
+               }
+            }
+         }
+
+
+         document.addEventListener("keydown", event => {
+            if(hasStarted(game)){
+               game.keyDown[event.key] = true;
+            }
+         })
+         document.addEventListener("keyup", event => {
+               game.keyDown[event.key] = false;
+         })
+         document.addEventListener("click", event => {
+            if(clickAction[event.target.id]){
+               clickAction[event.target.id](event);
+            }
+         })
+         function hasStarted(game) {
+            return game.status;
+         }
+      })()
+
+      function playGame(game) {
+         game.status = "start";
+         refresh(game);
+         es(".cloud").forEach(item => {
+            item.classList.add("move")
+         })
+      }
+      function refresh(game) {
+         setTimeout(() => {
+            game.update(game);
+            refresh(game);
+         }, 1000 / 60)
+      }
+      function createAirPlane() {
+         var o = {};
+         o.dom = e("#airPlane");
+         o.getWidth = function() {
+            return o.dom.offsetWidth;
+         }
+         o.getHeight = function() {
+            return o.dom.offsetHeight;
+         }
+         o.setX = function(x) {
+            this.dom.style.left = `${x}px`;
+         }
+         o.getX = function() {
+            return o.dom.offsetLeft;
+         }
+         o.setY = function(y) {
+            this.dom.style.top = `${y}px`;
+         }
+         o.getY = function() {
+            return o.dom.offsetTop;
+         }
+         o.speed = {
+            x: 10,
+            y: 10,
+         }
+         o.action = {
+            ArrowUp: (game) => {
+               var y = o.getY() - o.speed.y
+               o.setY( y <= 0 ? 0 : y);
+            },
+            ArrowDown: (game) => {
+               var y = o.getY() + o.speed.y
+               o.setY( y+o.getHeight() >= game.getHeight() ? game.getHeight()-o.getHeight() : y);
+            },
+            ArrowLeft: (game) => {
+               var x = o.getX() - o.speed.x
+               o.setX( x <= 0 ? 0 : x);
+            },
+            ArrowRight: (game) => {
+               var x = o.getX() + o.speed.x
+               o.setX( x+o.getWidth() >= game.getWidth() ? game.getWidth()-o.getWidth() : x);
+            },
+         }
+         o.move = function(direction, wraper) {
+            o.action[direction](wraper);
+         }
+         o.update = function(game) {
+            //按键事件
+            Object.keys(game.keyDown).forEach(item => {
+               if(game.keyDown[item] && o.action[item]) {
+                  o.move(item, game);
+               }
+            })
+
+         }
+         return o;
+      }
+   </script>
+</body>
+</html>
