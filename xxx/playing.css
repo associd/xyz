@@ -1,0 +1,78 @@
+.game-top{
+   justify-content: space-around;
+}
+#airPlane{
+   width: 120px;
+   height: 52px;
+   position: absolute;
+   left: 0;
+   top: 500px;
+   background-image: url(./img/airPlane_1.png);
+   z-index: 50;
+}
+#airPlane.gain{
+   transform: rotateZ(-15deg)
+}
+#airPlane.descend{
+   transform: rotateZ(15deg)
+}
+.airPlane-item{
+   position: absolute;
+   right: 0;
+   top: 5px;
+   animation: hight-rotate 0.1s linear infinite;
+}
+@keyframes hight-rotate {
+   from{
+      transform: rotateX(0);
+   }
+   to{
+      transform: rotateX(180deg);
+   }
+}
+.supply{
+   width: 60px;
+   height: 120px;
+   background-image: url(./img/supply.png);
+   animation: supply-light 0.5s infinite;
+}
+@keyframes supply-light {
+   0%{
+      background-image: url(./img/supply.png);
+   }
+   25%{
+      background-image: url(./img/supply-1.png);
+   }
+   50%{
+      background-image: url(./img/supply-2.png);
+   }
+   75%{
+      background-image: url(./img/supply-3.png);
+   }
+   100%{
+      background-image: url(./img/supply-4.png);
+   }
+}
+.star{
+   width: 40px;
+   height: 38px;
+   background-image: url(./img/star_gold_256.png);
+   animation: star-light 0.5s infinite;
+}
+@keyframes star-light {
+   0%{
+      background-image: url(./img/star_gold_256.png);
+   }
+   25%{
+      background-image: url(./img/star_gold_1.png);
+   }
+   50%{
+      background-image: url(./img/star_gold_2.png);
+   }
+   75%{
+      background-image: url(./img/star_gold_3.png);
+   }
+   100%{
+      background-image: url(./img/star_gold_4.png);
+   }
+}

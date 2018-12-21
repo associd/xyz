@@ -1,12 +1,12 @@
 #star-counter{
-   padding: 0px 5px;
-   line-height: 35px;
+   padding-left: 10px;
    text-align: center;
    font-size: 30px;
+   background-color: white;
 }
 #star-counter-value{
    width: 35px;
-   height: 35px;
+   line-height: 52px;
    color: orange;
 }
 #star-icon{

@@ -5,6 +5,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="playing.css">
    <link rel="stylesheet" href="scoreboard.css">
    <link rel="stylesheet" href="controlboard.css">
    <link rel="stylesheet" href="oil-gauge.css">
@@ -16,7 +17,16 @@
 <body>
    <div id="gameDom" class="p-center">
       <div id="screen" class="screen-box">
-         <div class="title-screen screen">
+         <div class="title-screen screen active">
+            <div class="direction">
+               <p>1. Move the airplane using the arrows keys;</p>
+               <p>2. The timer present the time lapsed;</p>
+               <p>3. The fuel counter show the remain fuel;</p>
+               <p>4. During the flight, the aircraft need to avoid the birds that are presented in the sky. If the airplane hit a bird, the game is over;</p>
+               <p>5. During the flight, the aircraft need to collect fuel and stars in the sky;</p>
+               <p>6. You can pause the game clicking in a button pause, or pressing the space bar.</p>
+               <p>7. Go beyond all limits;</p>
+            </div>
             <img src="./img/SkyAngel.png" alt="" id="logo-1">
             <button id="gameStart" class="btn">开始游戏</button>
          </div>
@@ -29,17 +39,11 @@
                </div>
                <div class="logo-2"></div>
                <div class="scoreAndcontrol-board board flex flex-align-center">
-                  <div id="star-counter">
-                     <table>
-                        <tbody>
-                           <tr>
-                              <td id="star-icon"></td>
-                              <td id="star-counter-value">0</td>
-                           </tr>
-                        </tbody>
-                     </table>
+                  <div id="star-counter" class="flex flex-align-center">
+                     <div id="star-icon"></div>
+                     <div id="star-counter-value">0</div>
                   </div>
-                  <div id="game-time"><span id="time-m">00</span>:<span id="time-s">00</span></div>
+                  <div id="game-time"><span class="time-m">00</span>:<span class="time-s">00</span></div>
                   <div id="text-font-size" class="flex flex-align-center">
                      <div id="text-increase" class="btn">A+</div>
                      <div id="text-decrease" class="btn">A-</div>
@@ -55,21 +59,35 @@
             </div>
             <div class="game-content">
                <div id="airPlane">
-                  <img src="./img/airPlane_2.png" alt="">
+                  <img class="airPlane-item" src="./img/airPlane-item.png" alt="">
                </div>
 
                <img src="./img/cloud_1.png" alt="" id="cloud-1" class="cloud">
                <img src="./img/cloud_2.png" alt="" id="cloud-2" class="cloud">
                <img src="./img/cloud_3.png" alt="" id="cloud-3" class="cloud">
 
-               <img src="./img/star_gold_256.png" id="star" alt="">
+               <div class="star"></div>
 
                <div id="bird-a"></div>
 
                <div class="supply"></div>
+
+               <div class="gameover">
+                  <div class="dialog p-center">
+                     <h3 class="t-a-center">your time:</h3>
+                     <div class="t-a-center"><span class="time-m">00</span>:<span class="time-s">00</span></div>
+                     <h3 class="t-a-center">your star:</h3>
+                     <div class="t-a-center">12</div>
+                     <h3 class="t-a-center">And your name:</h3>
+                     <div>
+                        <input class="input-username t-a-center" type="text">
+                     </div>
+                     <button id="showRanking" class="user-continue btn">continue</button>
+                  </div>
+               </div>
             </div>
          </div>
-         <div class="gameover-screen screen active">
+         <div class="gameover-screen screen">
             <div id="ranking">
                <div class="logo-2 ranking-logo"></div>
                <table class="ranking-content">
@@ -111,7 +129,7 @@
          var airPlane = createAirPlane();
 
          //保存众多游戏元素
-         var game = {
+         window.game = {
             dom: e("#gameDom"),
             keyDown: {},         //保存按键状态
             status: "stop",
@@ -136,12 +154,30 @@
                e(".title-screen").classList.remove("active")
                playGame(game);
             },
-            restart: function(event){
+            restart: function(event) {
                location.reload()
+            },
+            showRanking: function(event) {
+               es(".screen").forEach(dom => {
+                  dom.classList.remove("active")
+               })
+               e(".gameover-screen").classList.add("active")
             }
          }
 
 
+         e(".title-screen").addEventListener("mouseenter", event => {
+            es(".direction>p").forEach((dom, index) => {
+               var n = Math.floor(1/7*10);
+               dom.style.animation = `direction-show 0.5s 0.${n * index}s forwards`;
+            })
+         })
+         e(".title-screen").addEventListener("mouseleave", event => {
+            es(".direction>p").forEach((dom, index, arr) => {
+               var n = Math.floor(1/7*10);
+               dom.style.animation = `direction-hide 0.${n * (arr.length - index)}s forwards`;
+            })
+         })
          document.addEventListener("keydown", event => {
             if(hasStarted(game)){
                game.keyDown[event.key] = true;
@@ -162,6 +198,7 @@
 
       function gameover(game){
          game.status = "over"
+         e(".gameover").classList.add("gameover-show")
       }
       function playGame(game) {
          game.status = "start";
@@ -179,6 +216,7 @@
       function createAirPlane() {
          var o = {};
          o.dom = e("#airPlane");
+         o.status = "stand";
          o.getWidth = function() {
             return o.dom.offsetWidth;
          }
@@ -205,10 +243,12 @@
             ArrowUp: (game) => {
                var y = o.getY() - o.speed.y
                o.setY( y <= 0 ? 0 : y);
+               o.status = "gain";
             },
             ArrowDown: (game) => {
                var y = o.getY() + o.speed.y
                o.setY( y+o.getHeight() >= game.getHeight() ? game.getHeight()-o.getHeight() : y);
+               o.status = "descend";
             },
             ArrowLeft: (game) => {
                var x = o.getX() - o.speed.x
@@ -218,17 +258,55 @@
                var x = o.getX() + o.speed.x
                o.setX( x+o.getWidth() >= game.getWidth() ? game.getWidth()-o.getWidth() : x);
             },
+            stand: (game) => {
+               var oc = o.dom.classList
+               if(oc.contains("stand")) {
+                  o.status = "stand"
+               }else{
+                  oc.add("stand")
+                  oc.remove("gain")
+                  oc.remove("descend")
+               }
+            },
+            gain: (game) => {
+               var oc = o.dom.classList
+               if(oc.contains("gain")) {
+                  return
+               }else{
+                  oc.add("gain")
+                  oc.remove("stand")
+                  oc.remove("descend")
+               }
+            },
+            descend: (game) => {
+               var oc = o.dom.classList
+               if(oc.contains("descend")) {
+                  return
+               }else{
+                  oc.add("descend")
+                  oc.remove("stand")
+                  oc.remove("gain")
+               }
+            },
          }
          o.move = function(direction, wraper) {
             o.action[direction](wraper);
          }
          o.update = function(game) {
+            var hasKeydowned = false //至少一个按键被按下
             //按键事件
             Object.keys(game.keyDown).forEach(item => {
                if(game.keyDown[item] && o.action[item]) {
                   o.move(item, game);
+                  hasKeydowned = true;
                }
             })
+            //飞机状态
+            if(hasKeydowned) {
+               o.action[o.status](game);
+            }else {
+               o.action["stand"](game);
+            }
 
          }
          return o;
