@@ -1,0 +1,11 @@
+#oil-gauge{
+   font-size: 0;
+}
+.oil-energy{
+   border-radius: 5px;
+   /* 使用渐变 */
+   /* background: linear-gradient(to right, rgb(220,45,45), rgb(18,243,37)); */
+   /* 使用纯色 */
+   background-color: orange;
+   overflow: hidden;
+}

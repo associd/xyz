@@ -2,6 +2,19 @@
    margin: 0;
    padding: 0;
 }
+.display-none{
+   display: none;
+}
+.board{
+   border-radius: 10px;
+   overflow: hidden;
+}
+.flex{
+   display: flex;
+}
+.flex-align-center{
+   align-items: center;
+}
 .p-center{
    position: absolute;
    left: 0;
@@ -14,12 +27,16 @@
    position: relative;
    font-size: 30px;
 
-   background-color: #e7c45c;
+   cursor: pointer;
+   overflow: hidden;
+   outline: none;
    border: none;
+   background-color: #e7c45c;
    transition: all 0.5s;
 }
 .btn:hover{
-   background-color: #f39c12;
+   color: white;
+   background-color: #f39c12!important;
 }
 .btn:hover::after{
    content: "";
@@ -35,6 +52,18 @@
    animation: broaden 1s;
    animation-fill-mode: forwards;
 }
+@keyframes broaden {
+   0%{
+      width: 0;
+   }
+   50%{
+      width: 100%;
+   }
+   100%{
+      width: 100%;
+      filter: opacity(0);
+   }
+}
 .title-screen{
    background-image: url(./img/startBackground.jpg);
    background-size: cover;
@@ -43,17 +72,22 @@
    background-color: skyblue;
    overflow: hidden;
 }
-.play-screen,.title-screen{
-   transition: all 0.5s;
+.gameover-screen{
+   background-color: skyblue;
+   color: white;
+   bottom: 100%;
 }
-/* 实现标题界面到游戏界面的切换 采用淡入淡出的效果 */
-.screen-status-title .title-screen , .screen-status-play .play-screen{
-   filter: opacity(1);
-   z-index: 99;
-}
-.screen-status-title .play-screen , .screen-status-play .title-screen{
+/* 界面到界面的切换 采用淡入淡出的效果 */
+.screen{
    filter: opacity(0);
    z-index: 1;
+   transition: all 0.5s;
+}
+.active{
+   filter: opacity(1);
+   z-index: 99;
+   margin: 0;
+   bottom: 0;
 }
 #gameDom{
    width: 1024px;
@@ -67,13 +101,13 @@
    height: 100%;
 }
 #airPlane{
-   width: 100px;
-   height: 53px;
+   /* width: 100px;
+   height: 53px; */
    position: absolute;
    left: 0;
    top: 500px;
-   background-image: url(./img/airPlane.png);
-   background-size: contain;
+   /* background-image: url(./img/airPlane_2.png);
+   background-size: contain; */
    z-index: 50;
 }
 #gameStart{
@@ -95,152 +129,18 @@
    margin-top: 70px;
    margin-left: 20px;
 }
-@keyframes broaden {
-   0%{
-      width: 0;
-   }
-   50%{
-      width: 100%;
-   }
-   100%{
-      width: 100%;
-      filter: opacity(0);
-   }
-}
 .game-top{
-   position: relative;
-   display: flex;
-   align-items: center;
    justify-content: space-around;
 }
-#oil{
-   /* position: absolute; */
-   /* left: 5px;
-   top: 10px; */
-   z-index: 111;
-}
-.oil-energy{
-   border-radius: 22px;
-   background: linear-gradient(to right, rgb(220,45,45), rgb(18,243,37));
-   overflow: hidden;
-}
-.cloud{
-   position: absolute;
-   left: 100%;
-}
-#cloud-1.move{
-   top: 300px;
-   animation: moveRight 3s linear infinite;
-   z-index: 51;
-}
-#cloud-2.move{
-   top: 130px;
-   animation: moveRight 5s linear infinite;
-   z-index: 49;
-}
-#cloud-3.move{
-   top: 600px;
-   animation: moveRight 7s linear infinite;
-   z-index: 49;
-}
-@keyframes moveRight {
-   from{
-      left: 100%;
-   }
-   to{
-      left: -300px;
-   }
-}
-#logo-2{
-   /* position: absolute; */
-   /* right: 10px;
-   top: 10px; */
+.logo-2{
    width: 50px;
    height: 106px;
-   object-fit: none;
-   object-position: 0 0;
+   background-image: url(./img/logo_2.png);
+   /* background-size: ; */
+   background-position: 0 0;
 }
-#logo-2:hover{
-   object-position: -50px 0;
-}
-#bird-a{
-   width: 120px;
-   height: 82px;
-   position: absolute;
-   left: 500px;
-   top: 500px;
-   animation: birdFly 0.2s linear infinite;
-}
-@keyframes birdFly {
-   0%{
-      background-image: url(./img/frame-1.png);
-   }
-   33%{
-      background-image: url(./img/frame-2.png);
-   }
-   66%{
-      background-image: url(./img/frame-3.png);
-   }
-   100%{
-      background-image: url(./img/frame-4.png);
-   }
-}
-#star-counter{
-   /* position: absolute; */
-   /* top: 10px;
-   left: 320px; */
-   line-height: 35px;
-   text-align: center;
-   font-size: 30px;
-}
-#star-counter-value{
-   width: 35px;
-   height: 35px;
-   color: orange;
-}
-#star-icon{
-   width: 35px;
-   height: 35px;
-   background-image: url(./img/star-icon.png);
-   background-repeat: no-repeat;
-   background-size: cover;
-}
-#star{
-   position: absolute;
-   left: 300px;
-   top: 500px;
-}
-#game-time{
-   /* position: absolute; */
-   /* left: 50%; */
-   /* top: 10px; */
-   font-size: 40px;
-   color: white;
-   /* transform: translateX(-50%); */
-}
-#bgm{
-   width: 30px;
-   height: 30px;
-   /* position: absolute; */
-   /* left: calc(50% + 100px); */
-   /* top: 10px; */
-   background-image: url(./img/trumpet.png);
-   background-repeat: no-repeat;
-   background-position: center;
-}
-#text-font-size{
-   width: 100px;
-   height: 60px;
-   font-size: 20px;
-   text-align: center;
-   border-spacing: 0;
-}
-#text-increase,#text-decrease{
-   width: 60px;
-   font-size: 16px;
-}
-#game-status{
-   font-size: 0;
+.logo-2:hover{
+   background-position: -50px 0;
 }
 .supply{
    width: 60px;

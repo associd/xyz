@@ -1,0 +1,29 @@
+#ranking{
+   height: 60%;
+   margin: 10% auto;
+   text-align: center;
+   overflow: auto;
+}
+.ranking-content{
+   width: 100%;
+}
+.ranking-content tr{
+   height: 30px;
+}
+.ranking-logo{
+   position: absolute;
+   left: 10px;
+   top: 10px;
+}
+.restart{
+   margin-left: 50%;
+   transform: translateX(-50%);
+
+   padding: 5px 10px;
+   border-radius: 20px;
+
+   background-color: white;
+}
+.record:nth-child(even){
+   background-color: #ffffff25;
+}

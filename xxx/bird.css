@@ -1,0 +1,22 @@
+#bird-a{
+   width: 120px;
+   height: 82px;
+   position: absolute;
+   left: 500px;
+   top: 500px;
+   animation: birdFly 0.2s linear infinite;
+}
+@keyframes birdFly {
+   0%{
+      background-image: url(./img/frame-1.png);
+   }
+   33%{
+      background-image: url(./img/frame-2.png);
+   }
+   66%{
+      background-image: url(./img/frame-3.png);
+   }
+   100%{
+      background-image: url(./img/frame-4.png);
+   }
+}

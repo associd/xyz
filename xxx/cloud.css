@@ -1,0 +1,27 @@
+.cloud{
+   position: absolute;
+   left: 100%;
+}
+#cloud-1.move{
+   top: 300px;
+   animation: moveRight 3s linear infinite;
+   z-index: 51;
+}
+#cloud-2.move{
+   top: 130px;
+   animation: moveRight 5s linear infinite;
+   z-index: 49;
+}
+#cloud-3.move{
+   top: 600px;
+   animation: moveRight 7s linear infinite;
+   z-index: 49;
+}
+@keyframes moveRight {
+   from{
+      left: 100%;
+   }
+   to{
+      left: -300px;
+   }
+}

@@ -5,51 +5,58 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="scoreboard.css">
+   <link rel="stylesheet" href="controlboard.css">
+   <link rel="stylesheet" href="oil-gauge.css">
+   <link rel="stylesheet" href="cloud.css">
+   <link rel="stylesheet" href="bird.css">
+   <link rel="stylesheet" href="ranking.css">
    <title>airWar</title>
 </head>
 <body>
    <div id="gameDom" class="p-center">
-      <div id="screen" class="screen-status-title">
-         <div class="title-screen">
+      <div id="screen" class="screen-box">
+         <div class="title-screen screen">
             <img src="./img/SkyAngel.png" alt="" id="logo-1">
             <button id="gameStart" class="btn">开始游戏</button>
          </div>
-         <div class="play-screen">
-            <div class="game-top">
-               <div id="oil">
-                  <div class="oil-energy"><img class="oil-cover" src="./img/gas_2.png"></div>
+         <div class="play-screen screen">
+            <div class="game-top board flex flex-align-center">
+               <div class="content-1 flex flex-align-center">
+                  <div id="oil-gauge">
+                     <div class="oil-energy"><img class="oil-cover" src="./img/gas_2.png"></div>
+                  </div>
                </div>
-               <div id="star-counter">
-                  <table>
-                     <tbody>
-                        <tr>
-                           <td id="star-icon"></td>
-                           <td id="star-counter-value">0</td>
-                        </tr>
-                     </tbody>
-                  </table>
+               <div class="logo-2"></div>
+               <div class="scoreAndcontrol-board board flex flex-align-center">
+                  <div id="star-counter">
+                     <table>
+                        <tbody>
+                           <tr>
+                              <td id="star-icon"></td>
+                              <td id="star-counter-value">0</td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div id="game-time"><span id="time-m">00</span>:<span id="time-s">00</span></div>
+                  <div id="text-font-size" class="flex flex-align-center">
+                     <div id="text-increase" class="btn">A+</div>
+                     <div id="text-decrease" class="btn">A-</div>
+                  </div>
+                  <div id="game-status" class="btn">
+                     <img id="game-pause" class="" src="./img/pause-middle.png" alt="">
+                     <img id="game-play" class="display-none" src="./img/play-middle.png" alt="">
+                  </div>
+                  <div id="bgm" class="btn">
+                     <audio id="bgm-source" src="./sound/background.mp3"></audio>
+                  </div>
                </div>
-               <div id="game-time"><span id="time-m">00</span>:<span id="time-s">00</span></div>
-               <div id="bgm" class="btn">
-                  <audio id="bgm-source" src="./sound/background.mp3"></audio>
-               </div>
-               <table id="text-font-size">
-                  <tr>
-                     <td id="text-size-description" rowspan="2">T</td>
-                     <td id="text-increase" class="btn">+</td>
-                  </tr>
-                  <tr>
-                     <td id="text-decrease" class="btn">-</td>
-                  </tr>
-               </table>
-               <div id="game-status" class="btn">
-                  <img id="game-pause" src="./img/pause.png" alt="">
-                  <img id="game-play" src="./img/play.png" alt="">
-               </div>
-               <img id="logo-2" src="./img/logo_2.png" alt="" id="star-counter">
             </div>
             <div class="game-content">
-               <div id="airPlane"></div>
+               <div id="airPlane">
+                  <img src="./img/airPlane_2.png" alt="">
+               </div>
 
                <img src="./img/cloud_1.png" alt="" id="cloud-1" class="cloud">
                <img src="./img/cloud_2.png" alt="" id="cloud-2" class="cloud">
@@ -61,6 +68,36 @@
 
                <div class="supply"></div>
             </div>
+         </div>
+         <div class="gameover-screen screen active">
+            <div id="ranking">
+               <div class="logo-2 ranking-logo"></div>
+               <table class="ranking-content">
+                  <thead>
+                     <tr>
+                        <th>name</th>
+                        <th>time</th>
+                        <th>star</th>
+                     </tr>
+                  </thead>
+                  <tr class="record">
+                     <td class="record-name">sdfsdfs</td>
+                     <td class="record-time">21321</td>
+                     <td class="record-star">66655</td>
+                  </tr>
+                  <tr class="record">
+                     <td class="record-name">sdfsdfs</td>
+                     <td class="record-time">21321</td>
+                     <td class="record-star">66655</td>
+                  </tr>
+                  <tr class="record">
+                     <td class="record-name">sdfsdfs</td>
+                     <td class="record-time">21321</td>
+                     <td class="record-star">66655</td>
+                  </tr>
+               </table>
+            </div>
+            <div><button id="restart" class="btn restart">restart</button></div>
          </div>
       </div>
    </div>
@@ -95,15 +132,12 @@
          // 鼠标点击相应的按钮会触发相应的事件
          var clickAction = {
             gameStart: function(event) {
-               var cl = e("#screen").classList
-               if(cl.contains("screen-status-title")) {
-                  cl.remove("screen-status-title")
-                  cl.add("screen-status-play")
-                  playGame(game);
-               }else{
-                  cl.remove("screen-status-play")
-                  cl.add("screen-status-title")
-               }
+               e(".play-screen").classList.add("active")
+               e(".title-screen").classList.remove("active")
+               playGame(game);
+            },
+            restart: function(event){
+               location.reload()
             }
          }
 
@@ -126,6 +160,9 @@
          }
       })()
 
+      function gameover(game){
+         game.status = "over"
+      }
       function playGame(game) {
          game.status = "start";
          refresh(game);
