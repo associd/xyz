@@ -1,15 +1,19 @@
-#star-counter{
-   padding-left: 10px;
+.circular{
+   border-radius: 100px;
+   border: 2px solid white;
+   padding: 5px 10px;
+   overflow: hidden;
+}
+.star-counter{
    text-align: center;
    font-size: 30px;
    background-color: white;
 }
-#star-counter-value{
+.star-counter-value{
    width: 35px;
-   line-height: 52px;
    color: orange;
 }
-#star-icon{
+.star-icon{
    width: 35px;
    height: 35px;
    background-image: url(./img/star-icon.png);
@@ -21,9 +25,8 @@
    left: 300px;
    top: 500px;
 }
-#game-time{
-   padding: 0 5px;
-   font-size: 40px;
+.game-time{
+   font-size: 30px;
    color: white;
    background-color: orange;
 }

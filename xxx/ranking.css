@@ -27,3 +27,18 @@
 .record:nth-child(even){
    background-color: #ffffff25;
 }
+#ranking .record{
+   transform-origin: right center;
+   transform: rotateY(-90deg) rotateX(-90deg)
+}
+.record.show{
+   animation: showRecord 1s 1s forwards;
+}
+@keyframes showRecord {
+   from{
+      transform: rotateY(-90deg) rotateX(90deg) rotateZ(45deg);
+   }
+   to{
+      transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+   }
+}

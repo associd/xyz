@@ -27,32 +27,31 @@
                <p>6. You can pause the game clicking in a button pause, or pressing the space bar.</p>
                <p>7. Go beyond all limits;</p>
             </div>
-            <img src="./img/SkyAngel.png" alt="" id="logo-1">
+            <div id="logo-1">
+               <img src="./img/背景-1.png" alt="">
+               <img class="logo-star" src="./img/背景-star.png" alt="">
+            </div>
             <button id="gameStart" class="btn">开始游戏</button>
          </div>
          <div class="play-screen screen">
             <div class="game-top board flex flex-align-center">
-               <div class="content-1 flex flex-align-center">
-                  <div id="oil-gauge">
-                     <div class="oil-energy"><img class="oil-cover" src="./img/gas_2.png"></div>
-                  </div>
-               </div>
                <div class="logo-2"></div>
+               <div class="star-counter flex flex-align-center circular">
+                  <div class="star-icon"></div>
+                  <div class="star-counter-value">0</div>
+               </div>
+               <div class="circular game-time"><span class="time-m">00</span>:<span class="time-s">00</span></div>
+               <div id="oil-gauge">
+                  <img class="oil-cover" src="./img/gas_2.png">
+                  <div class="oil-energy"></div>
+               </div>
                <div class="scoreAndcontrol-board board flex flex-align-center">
-                  <div id="star-counter" class="flex flex-align-center">
-                     <div id="star-icon"></div>
-                     <div id="star-counter-value">0</div>
-                  </div>
-                  <div id="game-time"><span class="time-m">00</span>:<span class="time-s">00</span></div>
+                  <div id="game-status" class="btn circular pause"></div>
                   <div id="text-font-size" class="flex flex-align-center">
-                     <div id="text-increase" class="btn">A+</div>
-                     <div id="text-decrease" class="btn">A-</div>
+                     <div id="text-increase" class="btn circular">A+</div>
+                     <div id="text-decrease" class="btn circular">A-</div>
                   </div>
-                  <div id="game-status" class="btn">
-                     <img id="game-pause" class="" src="./img/pause-middle.png" alt="">
-                     <img id="game-play" class="display-none" src="./img/play-middle.png" alt="">
-                  </div>
-                  <div id="bgm" class="btn">
+                  <div id="bgm" class="btn circular">
                      <audio id="bgm-source" src="./sound/background.mp3"></audio>
                   </div>
                </div>
@@ -75,12 +74,15 @@
                <div class="gameover">
                   <div class="dialog p-center">
                      <h3 class="t-a-center">your time:</h3>
-                     <div class="t-a-center"><span class="time-m">00</span>:<span class="time-s">00</span></div>
+                     <div class="circular game-time"><span class="time-m">00</span>:<span class="time-s">00</span></div>
                      <h3 class="t-a-center">your star:</h3>
-                     <div class="t-a-center">12</div>
+                     <div class="star-counter flex flex-align-center flex-justify-center circular">
+                        <div class="star-icon"></div>
+                        <div class="star-counter-value">0</div>
+                     </div>
                      <h3 class="t-a-center">And your name:</h3>
                      <div>
-                        <input class="input-username t-a-center" type="text">
+                        <input class="input-username circular t-a-center" type="text">
                      </div>
                      <button id="showRanking" class="user-continue btn">continue</button>
                   </div>
@@ -88,6 +90,9 @@
             </div>
          </div>
          <div class="gameover-screen screen">
+            <div class="t-a-center btn">
+               <h3>Ranking</h3>
+            </div>
             <div id="ranking">
                <div class="logo-2 ranking-logo"></div>
                <table class="ranking-content">
@@ -98,6 +103,61 @@
                         <th>star</th>
                      </tr>
                   </thead>
+                  <tr class="record">
+                     <td class="record-name">sdfsdfs</td>
+                     <td class="record-time">21321</td>
+                     <td class="record-star">66655</td>
+                  </tr>
+                  <tr class="record">
+                     <td class="record-name">sdfsdfs</td>
+                     <td class="record-time">21321</td>
+                     <td class="record-star">66655</td>
+                  </tr>
+                  <tr class="record">
+                     <td class="record-name">sdfsdfs</td>
+                     <td class="record-time">21321</td>
+                     <td class="record-star">66655</td>
+                  </tr>
+                  <tr class="record">
+                     <td class="record-name">sdfsdfs</td>
+                     <td class="record-time">21321</td>
+                     <td class="record-star">66655</td>
+                  </tr>
+                  <tr class="record">
+                     <td class="record-name">sdfsdfs</td>
+                     <td class="record-time">21321</td>
+                     <td class="record-star">66655</td>
+                  </tr>
+                  <tr class="record">
+                     <td class="record-name">sdfsdfs</td>
+                     <td class="record-time">21321</td>
+                     <td class="record-star">66655</td>
+                  </tr>
+                  <tr class="record">
+                     <td class="record-name">sdfsdfs</td>
+                     <td class="record-time">21321</td>
+                     <td class="record-star">66655</td>
+                  </tr>
+                  <tr class="record">
+                     <td class="record-name">sdfsdfs</td>
+                     <td class="record-time">21321</td>
+                     <td class="record-star">66655</td>
+                  </tr>
+                  <tr class="record">
+                     <td class="record-name">sdfsdfs</td>
+                     <td class="record-time">21321</td>
+                     <td class="record-star">66655</td>
+                  </tr>
+                  <tr class="record">
+                     <td class="record-name">sdfsdfs</td>
+                     <td class="record-time">21321</td>
+                     <td class="record-star">66655</td>
+                  </tr>
+                  <tr class="record">
+                     <td class="record-name">sdfsdfs</td>
+                     <td class="record-time">21321</td>
+                     <td class="record-star">66655</td>
+                  </tr>
                   <tr class="record">
                      <td class="record-name">sdfsdfs</td>
                      <td class="record-time">21321</td>
@@ -162,6 +222,12 @@
                   dom.classList.remove("active")
                })
                e(".gameover-screen").classList.add("active")
+               e(".logo-2").classList.remove("toDialog")
+               e(".logo-2").classList.add("toRanking")
+               es(".record").forEach((dom, index, arr) => {
+                  index /= 10;
+                  dom.style.animation = `showRecord 1s ${0.5+index}s forwards`
+               })
             }
          }
 
@@ -199,6 +265,7 @@
       function gameover(game){
          game.status = "over"
          e(".gameover").classList.add("gameover-show")
+         e(".logo-2").classList.add("toDialog")
       }
       function playGame(game) {
          game.status = "start";
@@ -206,6 +273,7 @@
          es(".cloud").forEach(item => {
             item.classList.add("move")
          })
+         e("#logo-1").classList.add("shrink")
       }
       function refresh(game) {
          setTimeout(() => {

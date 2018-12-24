@@ -1,6 +1,9 @@
 .game-top{
    justify-content: space-around;
 }
+.scoreAndcontrol{
+   justify-content: space-around;
+}
 #airPlane{
    width: 120px;
    height: 52px;

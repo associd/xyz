@@ -15,6 +15,9 @@
 .flex-align-center{
    align-items: center;
 }
+.flex-justify-center{
+   justify-content: center;
+}
 .t-a-center{
    text-align: center;
 }
@@ -65,23 +68,15 @@
       filter: opacity(0);
    }
 }
-.title-screen{
-   background-image: url(./img/startBackground.jpg);
-   background-size: cover;
-}
-.play-screen{
-   overflow: hidden;
-}
-.gameover-screen{
-   color: white;
-   bottom: 100%;
-}
 /* 界面到界面的切换 采用淡入淡出的效果 */
 .screen{
+   position: absolute;
+   width: 100%;
+   height: 100%;
    background-color: skyblue;
    filter: opacity(0);
    z-index: 1;
-   transition: all 0.5s;
+   transition: all 1s;
    overflow: hidden;
 }
 .active{
@@ -90,8 +85,26 @@
    margin: 0;
    bottom: 0;
 }
+.title-screen{
+   background-image: url(./img/startBackground.jpg);
+   background-size: cover;
+}
+.play-screen{
+   overflow: hidden;
+}
+.gameover-screen{
+   bottom: 100%;
+}
+.gameover-screen.active{
+   color: white;
+   bottom: 0;
+   background-color: #3e7e98;
+}
 .title-screen:hover #logo-1{
    transform: translateX(20px);
+}
+.title-screen:hover #logo-1>.logo-star{
+   animation: star-fall 2s forwards;
 }
 .direction{
    width: 400px;
@@ -130,11 +143,6 @@
 
    border: 1px solid red;
 }
-#screen>*{
-   position: absolute;
-   width: 100%;
-   height: 100%;
-}
 #gameStart{
    display: block;
    padding: 5px 8px;
@@ -151,19 +159,96 @@
    bottom: 60px;
 }
 #logo-1{
+   width: 500px;
+   height: 290px;
    transition: all 0.5s;
    margin-top: 70px;
    transform: translateX(-100%);
 }
+#logo-1>img{
+   width: 100%;
+   height: 100%;
+}
+.logo-star{
+   position: absolute;
+   top: -300px;
+   left: 0;
+   transform-origin: 60% 20%;
+}
+@keyframes star-fall {
+   0%{
+      top: -300px;
+      transform: rotateZ(0deg);
+   }
+   33%{
+      top: -200px;
+      transform: rotateZ(-45deg);
+   }
+   66%{
+      top: -100px;
+      transform: rotateZ(45deg);
+   }
+   100%{
+      top: 0;
+      transform: rotateZ(0deg);
+   }
+}
+#logo-1.shrink{
+   animation: logo-1 0.5s forwards;
+}
+@keyframes logo-1 {
+   0%{
+      transform: translateX(20px);
+   }
+   100%{
+      transform: translateX(0) rotateZ(-90deg);
+      width: 120px;
+      height: 50px;
+      margin-top: 35px;
+      margin-left: -20px;
+   }
+}
 .logo-2{
    width: 50px;
-   height: 106px;
+   height: 120px;
    background-image: url(./img/logo_2.png);
-   /* background-size: ; */
-   background-position: 0 0;
+   background-position: 0 center;
+   background-repeat: no-repeat;
 }
 .logo-2:hover{
-   background-position: -50px 0;
+   background-position: -50px center;
+}
+.logo-2.toDialog{
+   z-index: 9999;
+   animation: logoToDialog 0.5s forwards;
+}
+.logo-2.toRanking{
+   z-index: 9999;
+   animation: logoToRanking 0.2s forwards;
+}
+@keyframes logoToDialog {
+   from{
+      position: absolute;
+      top: 0;
+      left: 20px;
+   }
+   to{
+      position: absolute;
+      top: 22%;
+      left: 30%;
+   }
+}
+@keyframes logoToRanking {
+   from{
+      position: absolute;
+      top: 22%;
+      left: 30%;
+   }
+   to{
+      position: absolute;
+      top: -120px;
+      left: 55px;
+   }
 }
 .gameover{
    width: 0;
@@ -195,11 +280,15 @@
    width: 300px;
    background-color: white;
    border-radius: 20px;
-   padding: 10px;
+   padding: 80px;
    text-align: center;
 }
 .dialog h3{
    margin-top: 10px;
+}
+.gameover .input-username{
+   border: 2px solid orange;
+   outline: none;
 }
 .user-continue{
    font-size: 20px;
