@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+   <style>
+      :root{
+         background-color: #233333;
+         overflow: hidden;
+         --r1: 700px;
+         --r2: 380px;
+         --r3: 100px;
+      }
+      .r1{
+         width: var(--r1);
+         height: var(--r1);
+      }
+      .r2{
+         width: var(--r2);
+         height: var(--r2);
+      }
+      .r3{
+         position: absolute;
+         top: -50px;
+         left: calc(50% - 50px);
+         width: var(--r3);
+         height: var(--r3);
+      }
+      .p-center{
+         position: absolute;
+         left: -100%;
+         top: -100%;
+         right: -100%;
+         bottom: -100%;
+         margin: auto;
+      }
+      .star-pathway{
+         border-radius: 50%;
+         border: 2px solid #acacac;
+      }
+      .object{
+         position: absolute;
+         left: 0;
+         margin: 0 50%;
+         transform: translateY(-50%) translateX(-50%);
+      }
+      @keyframes rotate-clockwise {
+         from%{
+            transform: rotateZ(0deg);
+         }
+         to{
+            transform: rotateZ(360deg);
+         }
+      }
+      @keyframes rotate-anticlockwise {
+         from%{
+            transform: rotateZ(0deg);
+         }
+         to{
+            transform: rotateZ(-360deg);
+         }
+      }
+      .clockwise{
+         animation: rotate-clockwise linear 2s infinite;
+      }
+      .anticlockwise{
+         animation: rotate-anticlockwise linear 2s infinite;
+      }
+   </style>
+</head>
+<body>
+   <div class="star-pathway r1 p-center clockwise">
+      <img class="object" src="./球.png" alt="">
+   </div>
+   <div class="star-pathway r2 p-center anticlockwise">
+      <div class="star-pathway r3 anticlockwise">
+         <img class="object" src="./球.png" alt="">
+         <img class="p-center" src="./球.png" alt="">
+      </div>
+   </div>
+</body>
+</html>

@@ -34,21 +34,6 @@
             rand(100, 200),
             rand(100, 200),
             rand(100, 200),
-            rand(100, 200),
-            rand(100, 200),
-            rand(100, 200),
-            rand(100, 200),
-            rand(100, 200),
-            rand(100, 200),
-            rand(100, 200),
-            rand(100, 200),
-            rand(100, 200),
-            rand(100, 200),
-            rand(100, 200),
-            rand(100, 200),
-            rand(100, 200),
-            rand(100, 200),
-            rand(100, 200),
          ]
 
          var numberOfEnergy = energy.length
@@ -83,13 +68,19 @@
             var d3x = d4x + Math.sin(angle) * fat
             var d3y = d4y - Math.cos(angle) * fat
 
+            drawPoint(canvas, x, y, 2, "#cccccc")
+            drawPoint(canvas, d1x, d1y, 2, "black")
+            drawPoint(canvas, d2x, d2y, 2, "red")
+            drawPoint(canvas, d3x, d3y, 2, "blue")
+            drawPoint(canvas, d4x, d4y, 2, "green")
+
             curveOfPath(canvas, [
                {x:d2x, y:d2y},
                {x:d3x, y:d3y},
                {x:d4x, y:d4y},
             ])
+            stroke(canvas, "skyblue")
          }
-         fill(canvas, "skyblue")
          //end
       }
 
@@ -144,10 +135,12 @@
       }
       function drawPoint(canvas, x, y, r = 2, color = "black") {
          var ctx = getContext(canvas)
+         ctx.save()
          ctx.beginPath()
          ctx.arc(x, y, r, 0, Math.PI * 2)
          ctx.fillStyle = color
          ctx.fill()
+         ctx.restore()
          return canvas
       }
       function drawPoints(canvas, points) {

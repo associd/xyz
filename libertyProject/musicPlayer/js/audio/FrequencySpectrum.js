@@ -6,7 +6,7 @@ class FrequencySpt {
       this.Tarr = []
       this.style = {
          rect: {
-            property: () => {
+            property: (Farr) => {
                var grd = this.refresh()
                var count = 120
                var o = {
@@ -69,7 +69,9 @@ class FrequencySpt {
                   c : 5,
                   h : 250,
 
-                  slice: true,
+                  pieW: 0,
+
+                  slice: 1,
                   center_margin : 376,
                   xw : this.canvas.width / 256,
                   num  : 0,
@@ -113,10 +115,14 @@ class FrequencySpt {
                //绘制圆形边框
 
                for(var i = 0; i < o.c; i++) {
-                  o.ctx.beginPath()
-                  o.ctx.arc(this.canvas.width / 2, this.canvas.height / 2, o.center_margin * (1 - i / o.c), 0, 2 * Math.PI)
-                  o.ctx.fillStyle = o.colors[i]
-                  o.ctx.fill()
+                  var r = o.center_margin * (1 - i / o.c) - (o.pieW / 2)
+                  if(r > 0) {
+                     o.ctx.beginPath()
+                     o.ctx.arc(this.canvas.width / 2, this.canvas.height / 2, r, 0, 2 * Math.PI)
+                     o.ctx.lineWidth = o.pieW
+                     o.ctx.strokeStyle = o.colors[i]
+                     o.ctx.stroke()
+                  }
                }
 
 
@@ -163,47 +169,179 @@ class FrequencySpt {
                o.ctx.closePath()
             },
             control: (o) => {
-               var menu = e("#frequency-setting>.f-menu")
-               menu.innerHTML = "";
-               var data = {
-                  w: {
+               return [
+                  {
                      des: "柱子宽度",
-                     dom: "<input propertyName='w' type='number' value='2'>",
+                     dom: {propertyName: 'w', type: 'number', value: o.w,},
                   },
-                  c: {
+                  {
                      des: "层数",
-                     dom: "<input propertyName='c' type='number' value='3'>",
+                     dom: {propertyName: 'c', type: 'number', value: o.c,},
                   },
-                  bar_size: {
+                  {
                      des: "柱子高度",
-                     dom: "<input propertyName='bar_size' type='number' value='100'>",
+                     dom: {propertyName: 'bar_size', type: 'number', value: o.bar_size,},
                   },
-                  r_speed: {
+                  {
                      des: "旋转速度",
-                     dom: "<input propertyName='r_speed' type='number' value='0'>",
+                     dom: {propertyName: 'r_speed', type: 'number', value: o.r_speed,},
                   },
-                  center_margin: {
+                  {
                      des: "中心间距间距",
-                     dom: "<input propertyName='center_margin' type='number' value='300'>",
+                     dom: {propertyName: 'center_margin', type: 'number', value: o.center_margin,},
                   },
-                  slice: {
+                  {
                      des: "是否分层",
-                     dom: "<input propertyName='slice'  type='number' value='1'>",
+                     dom: {propertyName: 'slice', type:'number', value: o.slice,},
                   },
-               }
-
-               for(var key in data) {
-                  menu.innerHTML += `<li>${data[key].des + data[key].dom}</li>`
-               }
-
-               menu.addEventListener("input", (event) => {
-                  var name = event.target.getAttribute("propertyName");
-                  o[name] = Number(event.target.value)
-               })
+                  {
+                     des: "饼大小",
+                     dom: {propertyName: "pieW", type: "number", value: o.pieW,},
+                  },
+               ]
             }
          },
+         peak:{
+            property: (Farr, canvas) => {
+               var o = {}
+               o.Farr = Farr;
+               o.startF = 62;
+               o.endF = 65;
+               o.fat = 20;
+               o.cvs = canvas;
+               o.ctx = canvas.getContext("2d");
+               return o
+            },
+            draw: (o) => {
+               var size = 2;
+               var pH = 100;
+               var contextCenter = {
+                  x: o.cvs.width / 2,
+                  y: o.cvs.height / 2,
+               }
+
+               var piece = o.Farr.slice(o.startF, o.endF);
+               // var piece = o.Farr.slice(63, 65);
+               var offsetRadian = 360 / piece.length / 180 * Math.PI;
+
+               /**      |
+                *  -----+------->x
+                *       |
+                *       |
+                *       v y
+                */
+               o.ctx.beginPath();
+               o.ctx.save();
+               o.ctx.translate(contextCenter.x, contextCenter.y);
+
+               for(let i = 0, j = piece.length - 1; i < piece.length; i++,j = (j+1)%piece.length) {
+                  var lastFqc = piece[j];
+                  var fqc = piece[i];
+                  var lastPH = pH + lastFqc;
+                  var curPH = pH + fqc;
+                  var start = {
+                     x : 0,
+                     y : curPH,
+                  }
+                  var end = {
+                     x : lastPH * Math.cos((Math.PI / 2) - offsetRadian),
+                     y : lastPH * Math.sin((Math.PI / 2) - offsetRadian),
+                  }
+                  var cp1 = {
+                     x: start.x + o.fat,
+                     y: start.y,
+                  }
+                  var cp2 = {
+                     // 根据计算 x = lastPH(cos@ - sin@) y = a( 根号2 / 2） * sin(45 + @)
+                     // @ = (Math.PI / 2) - offsetRadian
+                     // x: lastFqc * (Math.cos((Math.PI / 2) - offsetRadian) - Math.sin((Math.PI / 2) - offsetRadian)),
+                     // y: lastFqc * Math.sqrt(2) / 2 * Math.sin((45 / 180 * Math.PI) + (Math.PI / 2) - offsetRadian),
+
+                     // 以相对的方式得到 xy
+                     x: end.x - o.fat * Math.cos(offsetRadian),
+                     y: end.y + o.fat * Math.sin(offsetRadian),
+                  }
+                  // o.ctx.moveTo(0, curPH);
+                  o.ctx.bezierCurveTo(cp1.x, cp1.y, cp2.x, cp2.y, end.x, end.y);
+
+                  // pointer(start.x, start.y, 4, "white")
+                  // pointer(end.x, end.y, 4, "blackn");
+                  // pointer(cp1.x, cp1.y, 4, "red")
+                  // pointer(cp2.x, cp2.y, 4, "green")
+
+                  o.ctx.rotate(offsetRadian);
+               }
+               o.ctx.fillStyle = "white";
+               o.ctx.fill();
+               o.ctx.restore();
+
+               function pathOfCircle(fqc, pH, size) {
+                  o.ctx.rotate(offsetRadian);
+                  o.ctx.moveTo(size, pH + fqc);
+                  o.ctx.arc(0, pH + fqc, size, 0, Math.PI * 2)
+               }
+               function pointer(x, y, r, color) {
+                  o.ctx.save();
+                  o.ctx.beginPath();
+                  o.ctx.moveTo(x, y);
+                  o.ctx.arc(x, y, r, 0, Math.PI * 2);
+                  o.ctx.fillStyle = color;
+                  o.ctx.fill();
+                  o.ctx.restore();
+               }
+               function random(min, max) {
+                  return min + Math.floor(Math.random() * (max - min + 1));
+               }
+            },
+            control: (o) => {
+               return [
+                  {
+                     des: "最小音高",
+                     dom: {propertyName: "startF", type: "number", value: o.startF},
+                  },
+                  {
+                     des: "最大音高",
+                     dom: {propertyName: "endF", type: "number", value: o.endF},
+                  },
+                  {
+                     des: "山峰的扁平化",
+                     dom: {propertyName: "fat", type: "number", value: o.fat},
+                  },
+               ]
+            }
+         }
       }
       this.setup_style()
+   }
+   /**
+    *  input data [{des: des, dom: {attributeName: value,}}, {}, {}]
+    *
+    */
+   fromPropertyBindMenu(obj, data) {
+      var menu = e("#frequency-setting>.f-menu")
+      menu.innerHTML = "";
+
+      //output "<li>des<input attributeName: value><li>"
+      data.forEach((item, index) => {
+
+         var des = item.des;
+         var str = `<li>${des}<input `;
+         //期望的input "<input attributeName='value'>"
+         str += Object.keys(item.dom).reduce((total, cur, index, arr) => {
+            if(index > 1) {
+               return `${total} ${cur}="${item.dom[cur]}"`
+            }else{
+               return `${total}="${item.dom[total]}" ${cur}="${item.dom[cur]}"`
+            }
+         }) + "></li>";
+         menu.innerHTML += str;
+      })
+      // console.log(menu.innerHTML)
+
+      menu.addEventListener("input", (event) => {
+         var name = event.target.getAttribute("propertyName");
+         obj[name] = Number(event.target.value)
+      })
    }
    refresh() {
       //重设style 暂时不想封装 就晾在这儿吧
@@ -216,10 +354,10 @@ class FrequencySpt {
       return grd;
    }
    setup_style(style = "rect") {
-      this.active = this.style[style]
-      this.bar = this.active["property"]()
-      if(this.active.control) {
-         this.active.control(this.bar);
+      this.activeStyle = this.style[style]
+      this.activeStyleObject = this.activeStyle["property"](this.Farr, this.canvas)
+      if(this.activeStyle.control) {
+         this.fromPropertyBindMenu(this.activeStyleObject, this.activeStyle.control(this.activeStyleObject))
       }
    }
    update() {
@@ -227,6 +365,6 @@ class FrequencySpt {
    }
    draw() {
       this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height)
-      this.active["draw"](this.bar)
+      this.activeStyle["draw"](this.activeStyleObject)
    }
 }

@@ -1,18 +1,32 @@
-<style>
-  html,body{
-    width: 100%;
-    height: 100%;
-  }
-  strong{
-    height: 60px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    text-align: center;
-    font-size: 60px;
-  }
-</style>
-<strong>mother fucker</strong>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <script src="vue.js"></script>
+   <title>Document</title>
+</head>
+<body>
+   <div id="sb">
+      {{name}}
+   </div>
+   <script type="text/javascript">
+         var arr = new Array(0,1,2,3,4,5,6,7,8,9);
+         var 月考 = {
+            name: "黄清泽",
+            score: arr,
+         }
+         var json月考 = JSON.stringify(月考);
+
+
+
+
+         var 后台传来的json数据 = json月考;
+         var sb = new Vue({
+            el: "#sb",
+            data: JSON.parse(后台传来的json数据),
+         });
+   </script>
+</body>
+</html>

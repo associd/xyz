@@ -8,15 +8,8 @@
       set_audio_frequency()
       audio_init()
       drag(function(ele, mouse) {
-         var eleW = ele.offsetWidth
-         var elePW = ele.parentElement.offsetWidth
-         var elePL = ele.parentElement.offsetLeft
-         var min = elePL + (eleW / 2)
-         var max = elePL + elePW - (eleW / 2)
-         if(mouse.x <= min || mouse.x >= max ) {
-            return
-         }else {
-            ele.style.left = mouse.x - mouse.downPoint.x + "px";
+         return {
+            left:mouse.x - mouse.downPoint.x,
          }
       });
    }
@@ -109,7 +102,8 @@ function set_slideDown_btn_event() {
 
          //当large 是header的class时会发生一些奇妙的事情
          if(header.classList.contains("large")) {
-            window.frequency.setup_style("circle")
+            // window.frequency.setup_style("circle")
+            window.frequency.setup_style("peak")
          }else {
             window.frequency.setup_style("rect")
          }
@@ -125,6 +119,7 @@ function audio_init() {
    var duration = e(".end")
    var cur_time = e(".progress .cur")
    var cur_bar = e(".progress .curprogress")
+   var progress = e(".progress")
    sound.connect_currentTime = function() {
       var time = this.audio.currentTime
       var totalTime = this.audio.duration
@@ -134,7 +129,7 @@ function audio_init() {
          s = "0" + s
       }
       current_time.innerHTML = m + ":" + s
-      var cur = time / totalTime * 100 + "%"
+      var cur = time / totalTime * progress.offsetWidth + "px";
       cur_bar.style.width = cur
       cur_time.style.left = cur
    }
@@ -159,7 +154,7 @@ function set_audio_event() {
       sound.audioCtx.resume();
       e("#userConfirm").classList.add("dpn")
    })
-   //鼠标按住
+   //更改声音
    var v = e("#audio-volume")
    var cur = e("#audio-volume .cur")
    var curPro = e("#audio-volume .curprogress")
@@ -261,7 +256,6 @@ function get_audio_canvas() {
    return canvas
 }
 function set_audio_frequency() {
-   //全局的变量 写这条注释是为了 方便查找 ^_^
    window.frequency = new FrequencySpt(get_audio_canvas())
    sound.connect(frequency)
 }
@@ -299,7 +293,7 @@ function upload_music(file) {
    upload_piece(start, --count, file, fileName)
 }
 function upload_piece(start, count, file, fileName) {
-   //土豆丝
+
    var bytesPerPiece = 1024 * 1024 * 2
    var fileSize = file.size
    var end = start + bytesPerPiece
@@ -318,7 +312,6 @@ function upload_piece(start, count, file, fileName) {
       fd.append("token", "end")
       fd.append("fileName", fileName)
    }
-
    xhr.open('post', 'musicPlayer/upload_music.php')
    xhr.onload = function() {
       e('.music-list').innerHTML += xhr.responseText
@@ -326,10 +319,10 @@ function upload_piece(start, count, file, fileName) {
          upload_piece(end, --count, file, fileName)
       }
    }
-   xhr.upload.onprogress = function(event) {
-      log(Math.floor(event.loaded / event.total * 100) + '%')
-   }
    xhr.send(fd)
+   // xhr.upload.onprogress = function(event) {
+   //    log(Math.floor(event.loaded / event.total * 100) + '%')
+   // }
 }
 
 /**
