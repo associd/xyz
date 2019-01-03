@@ -205,9 +205,9 @@ class FrequencySpt {
             property: (Farr, canvas) => {
                var o = {}
                o.Farr = Farr;
-               o.startF = 62;
-               o.endF = 65;
-               o.fat = 20;
+               o.startF = 105;
+               o.endF = 332;
+               o.fat = 10;
                o.cvs = canvas;
                o.ctx = canvas.getContext("2d");
                return o
@@ -261,7 +261,7 @@ class FrequencySpt {
                      x: end.x - o.fat * Math.cos(offsetRadian),
                      y: end.y + o.fat * Math.sin(offsetRadian),
                   }
-                  // o.ctx.moveTo(0, curPH);
+                  o.ctx.moveTo(0, curPH);
                   o.ctx.bezierCurveTo(cp1.x, cp1.y, cp2.x, cp2.y, end.x, end.y);
 
                   // pointer(start.x, start.y, 4, "white")
@@ -271,8 +271,8 @@ class FrequencySpt {
 
                   o.ctx.rotate(offsetRadian);
                }
-               o.ctx.fillStyle = "white";
-               o.ctx.fill();
+               o.ctx.strokeStyle = "white";
+               o.ctx.stroke();
                o.ctx.restore();
 
                function pathOfCircle(fqc, pH, size) {
