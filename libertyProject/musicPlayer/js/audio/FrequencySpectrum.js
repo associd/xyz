@@ -222,6 +222,7 @@ class FrequencySpt {
 
                var piece = o.Farr.slice(o.startF, o.endF);
                // var piece = o.Farr.slice(63, 65);
+               piece = [100, 200, 300, 400]
                var offsetRadian = 360 / piece.length / 180 * Math.PI;
 
                /**      |
@@ -239,40 +240,44 @@ class FrequencySpt {
                   var fqc = piece[i];
                   var lastPH = pH + lastFqc;
                   var curPH = pH + fqc;
-                  var start = {
+                  var rotateRadian = (i+1) * offsetRadian;
+                  var halfOfThePI = Math.PI / 2
+                  var end = {
                      x : 0,
                      y : curPH,
                   }
-                  var end = {
-                     x : lastPH * Math.cos((Math.PI / 2) - offsetRadian),
-                     y : lastPH * Math.sin((Math.PI / 2) - offsetRadian),
-                  }
-                  var cp1 = {
-                     x: start.x + o.fat,
-                     y: start.y,
+                  var start = {
+                     x : lastPH * Math.cos(halfOfThePI - rotateRadian),
+                     y : lastPH * Math.sin(halfOfThePI - rotateRadian),
                   }
                   var cp2 = {
+                     x: end.x + o.fat,
+                     y: end.y,
+                  }
+                  var cp1 = {
                      // 根据计算 x = lastPH(cos@ - sin@) y = a( 根号2 / 2） * sin(45 + @)
                      // @ = (Math.PI / 2) - offsetRadian
                      // x: lastFqc * (Math.cos((Math.PI / 2) - offsetRadian) - Math.sin((Math.PI / 2) - offsetRadian)),
                      // y: lastFqc * Math.sqrt(2) / 2 * Math.sin((45 / 180 * Math.PI) + (Math.PI / 2) - offsetRadian),
 
                      // 以相对的方式得到 xy
-                     x: end.x - o.fat * Math.cos(offsetRadian),
-                     y: end.y + o.fat * Math.sin(offsetRadian),
+                     x: start.x - o.fat * Math.cos(rotateRadian),
+                     y: start.y + o.fat * Math.sin(rotateRadian),
                   }
-                  o.ctx.moveTo(0, curPH);
+                  o.ctx.save()
+                  o.ctx.moveTo(start.x, start.y);
                   o.ctx.bezierCurveTo(cp1.x, cp1.y, cp2.x, cp2.y, end.x, end.y);
+                  o.ctx.restore()
 
                   // pointer(start.x, start.y, 4, "white")
                   // pointer(end.x, end.y, 4, "blackn");
                   // pointer(cp1.x, cp1.y, 4, "red")
                   // pointer(cp2.x, cp2.y, 4, "green")
 
-                  o.ctx.rotate(offsetRadian);
+                  // o.ctx.rotate(offsetRadian);
                }
-               o.ctx.strokeStyle = "white";
-               o.ctx.stroke();
+               o.ctx.fillStyle = "white";
+               o.ctx.fill();
                o.ctx.restore();
 
                function pathOfCircle(fqc, pH, size) {
