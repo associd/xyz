@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+   <style>
+      :root{
+         --size: 20px;
+      }
+      .dot{
+         width: var(--size);
+         height: var(--size);
+         position: fixed;
+         border-radius: 50%;
+         background-color: black;
+      }
+   </style>
+
+</head>
+<body>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+   <script>
+      var dots = document.querySelectorAll(".dot")
+      dots.forEach((item) => {
+         item.start = {
+            //固定位置
+            // x: 0,
+            // y: window.innerHeight / 2,
+
+            //随机位置
+            x: random(0, window.innerWidth),
+            y: random(0, window.innerHeight),
+         }
+         item.end = {
+            // x: window.innerWidth,
+            // y: window.innerHeight / 2,
+
+            //随机位置
+            x: random(0, window.innerWidth),
+            y: random(0, window.innerHeight),
+         }
+         item.cp1 = {
+            // x: window.innerWidth / 2,
+            // y: 0,
+
+            //随机位置
+            x: random(0, window.innerWidth),
+            y: random(0, window.innerHeight),
+         }
+         item.timeOfDuration = random(5, 100)/10;
+         item.frame = 1;
+         item.curTime = 0;
+      })
+
+      /*
+         二次方贝兹曲线的路径由给定点P0、P1、P2的函数B（t）追踪：
+         B(t) = Math.pow((1 - t), 2)*P0 + 2*t(1-t)*P1 + Math.pow(t, 2)*p2
+      */
+
+      var fps = 60
+      setInterval(() => {
+         dots.forEach((item) => {
+            item.frame = (item.frame + 1) % (item.timeOfDuration * fps);
+            if(item.frame == 0) {
+               item.start.x = item.end.x
+               item.start.y = item.end.y
+               // item.timeOfDuration = random(5, 100) / 10;
+               disorder(item.cp1, item.end)
+            }
+            item.curTime = (item.frame / (item.timeOfDuration * fps))
+            var p = bezierCurve(item.start, item.cp1, item.end, item.curTime)
+            item.setX(p.x)
+            item.setY(p.y)
+         })
+      }, 1000 / fps)
+
+      function disorder(...args) {
+         args.forEach((item) => {
+            item.x = random(0, window.innerWidth)
+            item.y = random(0, window.innerHeight)
+         })
+      }
+
+      function random(min, max) {
+         return min + Math.floor(Math.random() * (max - min + 1))
+      }
+
+      function bezierCurve(p0, p1, p2, t) {
+         var x = Math.pow((1 - t), 2)*p0.x + 2 * t * (1-t)*p1.x + Math.pow(t, 2)*p2.x;
+         var y = Math.pow((1 - t), 2)*p0.y + 2 * t * (1-t)*p1.y + Math.pow(t, 2)*p2.y;
+         return {x:Math.floor(x), y:Math.floor(y)};
+      }
+
+      HTMLElement.prototype.setX = function(x) {
+         this.style.left = `${x}px`;
+      }
+      HTMLElement.prototype.setY = function(y) {
+         this.style.top = `${y}px`;
+      }
+   </script>
+</body>
+</html>
