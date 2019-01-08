@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <script src="../vue.js"></script>
+   <title>Document</title>
+</head>
+<body>
+   <div id="test">
+      <todo-item v-for="item in todoList"
+         v-bind:text="item"
+         v-bind:key="item.id"
+      ></todo-item>
+   </div>
+   <script type="text/javascript">
+      Vue.component("todo-item", {
+         props: ["text"],
+         template: `<div>{{text.text}}</div>`,
+      })
+      var test = new Vue({
+         el: "#test",
+         data: {
+            todoList: [
+               {id: 0, text: "吃饭"},
+               {id: 1, text: "睡觉"},
+               {id: 2, text: "打豆豆"},
+            ]
+         },
+      });
+   </script>
+</body>
+</html>

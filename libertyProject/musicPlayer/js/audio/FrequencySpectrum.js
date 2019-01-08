@@ -206,7 +206,7 @@ class FrequencySpt {
                var o = {}
                o.Farr = Farr;
                o.startF = 105;
-               o.endF = 332;
+               o.endF = 115;
                o.fat = 10;
                o.cvs = canvas;
                o.ctx = canvas.getContext("2d");
@@ -222,7 +222,7 @@ class FrequencySpt {
 
                var piece = o.Farr.slice(o.startF, o.endF);
                // var piece = o.Farr.slice(63, 65);
-               piece = [100, 200, 300, 400]
+               // piece = [100, 200, 300, 400]
                var offsetRadian = 360 / piece.length / 180 * Math.PI;
 
                /**      |
@@ -240,19 +240,19 @@ class FrequencySpt {
                   var fqc = piece[i];
                   var lastPH = pH + lastFqc;
                   var curPH = pH + fqc;
-                  var rotateRadian = (i+1) * offsetRadian;
+                  var rotateRadian = i * offsetRadian;
                   var halfOfThePI = Math.PI / 2
                   var end = {
-                     x : 0,
-                     y : curPH,
+                     x : curPH * Math.cos(rotateRadian),
+                     y : curPH * Math.sin(rotateRadian),
                   }
                   var start = {
-                     x : lastPH * Math.cos(halfOfThePI - rotateRadian),
-                     y : lastPH * Math.sin(halfOfThePI - rotateRadian),
+                     x : lastPH * Math.cos(rotateRadian),
+                     y : lastPH * Math.sin(rotateRadian),
                   }
                   var cp2 = {
-                     x: end.x + o.fat,
-                     y: end.y,
+                     x: end.x + o.fat * Math.cos(rotateRadian),
+                     y: end.y - o.fat * Math.sin(rotateRadian),
                   }
                   var cp1 = {
                      // 根据计算 x = lastPH(cos@ - sin@) y = a( 根号2 / 2） * sin(45 + @)
@@ -267,17 +267,17 @@ class FrequencySpt {
                   o.ctx.save()
                   o.ctx.moveTo(start.x, start.y);
                   o.ctx.bezierCurveTo(cp1.x, cp1.y, cp2.x, cp2.y, end.x, end.y);
+                  o.ctx.strokeStyle = "white";
+                  o.ctx.stroke();
                   o.ctx.restore()
 
-                  // pointer(start.x, start.y, 4, "white")
-                  // pointer(end.x, end.y, 4, "blackn");
-                  // pointer(cp1.x, cp1.y, 4, "red")
-                  // pointer(cp2.x, cp2.y, 4, "green")
+                  pointer(start.x, start.y, 4, "white")
+                  pointer(end.x, end.y, 4, "blackn");
+                  pointer(cp1.x, cp1.y, 4, "red")
+                  pointer(cp2.x, cp2.y, 4, "green")
 
                   // o.ctx.rotate(offsetRadian);
                }
-               o.ctx.fillStyle = "white";
-               o.ctx.fill();
                o.ctx.restore();
 
                function pathOfCircle(fqc, pH, size) {
