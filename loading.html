@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+   <style>
+      .wraper{
+         margin-top: 50px;
+         text-align: center;
+         font-size: 60px;
+      }
+      .loading-word{
+         display: inline-block;
+         position: absolute;
+         right: 0;
+      }
+      .L{
+         animation: moveToLeft 2s 0s linear infinite, show 2s 0s linear infinite, rotate 2s 0s linear infinite;
+      }
+      .O{
+         animation: moveToLeft 2s 0.2s linear infinite, show 2s 0.2s linear infinite, rotate 2s 0.2s linear infinite;
+      }
+      .A{
+         animation: moveToLeft 2s 0.4s linear infinite, show 2s 0.4s linear infinite, rotate 2s 0.4s linear infinite;
+      }
+      .D{
+         animation: moveToLeft 2s 0.6s linear infinite, show 2s 0.6s linear infinite, rotate 2s 0.6s linear infinite;
+      }
+      .I{
+         animation: moveToLeft 2s 0.8s linear infinite, show 2s 0.8s linear infinite, rotate 2s 0.8s linear infinite;
+      }
+      .N{
+         animation: moveToLeft 2s 1s linear infinite, show 2s 1s linear infinite, rotate 2s 1s linear infinite;
+      }
+      .G{
+         animation: moveToLeft 2s 1.2s linear infinite, show 2s 1.2s linear infinite, rotate 2s 1.2s linear infinite;
+      }
+      @keyframes moveToLeft {
+         to{
+            right:100%;
+         }
+      }
+      @keyframes show {
+         0%{
+            filter: opacity(0);
+         }
+         33%{
+            filter: opacity(1);
+         }
+         66%{
+            filter: opacity(1);
+         }
+         100%{
+            filter: opacity(0);
+         }
+      }
+      @keyframes rotate {
+         0%{
+            transform-origin: 50% 0;
+            transform: rotate(180deg);
+         }
+         33%{
+            transform-origin: 50% 0;
+            transform: rotate(0deg);
+         }
+         66%{
+            transform-origin: 50% 0%;
+            transform: rotate(0deg);
+         }
+         100%{
+            transform-origin: 50% 0%;
+            transform: rotate(180deg);
+         }
+      }
+   </style>
+</head>
+<body>
+   <div class="wraper">
+      <div class="box">
+         <div class="loading-word L">L</div>
+         <div class="loading-word O">O</div>
+         <div class="loading-word A">A</div>
+         <div class="loading-word D">D</div>
+         <div class="loading-word I">I</div>
+         <div class="loading-word N">N</div>
+         <div class="loading-word G">G</div>
+      </div>
+   </div>
+</body>
+</html>
