@@ -50,6 +50,10 @@
          z-index: 999;
          outline: dotted skyblue;
          transition: none;
+         cursor: move;
+      }
+      .disabled{
+         cursor:no-drop!important;
       }
    </style>
 </head>
@@ -57,22 +61,117 @@
    <div class="html-background"></div>
    <div class="fragment-wraper"></div>
    <button id="game-start">开始游戏</button>
+   <table>
+      <tr>
+         <td>行</td>
+         <td><input class="row" type="number" value="4"></td>
+      </tr>
+      <tr>
+         <td>列</td>
+         <td><input class="col" type="number" value="6"></td>
+      </tr>
+   </table>
    <script>
       var e = sel => document.querySelector(sel)
       var es = sel => document.querySelectorAll(sel)
+      HTMLElement.prototype.setWidth = function(value) {
+         this.style.width = value;
+      }
+      HTMLElement.prototype.setHeight = function(value) {
+         this.style.height = value;
+      }
+      HTMLElement.prototype.setX = function(x) {
+         this.style.left = `${x}px`;
+      }
+      HTMLElement.prototype.setY = function(y) {
+         this.style.top = `${y}px`;
+      }
+      var __col = e(".col").value
+      var __row = e(".row").value
 
-      var __col = 6
-      var __row = 4
+      var wraper = e(".fragment-wraper")
+      var fragmentWidth = 0
+      var fragmentHeight = 0
+      var pathOfImg = "./img/1.jpg"
 
-      window.onload = function() {
-         var wraper = e(".fragment-wraper")
-         var fragmentWidth = Math.floor(wraper.offsetWidth / __col);
-         var fragmentHeight = Math.floor(wraper.offsetHeight / __row);
-         console.log(fragmentWidth, fragmentHeight)
+      window.fragments = setup(pathOfImg)
 
+      window.mouse = {
+         down: false,
+      }
+      document.addEventListener("mousedown", (event) => {
+            mouse.down = true;
+            mouse.dropPoint = {
+               x: event.screenX,
+               y: event.screenY,
+            }
+            if(mouse.containedBy) {
+               mouse.containedBy.x = mouse.containedBy.offsetLeft
+               mouse.containedBy.y = mouse.containedBy.offsetTop
+            }
+      })
+      document.addEventListener("mouseup", (event) => {
+         mouse.down = false;
+         if(mouse.containedBy && !mouse.containedBy.classList.contains("disabled")) {
+            var relativeX =  event.clientX - wraper.offsetLeft
+            var relativeY =  event.clientY - wraper.offsetTop
+            var numberOfCol = Math.floor(relativeX / fragmentWidth)
+            var numberOfRow = Math.floor(relativeY / fragmentHeight)
+            if(numberOfCol < __col && numberOfRow < __row && numberOfCol >= 0 && numberOfRow >= 0) {
+               var index = numberOfRow * __col + numberOfCol
+               var a = fragments[index]
+               var b = mouse.containedBy
+               swap(a, b)
+               if(isGameover()) {
+                  setTimeout(function() {
+                     alert("拼图完成")
+                  }, 500)
+               }
+            }else{
+               back(mouse.containedBy, mouse.containedBy.activePos.x, mouse.containedBy.activePos.y)
+            }
+         }
+      })
+      document.addEventListener("mouseover", (event) => {
+         var dom = event.target
+         if(isFragment(dom) && mouse.containedBy == null) {
+            setMouseContained(dom)
+         }
+      })
+      document.addEventListener("mouseout", (event) => {
+         var dom = event.target
+         if(isFragment(dom) && mouse.down == false && mouse.containedBy) {
+            repealMouseContained(dom)
+         }
+      })
+      document.addEventListener("mousemove", (event) => {
+         if(mouse.down && mouse.containedBy && !mouse.containedBy.classList.contains("disabled")) {
+            mouse.containedBy.setX(mouse.containedBy.x + event.screenX - mouse.dropPoint.x)
+            mouse.containedBy.setY(mouse.containedBy.y + event.screenY - mouse.dropPoint.y)
+         }
+      })
+      document.addEventListener("click", (event) => {
+         if(event.target.id == "game-start") {
+            gameStart()
+            disorder(fragments)
+         }
+      })
+      document.addEventListener("change", (event) => {
+         if(event.target.classList.contains("col")) {
+            __col = event.target.value
+            window.fragments = setup(pathOfImg)
+         }
+         if(event.target.classList.contains("row")) {
+            __row = event.target.value
+            window.fragments = setup(pathOfImg)
+         }
+      })
+
+      function setup(pathOfImg) {
+         fragmentWidth = Math.floor(wraper.offsetWidth / __col);
+         fragmentHeight = Math.floor(wraper.offsetHeight / __row);
          var fragments = []
-         var pathOfImg = "./img/1.jpg"
-
+         wraper.innerHTML = ""
          for(let i = 0; i < __col*__row; i++) {
             let x = fragmentWidth * (i % __col)
             let y = fragmentHeight * Math.floor(i / __col)
@@ -91,108 +190,83 @@
             wraper.append(f)
             fragments.push(f)
          }
-         window.mouse = {
-            down: false,
-         }
-         document.addEventListener("mousedown", (event) => {
-               mouse.down = true;
-               mouse.dropPoint = {
-                  x: event.screenX,
-                  y: event.screenY,
-               }
-               if(mouse.containedBy) {
-                  mouse.containedBy.x = mouse.containedBy.offsetLeft
-                  mouse.containedBy.y = mouse.containedBy.offsetTop
-               }
-         })
-         document.addEventListener("mouseup", (event) => {
-            mouse.down = false;
-            if(mouse.containedBy) {
-               var relativeX =  event.clientX - wraper.offsetLeft
-               var relativeY =  event.clientY - wraper.offsetTop
-               var numberOfCol = Math.floor(relativeX / fragmentWidth)
-               var numberOfRow = Math.floor(relativeY / fragmentHeight)
-               if(numberOfCol < __col && numberOfRow < __row && numberOfCol >= 0 && numberOfRow >= 0) {
-                  var index = numberOfRow * __col + numberOfCol
-                  var a = fragments[index]
-                  var b = mouse.containedBy
-                  swapActivePos(a, b)
-                  a.setX(a.activePos.x)
-                  a.setY(a.activePos.y)
-                  b.setX(b.activePos.x)
-                  b.setY(b.activePos.y)
+         return fragments;
+      }
 
-                  if(a != b) {
-                     fragments[b.activeIndex] = a
-                     fragments[a.activeIndex] = b
-                     var tIndex = a.activeIndex
-                     a.activeIndex = b.activeIndex
-                     b.activeIndex = tIndex
-                     repealMouseContained()
-                  }
-               }else{
-                  back(mouse.containedBy, mouse.containedBy.activePos.x, mouse.containedBy.activePos.y)
-               }
+      function gameStart() {
+         fragments.forEach((item, index) => {
+            item.classList.remove("disabled", "active")
+         })
+      }
 
+      function isGameover() {
+         var gameover = true
+         fragments.forEach((item, index) => {
+            if(item.activePos.x != item.correctPos.x || item.activePos.y != item.correctPos.y) {
+               gameover = false
             }
          })
-         document.addEventListener("mouseover", (event) => {
-            var dom = event.target
-            if(isFragment(dom) && mouse.containedBy == null) {
-               setMouseContained(dom)
-            }
-         })
-         document.addEventListener("mouseout", (event) => {
-            var dom = event.target
-            if(isFragment(dom) && mouse.down == false && mouse.containedBy) {
-               repealMouseContained(dom)
-            }
-         })
-         document.addEventListener("mousemove", (event) => {
-            if(mouse.down && mouse.containedBy) {
-               mouse.containedBy.setX(mouse.containedBy.x + event.screenX - mouse.dropPoint.x)
-               mouse.containedBy.setY(mouse.containedBy.y + event.screenY - mouse.dropPoint.y)
-            }
-         })
-         document.addEventListener("click", (event) => {
-            if(event.target.id == "game-start") {
-               disorder(fragments)
-            }
+         return gameover
+      }
+
+      function disorder(arr) {
+         var activePos = []
+         var indexArr = []
+         arr.forEach((item, i) => {
+            indexArr.push(i)
+            activePos.push({x:item.activePos.x, y:item.activePos.y})
          })
 
-         function disorder(arr) {
-            var tArr = arr.slice()
-            for(let i = tArr.length - 1, j = 0; i > -1; i--,j++) {
-               tArr.splice(i, 1);
-               arr[j] = tArr[]
-            }
-         }
+         arr.forEach((item, j) => {
+            var index = indexArr.splice(random(0, indexArr.length - 1), 1)[0];
+            swap(arr[j], arr[index])
+         })
+      }
 
-         function repealMouseContained() {
+      function repealMouseContained() {
+         if(mouse.containedBy) {
             mouse.containedBy.classList.remove("active");
             mouse.containedBy = null;
          }
-         function setMouseContained(dom) {
+      }
+      function setMouseContained(dom) {
+         if(dom && !dom.classList.contains("disabled")) {
             mouse.containedBy = dom;
             mouse.containedBy.classList.add("active");
+         }
+      }
+      function swap(a, b){
+         swapActivePos(a, b)
+         a.setX(a.activePos.x)
+         a.setY(a.activePos.y)
+         b.setX(b.activePos.x)
+         b.setY(b.activePos.y)
+
+         if(a != b) {
+            fragments[b.activeIndex] = a
+            fragments[a.activeIndex] = b
+            var tIndex = a.activeIndex
+            a.activeIndex = b.activeIndex
+            b.activeIndex = tIndex
+            repealMouseContained()
+         }
+
+         function swapActivePos(dom1, dom2) {
+            var t = {
+               x: dom1.activePos.x,
+               y: dom1.activePos.y,
+            }
+
+            dom1.activePos.x = dom2.activePos.x
+            dom1.activePos.y = dom2.activePos.y
+
+            dom2.activePos.x = t.x
+            dom2.activePos.y = t.y
          }
       }
 
       function isFragment(dom) {
          return dom.classList.contains("fragment")
-      }
-
-      function swapActivePos(dom1, dom2){
-         var t = {
-            x: dom1.activePos.x,
-            y: dom1.activePos.y,
-         }
-
-         dom1.activePos.x = dom2.activePos.x
-         dom1.activePos.y = dom2.activePos.y
-
-         dom2.activePos.x = t.x
-         dom2.activePos.y = t.y
       }
 
       function back(dom, x, y) {
@@ -202,7 +276,7 @@
 
       function createFragment(x, y, w, h, bgUrl) {
          var fgt = document.createElement("div")
-         fgt.classList.add("fragment");
+         fgt.classList.add("fragment", "disabled", "active");
          fgt.setWidth(`${w}px`);
          fgt.setHeight(`${h}px`);
          fgt.setX(x);
@@ -212,18 +286,10 @@
          return fgt;
       }
 
-      HTMLElement.prototype.setWidth = function(value) {
-         this.style.width = value;
+      function random(min, max) {
+         return min + Math.floor(Math.random() * (max - min + 1))
       }
-      HTMLElement.prototype.setHeight = function(value) {
-         this.style.height = value;
-      }
-      HTMLElement.prototype.setX = function(x) {
-         this.style.left = `${x}px`;
-      }
-      HTMLElement.prototype.setY = function(y) {
-         this.style.top = `${y}px`;
-      }
+
    </script>
 </body>
 </html>
