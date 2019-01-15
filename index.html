@@ -11,7 +11,25 @@
    <div id="sb">
       {{name}}
    </div>
+   <button onclick="xq(this)"></button>
+
+
+   <button type="button" name="button">上一页</button>
+   <button type="button" name="button" value="10" onclick="changePage(this.value)">10</button>
+   <button type="button" name="button" value="11" onclick="changePage(this.value)">11</button>
+   <button type="button" name="button" value="12" onclick="changePage(this.value)">12</button>
+   <button type="button" name="button">下一页</button>
+
+
    <script type="text/javascript">
+   function changePage(value) {
+      console.log(value)
+      $.post("change_page.php", value, function(data) {
+         console.log(data)
+      })
+   }
+
+
          var arr = new Array(0,1,2,3,4,5,6,7,8,9);
          var 月考 = {
             name: "黄清泽",
