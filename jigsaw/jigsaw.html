@@ -160,10 +160,14 @@
          if(event.target.classList.contains("col")) {
             __col = event.target.value
             window.fragments = setup(pathOfImg)
+            gameStart()
+            disorder(window.fragments)
          }
          if(event.target.classList.contains("row")) {
             __row = event.target.value
             window.fragments = setup(pathOfImg)
+            gameStart()
+            disorder(window.fragments)
          }
       })
 
