@@ -156,6 +156,10 @@
             disorder(fragments)
          }
       })
+      document.addEventListener("keydown", (event) => {
+            gameStart()
+            disorder(fragments)
+      })
       document.addEventListener("change", (event) => {
          if(event.target.classList.contains("col")) {
             __col = event.target.value
