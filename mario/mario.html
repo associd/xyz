@@ -8,6 +8,14 @@
    <title>Document</title>
 </head>
 <body>
+   <div id="offset"></div>
    <canvas id="canvas" width="640" height="640"></canvas>
+   <span class="controls">
+      <button data-action="change_offset" data-offset="-1024">-1024</button>
+      <button data-action="change_offset" data-offset="-16">-16</button>
+      <button data-action="change_offset" data-offset="+16">+16</button>
+      <button data-action="change_offset" data-offset="+1024">+1024</button>
+   </span>
+   <canvas id="mario-canvas" width="160" height="320"></canvas>
 </body>
 </html>
