@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <script src="js/master.js"></script>
+   <title>Document</title>
+   <style media="screen">
+      canvas{
+         border: 1px dashed lightskyblue;
+      }
+   </style>
+</head>
+<body>
+   <div id="offset">32784</div>
+   <canvas
+      data-action="change_tile"
+      id="canvas"
+      width="640"
+      height="640"></canvas>
+   <canvas id="mario-canvas" width="160" height="320"></canvas>
+   <canvas
+      data-action="draw_tile"
+      width="320"
+      height="320"></canvas>
+   <span class="controls">
+      <button data-action="change_offset" data-offset="-1024">-1024</button>
+      <button data-action="change_offset" data-offset="-32">-32</button>
+      <button data-action="change_offset" data-offset="-16">-16</button>
+      <button data-action="change_offset" data-offset="+16">+16</button>
+      <button data-action="change_offset" data-offset="+32">+32</button>
+      <button data-action="change_offset" data-offset="+1024">+1024</button>
+   </span>
+</body>
+</html>

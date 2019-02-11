@@ -312,7 +312,7 @@ function upload_piece(start, count, file, fileName) {
       fd.append("token", "end")
       fd.append("fileName", fileName)
    }
-   xhr.open('post', 'musicPlayer/upload_music.php')
+   xhr.open('post', 'upload_music.php')
    xhr.onload = function() {
       e('.music-list').innerHTML += xhr.responseText
       if(count >= 0) {

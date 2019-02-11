@@ -16,10 +16,9 @@ window.onload = function() {
          ]
          let canvas = e("#canvas");
          let ctx = canvas.getContext("2d");
-         drawNes(ctx, window.bytes, window.offset);
-
          bindEvent(ctx);
-         drawSprite(e("#mario-canvas").getContext("2d"), window.bytes)
+         drawNes(ctx, window.bytes, window.offset);
+         // drawSprite(e("#mario-canvas").getContext("2d"), window.bytes)
       }
    })
 }
@@ -46,27 +45,58 @@ function drawSprite(ctx, bytes) {
 }
 
 function bindEvent(ctx) {
+   window.tile = {
+      row: 0,
+      col: 0,
+      width:80,
+      height: 80,
+      nesOffset: window.offset,
+   }
    window.actions = {
-      change_offset(offset) {
-         window.offset += offset
+      change_offset(event) {
+         window.offset += Number(event.target.dataset.offset);
          drawNes(ctx, window.bytes, window.offset)
          e("#offset").innerHTML = window.offset;
-      }
+      },
+      change_tile(event) {
+         let pos = getMouseOffset(event)
+         let i = Math.floor(pos.y / window.tile.height)
+         let j = Math.floor(pos.x / window.tile.width)
+
+         window.tile.row = i
+         window.tile.col = j
+         window.tile.number = i * 8 + j
+         window.tile.nesOffset = window.offset + window.tile.number * 16
+
+      },
+      draw_tile(event) {
+         let ctx = event.target.getContext("2d")
+         let pos = getMouseOffset(event)
+         let i = Math.floor(pos.y / window.tile.height)
+         let j = Math.floor(pos.x / window.tile.width)
+
+         drawPixel(ctx, window.bytes.slice(window.tile.nesOffset), j * window.tile.width, i * window.tile.height)
+      },
    }
-   e(".controls").addEventListener("click", event => {
+   document.addEventListener("click", event => {
       let action = event.target.dataset.action;
-      let offset = Number(event.target.dataset.offset);
-      actions[action] && actions[action](offset);
+      actions[action] && actions[action](event);
    })
+   function getMouseOffset(event){
+      let rect = event.target.getBoundingClientRect()
+      let x = event.clientX - rect.left
+      let y = event.clientY - rect.top
+      return {x,y}
+   }
 }
 
-function drawNes(ctx, bytes, offset) {
+function drawNes(ctx, bytes, offset, col = 8, row = 8) {
    let blockSize = 8
    let pixelSize = 10
    let numberOfBytesPerBlock = 16
-   for(let i = 0; i < blockSize; i++ ) {
-      for(let j = 0; j < blockSize; j++) {
-         let index = offset + (i * blockSize + j) * numberOfBytesPerBlock;
+   for(let i = 0; i < row; i++ ) {
+      for(let j = 0; j < col; j++) {
+         let index = offset + (i * col + j) * numberOfBytesPerBlock;
          let x = j * pixelSize * 8
          let y = i * pixelSize * 8
          drawPixel(ctx, bytes.slice(index), x, y)

@@ -1,5 +1,5 @@
 <?php
-include "../function.php";
+include "function.php";
 include "DB.php";
 include_once "music.php";
 use Music\Music as Music;
@@ -58,6 +58,6 @@ if($_POST["token"] != "end") {
         $time = $list["Time"];
         $time = floor($time / 60).date(":s", $time);
         $music = new Music($DB);
-        $music->get_music_li([$list["Name"], $list["Composer"], $list["Album"], $time], $img, $path, $id, "musicPlayer");
+        $music->get_music_li([$list["Name"], $list["Composer"], $list["Album"], $time], $img, $path, $id);
     }
 }

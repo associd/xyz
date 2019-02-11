@@ -8,43 +8,41 @@
    <title>Document</title>
 </head>
 <body>
-   <div id="sb">
-      {{name}}
-   </div>
-   <button onclick="xq(this)"></button>
-
-
-   <button type="button" name="button">上一页</button>
-   <button type="button" name="button" value="10" onclick="changePage(this.value)">10</button>
-   <button type="button" name="button" value="11" onclick="changePage(this.value)">11</button>
-   <button type="button" name="button" value="12" onclick="changePage(this.value)">12</button>
-   <button type="button" name="button">下一页</button>
-
-
-   <script type="text/javascript">
-   function changePage(value) {
-      console.log(value)
-      $.post("change_page.php", value, function(data) {
-         console.log(data)
-      })
-   }
-
-
-         var arr = new Array(0,1,2,3,4,5,6,7,8,9);
-         var 月考 = {
-            name: "黄清泽",
-            score: arr,
-         }
-         var json月考 = JSON.stringify(月考);
-
-
-
-
-         var 后台传来的json数据 = json月考;
-         var sb = new Vue({
-            el: "#sb",
-            data: JSON.parse(后台传来的json数据),
-         });
-   </script>
+    <div id="p-list">
+        <project-list></project-list>
+    </div>
+    <script>
+        let list = Vue.component("project-list", {
+            template: "<ul><li v-for='item in list' v-on='goto(item)'>{{item}}</li></ul>",
+            data: function(){
+                return {
+                    list: null,
+                }
+            },
+            created: function() {
+                let p = this.getList();
+                p.then((text) => {
+                    this.list = JSON.parse(text);
+                }).catch((text) => {
+                    this.list = [];
+                })
+            },
+            methods: {
+                getList() {
+                    return new Promise(function (resolve, reject) {
+                        let xhr = new XMLHttpRequest();
+                        xhr.open("POST", "./libertyProject/returnProjectList.php")
+                        xhr.onload = () => {resolve(xhr.responseText)}
+                        xhr.onerror = () => {reject(xhr.statusText)}
+                        xhr.send()
+                    })
+                },
+                goto(href) {
+                    window.location.href = window.location.pathname + "/libertyProject/" + href;
+                },
+            }
+        })
+        let pList = new Vue({el:"#p-list"})
+        </script>
 </body>
 </html>

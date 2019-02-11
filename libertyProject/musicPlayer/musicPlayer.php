@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link type="favicon" rel="shortcut icon" href="<?php echo $name; ?>/favicon.ico" />
+    <link type="favicon" rel="shortcut icon" href="favicon.ico" />
     <?php load_js($js_array); ?>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
     <?php load_css($css_array); ?>
@@ -47,7 +47,7 @@
         <ul class="music-list scroll-inner">
             <?php   use Music\Music;
                     $music = new Music($DB);
-                    $music->get_music($name);
+                    $music->get_music();
             ?>
         </ul>
         <div class="bg-reminding">
@@ -79,7 +79,7 @@
         </div>
         <div class="vol f1 flex">
             <div class="imgwraper volicon">
-                <img src="musicPlayer/img/v.png" alt="">
+                <img src="img/v.png" alt="">
             </div>
             <div class="progress" id="audio-volume">
                 <div class="curprogress"></div>
