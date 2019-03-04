@@ -204,6 +204,7 @@ class FrequencySpt {
          peak:{
             property: (Farr, canvas) => {
                var o = {}
+               o.color = "rgba(0,255,255,0.2)";
                o.Farr = Farr;
                o.startF = 105;
                o.endF = 115;
@@ -240,7 +241,8 @@ class FrequencySpt {
                 *       |
                 *       v y
                 */
-                o.ctx.save();
+               o.ctx.fillStyle = o.color;
+               o.ctx.save();
                o.ctx.beginPath();
                o.ctx.translate(contextCenter.x, contextCenter.y);
 
@@ -278,23 +280,7 @@ class FrequencySpt {
                      x: end.x + o.fat * Math.sin(rotateRadian_1),
                      y: end.y - o.fat * Math.cos(rotateRadian_1),
                   }
-                  // o.ctx.moveTo(node.x, node.y);
                   o.ctx.bezierCurveTo(cp2.x, cp2.y, cp1.x, cp1.y, end.x, end.y);
-                  // o.ctx.strokeStyle = "white";
-                  // o.ctx.stroke();
-                  //
-                  // o.ctx.moveTo(end.x, end.y)
-                  // o.ctx.lineTo(cp1.x, cp1.y)
-                  // o.ctx.stroke();
-                  //
-                  // o.ctx.moveTo(start.x, start.y)
-                  // o.ctx.lineTo(cp2.x, cp2.y)
-                  // o.ctx.fill();
-
-                  // pointer(start.x, start.y, 4, "white")
-                  // pointer(end.x, end.y, 2, "blackn");
-                  // pointer(cp1.x, cp1.y, 4, "red")
-                  // pointer(cp2.x, cp2.y, 4, "green")
                   node = end
                }
                o.ctx.fill()
