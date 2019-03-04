@@ -1,0 +1,124 @@
+.control{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    line-height: 60px;
+}
+.control .imgwraper{
+    height: 100%;
+}
+.control .imgwraper img{
+    object-fit: scale-down;
+}
+.audiobox{
+    flex: 8;
+}
+.audiobox .l,.audiobox .r{
+   margin: auto 36px;
+   width: 36px;
+   height: 36px;
+}
+.audiobox .c{
+   width: 50px;
+   height: 50px;
+   margin: auto 0;
+}
+.l, .c, .r{
+   cursor: pointer;
+   border-radius: 50%;
+   overflow: hidden;
+   filter: opacity(0.8);
+   transition: opacity 0.2s;
+}
+.l:hover, .c:hover, .r:hover{
+   filter: opacity(1);
+}
+.c *{
+   width: 100%;
+   height: 100%;
+   background-image: url(../img/play.png);
+   background-size: 100px 100px;
+   display: none;
+}
+.c #play{
+   background-position: 0 0;
+}
+.c #play:hover{
+   background-position: 0 50px;
+}
+.c #pause{
+   background-position: 50px 0;
+}
+.c #pause:hover{
+   background-position: 50px 50px;
+}
+.l, .r{
+   background-image: url(../img/play-left.png);
+   background-position: center -7px;
+}
+.r{
+   transform: rotateZ(180deg);
+}
+.l:hover, .r:hover{
+   background-position: center 43px;
+}
+.vol{
+    flex: 1.5;
+}
+.other{
+    flex: 0.5;
+}
+.progress{
+    position: relative;
+    height: 2px;
+    margin: auto;
+    background-color: #aaa;
+    flex: 1;
+}
+.progress .curprogress{
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+.time .progress .curprogress{
+   width: 0;
+}
+.progress .cur{
+    width: 20px;
+    height: 20px;
+    margin: auto 0;
+    background-color: gray;
+    border-radius: 50%;
+    border: white solid 2px;
+    position: absolute;
+    left: 0;
+    top: -50%;
+    bottom: -50%;
+    cursor: pointer;
+}
+.vol .cur{
+   left: calc(100% - 10px);
+}
+.vol{
+    padding: 0 20px;
+}
+.volicon{
+    margin-right: 10px;
+    width: 17px;
+}
+.audiobox span{
+    margin: 0 20px;
+    width: 32px;
+}
+.play-control, .time, .vol{
+   height: 60px;
+   line-height: 60px;
+}
+
+.userConfirm{
+   position: fixed;
+   right: 0;
+   bottom: 60px;
+   background-color: white;
+   color: black;
+}

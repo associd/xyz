@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <script src="./libertyProject/musicPlayer/js/drag.js"></script>
+   <title>Document</title>
+   <style>
+      *{
+         margin: 0;
+      }
+      .drag{
+         position: absolute;
+         width: 50px;
+         height: 50px;
+         border-radius: 50%;
+         background-color: skyblue;
+      }
+   </style>
+</head>
+<body>
+   <canvas id="canvas" width="800" height="800"></canvas>
+   <div class="drag"></div>
+   <div class="drag"></div>
+   <div class="drag"></div>
+   <div class="drag"></div>
+   <script>
+      var cvs = document.querySelector("#canvas")
+      var ctx = cvs.getContext("2d")
+
+      var dots = document.querySelectorAll(".drag")
+
+
+
+      setInterval(() => {
+         draw(...dots)
+      }, 23.5)
+
+      function draw(d1,d2,d3,d4) {
+
+         ctx.clearRect(0,0, 800, 800)
+         ctx.beginPath()
+
+         d1.x = d1.offsetLeft
+         d1.y = d1.offsetTop
+
+         d2.x = d2.offsetLeft
+         d2.y = d2.offsetTop
+
+         d3.x = d3.offsetLeft
+         d3.y = d3.offsetTop
+
+         d4.x = d4.offsetLeft
+         d4.y = d4.offsetTop
+
+         ctx.moveTo(d1.x, d1.y)
+         ctx.bezierCurveTo(d2.x, d2.y, d3.x, d3.y, d4.x, d4.y);
+         ctx.stroke()
+      }
+
+      function pointer(dot, color) {
+         ctx.moveTo(dot.x, dot.y)
+         ctx.arc(dot.x, dot.y, 4, 0, Math.PI * 2);
+         ctx.fillStyle = color;
+         ctx.fill();
+      }
+      drag()
+   </script>
+</body>
+</html>

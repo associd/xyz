@@ -4,22 +4,38 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
    <script src="vue.js"></script>
    <title>Document</title>
+    <style>
+        .list-group{
+            list-style: decimal-leading-zero inside;
+        }
+        .list-group-item{
+            display: list-item;
+        }
+    </style>
 </head>
 <body>
-    <div id="p-list">
-        <project-list></project-list>
+    <div>
+        <practice-list></practice-list>
     </div>
+    <div></div>
     <script>
-        let list = Vue.component("project-list", {
-            template: "<ul><li v-for='item in list' v-on='goto(item)'>{{item}}</li></ul>",
-            data: function(){
+        let list = Vue.component("practice-list", {
+            template: "<div class='list-group'><a " +
+            "v-for='(item, index) in list' " +
+            "v-bind:href='item'" +
+            "class='list-group-item list-group-item-action'><span class='font-weight-bold'>{{item}}</span></a></div>",
+            data: function () {
                 return {
                     list: null,
                 }
             },
-            created: function() {
+            created: function () {
                 let p = this.getList();
                 p.then((text) => {
                     this.list = JSON.parse(text);
@@ -31,18 +47,19 @@
                 getList() {
                     return new Promise(function (resolve, reject) {
                         let xhr = new XMLHttpRequest();
-                        xhr.open("POST", "./libertyProject/returnProjectList.php")
-                        xhr.onload = () => {resolve(xhr.responseText)}
-                        xhr.onerror = () => {reject(xhr.statusText)}
+                        xhr.open("POST", "./returnProjectList.php")
+                        xhr.onload = () => {
+                            resolve(xhr.responseText)
+                        }
+                        xhr.onerror = () => {
+                            reject(xhr.statusText)
+                        }
                         xhr.send()
                     })
                 },
-                goto(href) {
-                    window.location.href = window.location.pathname + "/libertyProject/" + href;
-                },
             }
-        })
-        let pList = new Vue({el:"#p-list"})
-        </script>
+        });
+        let pList = new Vue({el:"div"})
+    </script>
 </body>
 </html>
