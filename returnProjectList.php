@@ -5,7 +5,7 @@
  * Date: 2019/2/9/0009
  * Time: 下午 5:01
  */
- $list = scandir("../libertyProject");
+ $list = scandir(".");
  $res = array();
  foreach ($list as $key => $val) {
      if(preg_match("/[.]+/", $val)) {
