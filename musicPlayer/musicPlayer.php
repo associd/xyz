@@ -21,7 +21,9 @@
       <div class="canvas-wraper" id="canvas-wraper">
          <canvas class="audio-canvas" id="audio-canvas" height="220"></canvas>
       </div>
-      <div class="html-bg hide" id="active-albumimg"></div>
+      <div class="html-bg hide" id="active-albumimg">
+         <canvas class="imgData" width="300" height="300"></canvas>
+      </div>
       <div class="flex">
             <div class="imgwraper m10 albumimg">
                 <img class="music-img" src="" alt="">

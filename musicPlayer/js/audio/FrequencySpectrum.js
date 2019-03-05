@@ -233,13 +233,13 @@ class FrequencySpt {
                o.ctx.save();
                o.ctx.beginPath();
                o.ctx.translate(o.center.x, o.center.y);
-               pathOfCake(o.Farr.slice(32, 64), 100, 8)
+               pathOfCake(o.Farr.slice(32, 128), 100, 8)
                o.ctx.fill()
-               pathOfCake(o.Farr.slice(64, 96), 200, 12)
+               pathOfCake(o.Farr.slice(125, 250), 200, 8)
                o.ctx.fill()
-               pathOfCake(o.Farr.slice(96, 128), 300, 16)
+               pathOfCake(o.Farr.slice(250, 500), 300, 8)
                o.ctx.fill()
-               pathOfCake(o.Farr.slice(128, 160), 400, 20)
+               pathOfCake(o.Farr.slice(500, 800), 400, 8)
                o.ctx.fill()
                o.ctx.restore();
 
