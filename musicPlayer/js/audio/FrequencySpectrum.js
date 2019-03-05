@@ -204,36 +204,24 @@ class FrequencySpt {
          peak:{
             property: (Farr, canvas) => {
                var o = {}
-               o.color = "rgba(0,255,255,0.2)";
+               o.color = "rgba(0,255,255,0.1)";
                o.Farr = Farr;
-               o.startF = 105;
-               o.endF = 115;
+               o.startF = 0;
+               o.endF = 32;
                o.fat = 10;
                o.cvs = canvas;
                o.ctx = canvas.getContext("2d");
-               return o
-            },
-            draw: (o) => {
-               var size = 2;
-               var pH = 100;
-               var contextCenter = {
+               o.center = {
                   x: o.cvs.width / 2,
                   y: o.cvs.height / 2,
                }
-
+               o.centerDistance = 200;
+               o.frequencyHeight = 100;
+               o.maxFrequency = 256;
+               return o
+            },
+            draw: (o) => {
                var piece = o.Farr.slice(o.startF, o.endF);
-               // var piece = o.Farr.slice(63, 65);
-               // piece = [100, 200, 300, 400]
-               var offsetRadian = 360 / piece.length / 180 * Math.PI;
-               var origin = {
-                  x: 0,
-                  y: 0,
-               }
-               var node = {
-                  x: 0,
-                  y: 0,
-               }
-
 
                /**      |
                 *  -----+------->x
@@ -244,66 +232,64 @@ class FrequencySpt {
                o.ctx.fillStyle = o.color;
                o.ctx.save();
                o.ctx.beginPath();
-               o.ctx.translate(contextCenter.x, contextCenter.y);
-
-               for(let i = 0, j = piece.length - 1; i < piece.length; i++,j = (j+1)%piece.length) {
-                  var lastFqc = piece[j];
-                  var fqc = piece[i];
-                  var lastPH = pH + lastFqc;
-                  var curPH = pH + fqc;
-                  var rotateRadian_1 = i * offsetRadian;
-                  var rotateRadian_2 = j * offsetRadian;
-                  var halfOfThePI = Math.PI / 2
-                  var end,start,cp2,cp1;
-                  if(i == 0) {
-                     start = {
-                        x : lastPH * Math.cos(rotateRadian_2),
-                        y : lastPH * Math.sin(rotateRadian_2),
-                     }
-                     origin = start
-                     node = start
-                     o.ctx.moveTo(node.x, node.y)
-                  }
-                  if(i == piece.length - 1){
-                     end = origin
-                  }else {
-                     end = {
-                        x : curPH * Math.cos(rotateRadian_1),
-                        y : curPH * Math.sin(rotateRadian_1),
-                     }
-                  }
-                  cp2 = {
-                     x: node.x - o.fat * Math.sin(rotateRadian_2),
-                     y: node.y + o.fat * Math.cos(rotateRadian_2),
-                  }
-                  cp1 = {
-                     x: end.x + o.fat * Math.sin(rotateRadian_1),
-                     y: end.y - o.fat * Math.cos(rotateRadian_1),
-                  }
-                  o.ctx.bezierCurveTo(cp2.x, cp2.y, cp1.x, cp1.y, end.x, end.y);
-                  node = end
-               }
+               o.ctx.translate(o.center.x, o.center.y);
+               pathOfCake(o.Farr.slice(32, 64), 100, 8)
+               o.ctx.fill()
+               pathOfCake(o.Farr.slice(64, 96), 200, 12)
+               o.ctx.fill()
+               pathOfCake(o.Farr.slice(96, 128), 300, 16)
+               o.ctx.fill()
+               pathOfCake(o.Farr.slice(128, 160), 400, 20)
                o.ctx.fill()
                o.ctx.restore();
 
-
-
-               function pathOfCircle(fqc, pH, size) {
-                  o.ctx.rotate(offsetRadian);
-                  o.ctx.moveTo(size, pH + fqc);
-                  o.ctx.arc(0, pH + fqc, size, 0, Math.PI * 2)
-               }
-               function pointer(x, y, r, color) {
-                  o.ctx.save();
-                  o.ctx.beginPath();
-                  o.ctx.moveTo(x, y);
-                  o.ctx.arc(x, y, r, 0, Math.PI * 2);
-                  o.ctx.fillStyle = color;
-                  o.ctx.fill();
-                  o.ctx.restore();
-               }
-               function random(min, max) {
-                  return min + Math.floor(Math.random() * (max - min + 1));
+               function pathOfCake(piece, centerDistance = o.centerDistance, fat = o.fat, freH = o.frequencyHeight) {
+                  var offsetRadian = 360 / piece.length / 180 * Math.PI;
+                  var origin = {
+                     x: 0,
+                     y: 0,
+                  }
+                  var node = {
+                     x: 0,
+                     y: 0,
+                  }
+                  for(let i = 0, j = piece.length - 1; i < piece.length; i++,j = (j+1)%piece.length) {
+                     var lastFqc = piece[j] / o.maxFrequency * freH;
+                     var fqc = piece[i] / o.maxFrequency * freH;
+                     var lastPH = centerDistance + lastFqc;
+                     var curPH = centerDistance + fqc;
+                     var rotateRadian_1 = i * offsetRadian;
+                     var rotateRadian_2 = j * offsetRadian;
+                     var halfOfThePI = Math.PI / 2
+                     var end,start,cp2,cp1;
+                     if(i == 0) {
+                        start = {
+                           x : lastPH * Math.cos(rotateRadian_2),
+                           y : lastPH * Math.sin(rotateRadian_2),
+                        }
+                        origin = start
+                        node = start
+                        o.ctx.moveTo(node.x, node.y)
+                     }
+                     if(i == piece.length - 1){
+                        end = origin
+                     }else {
+                        end = {
+                           x : curPH * Math.cos(rotateRadian_1),
+                           y : curPH * Math.sin(rotateRadian_1),
+                        }
+                     }
+                     cp2 = {
+                        x: node.x - fat * Math.sin(rotateRadian_2),
+                        y: node.y + fat * Math.cos(rotateRadian_2),
+                     }
+                     cp1 = {
+                        x: end.x + fat * Math.sin(rotateRadian_1),
+                        y: end.y - fat * Math.cos(rotateRadian_1),
+                     }
+                     o.ctx.bezierCurveTo(cp2.x, cp2.y, cp1.x, cp1.y, end.x, end.y);
+                     node = end
+                  }
                }
             },
             control: (o) => {
