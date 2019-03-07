@@ -1,0 +1,29 @@
+html,body{
+   height: 100%;
+}
+body{
+   margin: 0;
+}
+
+.transition, .transition *{
+   transition: all 0.5s;
+}
+
+.bg1{
+   background-color: rgba(255,0,0,0.2);
+}
+.bg2{
+   background-color: rgba(0,255,255,0.2);
+}
+.bg3{
+   background-color: rgba(255,0,255,0.2);
+}
+.bg4{
+   background-color: rgba(255,255,0,0.2);
+}
+
+div{
+   text-align: center;
+   color: white;
+   font-size: 60px;
+}

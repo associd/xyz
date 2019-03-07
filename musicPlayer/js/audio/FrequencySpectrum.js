@@ -204,7 +204,7 @@ class FrequencySpt {
          peak:{
             property: (Farr, canvas) => {
                var o = {}
-               o.color = "rgba(0,255,255,0.1)";
+               o.color = "rgba(0,255,255,0.2)";
                o.Farr = Farr;
                o.startF = 0;
                o.endF = 32;
@@ -234,8 +234,10 @@ class FrequencySpt {
                o.ctx.beginPath();
                o.ctx.translate(o.center.x, o.center.y);
                pathOfCake(o.Farr.slice(32, 128), 100, 8)
+               o.ctx.fillStyle = "white"
                o.ctx.fill()
                pathOfCake(o.Farr.slice(125, 250), 200, 8)
+               o.ctx.fillStyle = o.color;
                o.ctx.fill()
                pathOfCake(o.Farr.slice(250, 500), 300, 8)
                o.ctx.fill()

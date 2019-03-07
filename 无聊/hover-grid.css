@@ -1,0 +1,28 @@
+:root{
+   --example: 100%;
+}
+
+.hg-box{
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   height: 100%;
+}
+
+.hg-tr{
+   display: flex;
+   flex: 1 1 0;
+}
+
+.hg-td{
+   display: flex;
+   flex: 1 1 0;
+}
+
+.hg-td:hover{
+   flex: 9 1 0;
+}
+
+.hg-tr:hover{
+   flex: 9 1 0;
+}
