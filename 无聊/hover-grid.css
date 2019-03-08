@@ -9,6 +9,10 @@
    height: 100%;
 }
 
+.hg-tr,.hg-td,.hg-box{
+   overflow: hidden;
+}
+
 .hg-tr{
    display: flex;
    flex: 1 1 0;
@@ -25,4 +29,8 @@
 
 .hg-tr:hover{
    flex: 9 1 0;
+}
+
+.hg-td.col{
+   flex-direction: column;
 }

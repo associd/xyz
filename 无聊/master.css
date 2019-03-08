@@ -10,16 +10,20 @@ body{
 }
 
 .bg1{
-   background-color: rgba(255,0,0,0.2);
+   background-image: url(./img/1.jpg);
 }
 .bg2{
-   background-color: rgba(0,255,255,0.2);
+   background-image: url(./img/2.jpg);
 }
 .bg3{
-   background-color: rgba(255,0,255,0.2);
+   background-image: url(./img/3.jpg);
 }
 .bg4{
-   background-color: rgba(255,255,0,0.2);
+   background-image: url(./img/4.jpg);
+}
+.bg1,.bg2,.bg3,.bg4{
+   background-size: cover;
+   background-position: center;
 }
 
 div{
