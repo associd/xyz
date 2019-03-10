@@ -1,7 +1,3 @@
-:root{
-   --example: 100%;
-}
-
 .fg-box{
    display: flex;
    width: 100%;
@@ -12,21 +8,12 @@
    overflow: hidden;
 }
 
-.fg-tr{
+.fg-tr, .fg-td{
    display: flex;
-   flex: 1 1 0;
+   flex: var(--flex-grow) 1 0;
 }
 
-.fg-td{
-   display: flex;
-   flex: 1 1 0;
-}
-
-.fg-td:hover{
-   flex: 9 1 0;
-}
-
-.fg-tr:hover{
+.fg-td:hover, .fg-tr:hover, .fg-td.active, .fg-tr.active{
    flex: 9 1 0;
 }
 

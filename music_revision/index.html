@@ -7,13 +7,27 @@
    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
    <title>Document</title>
    <style media="screen">
-      @import url(./css/master.css);
-      @import url(./css/hover-grid.css);
+      @import url(./CSS/master.css);
+      @import url(./CSS/hover-grid.css);
+      @import url(./CSS/app.css);
    </style>
 </head>
 <body>
-   <div id="app">
-      <flex-grid></flex-grid>
+   <div id="app" class="fg-box col full transition">
+      <div class="fg-tr">
+         <div id="user" class="fg-td pos-r">
+            <section class="center-box">
+               <button id="user-start" class="btn start">开始浏览</button>
+            </section>
+         </div>
+         <div class="fg-td bg2"></div>
+         <div class="fg-td bg3"></div>
+      </div>
+      <div class="fg-tr">
+         <div class="fg-td bg1"></div>
+         <div class="fg-td bg2"></div>
+         <div class="fg-td bg3"></div>
+      </div>
    </div>
    <script src="./JS/master.js"></script>
 </body>

@@ -1,0 +1,30 @@
+#user{
+   background: linear-gradient(to bottom, #54afd1, #63d0f4, #3ed4ef);
+}
+
+.btn{
+   padding: 0.8em;
+   border: 1px solid rgba(255,255,255,0.5);
+   background-color: transparent;
+}
+.btn:active{
+   background-color: rgba(255,255,255,0.8)!important;
+   transform: scale(1.1)!important;
+}
+.btn:hover{
+   cursor: pointer;
+   background-color: rgba(255,255,255,0.5);
+   transform: scale(1.2);
+}
+
+.center-box{
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translateX(-50%) translateY(-50%);
+}
+
+.start{
+   font-size: 30px;
+   color: inherit;
+}
