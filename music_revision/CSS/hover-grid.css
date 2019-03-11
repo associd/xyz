@@ -13,8 +13,11 @@
    flex: var(--flex-grow) 1 0;
 }
 
-.fg-td:hover, .fg-tr:hover, .fg-td.active, .fg-tr.active{
+/* .fg-td:hover, .fg-tr:hover, .fg-td.active, .fg-tr.active{
    flex: 9 1 0;
+} */
+.fg-td:hover, .fg-tr:hover, .fg-td.active, .fg-tr.active{
+   flex: 1.2 1 0;
 }
 
 .fg-td.col, .fg-box.col{

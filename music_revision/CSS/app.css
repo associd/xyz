@@ -7,14 +7,14 @@
    border: 1px solid rgba(255,255,255,0.5);
    background-color: transparent;
 }
-.btn:active{
-   background-color: rgba(255,255,255,0.8)!important;
-   transform: scale(1.1)!important;
-}
 .btn:hover{
    cursor: pointer;
    background-color: rgba(255,255,255,0.5);
    transform: scale(1.2);
+}
+.btn:active{
+   background-color: rgba(255,255,255,0.8);
+   transform: scale(1.1);
 }
 
 .center-box{

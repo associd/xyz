@@ -23,8 +23,8 @@ function bindEvent() {
          "fg-td": function(event) {
             fgFull(event.target)
          },
-         "btn": function(event) {
-
+         "return": function(event) {
+            fgNormal(event.target)
          }
       }
 
