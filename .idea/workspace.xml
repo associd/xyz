@@ -1,51 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2efdd486-e4c0-4874-84bf-b8848699a0d8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/.idea/codeStyleSettings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/.idea/music_player.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/.idea/musicPlayer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/.idea/musicPlayer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/1920_design.psd" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/1920_design.psd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/DB.php" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/DB.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/css/1_base.css" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/css/1_base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/css/2.1_header.css" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/css/2.1_header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/css/2.2_main.css" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/css/2.2_main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/css/2.3_footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/css/2.3_footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/css/3_master.css" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/css/3_master.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/css/4_media.css" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/css/4_media.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/del.php" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/del.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/function.php" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/function.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/img/l-light-2.psd" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/img/l-light-2.psd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/img/l-light.png" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/img/l-light.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/img/l.png" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/img/l.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/img/pause.png" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/img/pause.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/img/play-left.png" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/img/play-left.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/img/play-left.psd" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/img/play-left.psd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/img/play.png" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/img/play.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/img/play.psd" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/img/play.psd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/img/r.png" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/img/r.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/img/up.png" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/img/up.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/img/v.png" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/img/v.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/js/audio/FrequencySpectrum.js" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/js/audio/FrequencySpectrum.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/js/audio/audio.js" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/js/audio/audio.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/js/drag.js" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/js/drag.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/music.php" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/music.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/musicPlayer.php" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/musicPlayer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/musicPlayer/upload_music.php" beforeDir="false" afterPath="$PROJECT_DIR$/musicPlayer/upload_music.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libertyProject/returnProjectList.php" beforeDir="false" afterPath="$PROJECT_DIR$/returnProjectList.php" afterDir="false" />
-    </list>
+    <list default="true" id="2efdd486-e4c0-4874-84bf-b8848699a0d8" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,16 +120,17 @@
       <workItem from="1550028018401" duration="899000" />
       <workItem from="1550029106601" duration="33000" />
       <workItem from="1550059353905" duration="6009000" />
+      <workItem from="1552120571795" duration="12000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28889000" />
+    <option name="totallyTimeSpent" value="28901000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1050" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.104477614" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10554371" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
