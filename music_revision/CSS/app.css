@@ -1,8 +1,12 @@
 #user{
    background: linear-gradient(to bottom, #54afd1, #63d0f4, #3ed4ef);
 }
+::selection{
+   color: none;
+}
 
 .btn{
+   font-size: 30px;
    padding: 0.8em;
    border: 1px solid rgba(255,255,255,0.5);
    background-color: transparent;
@@ -27,4 +31,10 @@
 .start{
    font-size: 30px;
    color: inherit;
+}
+
+.return{
+   position: absolute;
+   right: 0;
+   bottom: 0;
 }

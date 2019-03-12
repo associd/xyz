@@ -13,16 +13,16 @@ body{
 }
 
 .bg1{
-   background-image: url(../IMG/1.jpg);
+   background-color: rgba(255,0,0,0.2);
 }
 .bg2{
-   background-image: url(../IMG/2.jpg);
+   background-color: rgba(255,255,0,0.2);
 }
 .bg3{
-   background-image: url(../IMG/3.jpg);
+   background-color: rgba(255,0,255,0.2);
 }
 .bg4{
-   background-image: url(../IMG/4.jpg);
+   background-color: rgba(0,255,0,0.2);
 }
 .bg1,.bg2,.bg3,.bg4{
    background-size: cover;

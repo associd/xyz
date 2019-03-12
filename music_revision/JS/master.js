@@ -47,7 +47,11 @@ function bindEvent() {
       },
       class: {
          "fg-td": function(event) {
-            fgFull(event.target)
+            if(event.target.classList.contains("active")) {
+               fgNormal(event.target)
+            }else{
+               fgFull(event.target)
+            }
          },
          "return": function(event) {
             fgNormal(event.target)

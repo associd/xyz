@@ -5,6 +5,7 @@
 }
 
 .fg-tr,.fg-td,.fg-box{
+   position: relative;
    overflow: hidden;
 }
 
