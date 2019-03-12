@@ -10,12 +10,13 @@
 
 .fg-tr, .fg-td{
    display: flex;
-   flex: var(--flex-grow) 1 0;
+   flex: 1 1 0;
 }
 
-/* .fg-td:hover, .fg-tr:hover, .fg-td.active, .fg-tr.active{
-   flex: 9 1 0;
-} */
+.fg-tr.hide, .fg-td.hide{
+   flex-grow: 0;
+}
+
 .fg-td:hover, .fg-tr:hover, .fg-td.active, .fg-tr.active{
    flex: 1.2 1 0;
    cursor: pointer;

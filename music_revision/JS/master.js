@@ -80,22 +80,22 @@ function userLogin() {
 }
 
 function fgNormal(dom) {
+   if(dom.parent() && !dom.parent().classList.contains("fg-box")) {
+      fgNormal(dom.parent())
+   }
    fgRemove(dom, "active")
    e("html").style.setProperty("--flex-grow", 1);
 }
 function fgFull(dom) {
+   if(dom.parent() && !dom.parent().classList.contains("fg-box")) {
+      fgFull(dom.parent())
+
+   }
    fgAdd(dom, "active");
-   e("html").style.setProperty("--flex-grow", 0);
 }
 function fgAdd(dom, className) {
-   if(dom.parent() && !dom.parent().classList.contains("fg-box")) {
-      fgAdd(dom.parent(), className)
-   }
    dom.classList.add(className)
 }
 function fgRemove(dom, className) {
-   if(dom.parent() && !dom.parent().classList.contains("fg-box")) {
-      fgRemove(dom.parent(), className)
-   }
    dom.classList.remove(className)
 }
