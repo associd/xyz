@@ -7,6 +7,32 @@ HTMLElement.prototype.attr = function() {
 HTMLElement.prototype.parent = function() {
    return this.parentElement;
 }
+HTMLElement.prototype.last = function() {
+   return this.previousElementSibling;
+}
+HTMLElement.prototype.next = function() {
+   return this.nextElementSibling;
+}
+HTMLElement.prototype.nextElements = function(elements = []) {
+   if(this.next()) {
+      this.next().nextElements(elements).push(this.next())
+      return elements;
+   }else{
+      return elements;
+   }
+}
+HTMLElement.prototype.lastElements = function(elements = []) {
+   if(this.last()) {
+      this.last().lastElements(elements).push(this.last())
+      return elements;
+   }else{
+      return elements;
+   }
+}
+HTMLElement.prototype.siblings = function() {
+   return this.lastElements().concat(this.nextElements())
+}
+
 window.onload = function() {
    userLogin();
    bindEvent();
