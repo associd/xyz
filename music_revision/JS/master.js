@@ -7,6 +7,20 @@ HTMLElement.prototype.attr = function() {
 HTMLElement.prototype.parent = function() {
    return this.parentElement;
 }
+HTMLElement.prototype.next = function() {
+   return this.nextElementSibling;
+}
+HTMLElement.prototype.last = function() {
+   return this.previousElementSibling;
+}
+HTMLElement.prototype.siblings = function() {
+   let node = new Array();
+   if(this.next()) {
+      node.push(this.next())
+   }
+   if(this.last() && node.push(this.last()));
+   return ;
+}
 window.onload = function() {
    userLogin();
    bindEvent();
@@ -54,22 +68,22 @@ function userLogin() {
 }
 
 function fgNormal(dom) {
+   if(dom.parent() && !dom.parent().classList.contains("fg-box")) {
+      fgNormal(dom.parent())
+   }
    fgRemove(dom, "active")
    e("html").style.setProperty("--flex-grow", 1);
 }
 function fgFull(dom) {
+   if(dom.parent() && !dom.parent().classList.contains("fg-box")) {
+      fgFull(dom.parent())
+
+   }
    fgAdd(dom, "active");
-   e("html").style.setProperty("--flex-grow", 0);
 }
 function fgAdd(dom, className) {
-   if(dom.parent() && !dom.parent().classList.contains("fg-box")) {
-      fgAdd(dom.parent(), className)
-   }
    dom.classList.add(className)
 }
 function fgRemove(dom, className) {
-   if(dom.parent() && !dom.parent().classList.contains("fg-box")) {
-      fgRemove(dom.parent(), className)
-   }
    dom.classList.remove(className)
 }
