@@ -27,6 +27,7 @@ body{
 .bg1,.bg2,.bg3,.bg4{
    background-size: cover;
    background-position: center;
+   background-repeat: repeat;
 }
 
 .full{

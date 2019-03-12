@@ -19,6 +19,7 @@
 
 .fg-td:hover, .fg-tr:hover, .fg-td.active, .fg-tr.active{
    flex: 1.2 1 0;
+   cursor: pointer;
 }
 
 .fg-td.col, .fg-box.col{
