@@ -83,14 +83,18 @@ function fgNormal(dom) {
    if(dom.parent() && !dom.parent().classList.contains("fg-box")) {
       fgNormal(dom.parent())
    }
+   dom.siblings().forEach(item => {
+      fgRemove(item, "hide")
+   })
    fgRemove(dom, "active")
-   e("html").style.setProperty("--flex-grow", 1);
 }
 function fgFull(dom) {
    if(dom.parent() && !dom.parent().classList.contains("fg-box")) {
       fgFull(dom.parent())
-
    }
+   dom.siblings().forEach(item => {
+      fgAdd(item, "hide")
+   })
    fgAdd(dom, "active");
 }
 function fgAdd(dom, className) {
