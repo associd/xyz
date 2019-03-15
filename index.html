@@ -40,7 +40,7 @@
                 p.then((text) => {
                     this.list = JSON.parse(text);
                 }).catch((text) => {
-                    this.list = [];
+                    this.list = ["请求失败","祝你好运", "再见"];
                 })
             },
             methods: {
