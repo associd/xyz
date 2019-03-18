@@ -241,7 +241,7 @@ class FrequencySpt {
                o.ctx.fill()
                pathOfCake(o.Farr.slice(250, 500), 300, 8)
                o.ctx.fill()
-               pathOfCake(o.Farr.slice(500, 800), 400, 8)
+               pathOfCake(o.Farr.slice(500, 700), 400, o.fat)
                o.ctx.fill()
                o.ctx.restore();
 
