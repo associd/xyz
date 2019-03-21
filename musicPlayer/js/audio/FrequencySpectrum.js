@@ -211,17 +211,18 @@ class FrequencySpt {
                o.fat = 10;
                o.cvs = canvas;
                o.ctx = canvas.getContext("2d");
+               o.centerDistance = 50;
+               o.frequencyHeight = 100;
+               o.maxFrequency = 255;
+               return o
+            },
+            draw: (o) => {
                o.center = {
                   x: o.cvs.width / 2,
                   y: o.cvs.height / 2,
                }
-               o.centerDistance = 200;
-               o.frequencyHeight = 100;
-               o.maxFrequency = 256;
-               return o
-            },
-            draw: (o) => {
-               var piece = o.Farr.slice(o.startF, o.endF);
+               // var piece = o.Farr.slice(o.startF, o.endF);
+               // console.log(o.Farr)
 
                /**      |
                 *  -----+------->x
@@ -233,17 +234,35 @@ class FrequencySpt {
                o.ctx.save();
                o.ctx.beginPath();
                o.ctx.translate(o.center.x, o.center.y);
-               pathOfCake(o.Farr.slice(32, 128), 100, 8)
+               o.ctx.rotate(Math.PI / 2)
+
+               o.ctx.beginPath();
+               pathOfCake(o.Farr.slice(300, 601), 300)
+               o.ctx.fill()
+               o.ctx.closePath()
+
+               o.ctx.beginPath();
+               pathOfCake(getPiece(o.Farr.slice(80, 141)), 180)
+               o.ctx.fill()
+               o.ctx.closePath()
+
+               o.ctx.beginPath();
+               pathOfCake(getPiece(o.Farr.slice(40, 81)), 100)
                o.ctx.fillStyle = "white"
                o.ctx.fill()
-               pathOfCake(o.Farr.slice(125, 250), 200, 8)
-               o.ctx.fillStyle = o.color;
-               o.ctx.fill()
-               pathOfCake(o.Farr.slice(250, 500), 300, 8)
-               o.ctx.fill()
-               pathOfCake(o.Farr.slice(500, 700), 400, o.fat)
-               o.ctx.fill()
+               o.ctx.fillStyle = o.color
+               o.ctx.closePath()
+
                o.ctx.restore();
+
+               function getPiece(tarr) {
+                  var piece = []
+                  tarr.forEach(function(item, index) {
+                     piece.push(item)
+                     piece.unshift(item)
+                  })
+                  return piece
+               }
 
                function pathOfCake(piece, centerDistance = o.centerDistance, fat = o.fat, freH = o.frequencyHeight) {
                   var offsetRadian = 360 / piece.length / 180 * Math.PI;
@@ -307,6 +326,10 @@ class FrequencySpt {
                   {
                      des: "山峰的扁平化",
                      dom: {propertyName: "fat", type: "number", value: o.fat},
+                  },
+                  {
+                     des: "面积",
+                     dom: {propertyName: "frequencyHeight", type: "number", value: o.frequencyHeight},
                   },
                ]
             }

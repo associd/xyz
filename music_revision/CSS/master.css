@@ -20,6 +20,7 @@ body{
 }
 .bg3{
    background-color: rgba(255,0,255,0.2);
+   background-image: url(../IMG/3.jpg);
 }
 .bg4{
    background-color: rgba(0,255,0,0.2);
@@ -37,4 +38,12 @@ body{
 
 .pos-r{
    position: relative;
+}
+.p-center{
+   position: absolute!important;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   margin: auto;
 }

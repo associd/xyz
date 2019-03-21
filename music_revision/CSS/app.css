@@ -1,5 +1,15 @@
+body{
+   overflow: hidden;
+}
 #user{
    background: linear-gradient(to bottom, #54afd1, #63d0f4, #3ed4ef);
+}
+#app{
+   width: 90%;
+   height: 90%;
+   background-color: rgba(255,255,255,0.2);
+   transform: perspective(1920px) rotateX(0deg) rotateY(0deg);
+   transition: all 0.1s linear;
 }
 ::selection{
    color: none;

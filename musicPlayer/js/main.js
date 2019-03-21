@@ -46,10 +46,6 @@ function web_init() {
  */
 function main_slide_down(value) {
    var main = e("main");
-   // var header = e("header")
-   // var footer = e("footer")
-   // var ml = e(".music-list")
-   // var mh = window.innerHeight - header.offsetHeight
    main.style.transform = `translateY(${value}px)`;
 }
 function fit_main_height(height = undefined) {

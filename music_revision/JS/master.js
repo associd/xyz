@@ -32,59 +32,44 @@ HTMLElement.prototype.lastElements = function(elements = []) {
 HTMLElement.prototype.siblings = function() {
    return this.lastElements().concat(this.nextElements())
 }
+HTMLElement.prototype.setBGColor = function(color) {
+   this.style.backgroundColor = color
+   return this
+}
 
 window.onload = function() {
-   userLogin();
+   webStart();
    bindEvent();
+   debug();
 }
 
 function bindEvent() {
-   var clickAction = {
-      id: {
-         "user-start": function(event) {
+   es(".f-box").forEach(function(item) {
+      item.addEventListener("click", function(event) {
+         if(event.target.classList.contains("active")) {
             fgNormal(event.target)
-         }
-      },
-      class: {
-         "fg-td": function(event) {
-            if(event.target.classList.contains("active")) {
-               fgNormal(event.target)
-            }else{
-               fgFull(event.target)
-            }
-         },
-         "return": function(event) {
-            fgNormal(event.target)
-         }
-      }
-
-   }
-   document.addEventListener("click", event => {
-      var target = event.target
-      var id = clickAction.id
-      var _class = clickAction.class
-      Object.keys(_class).forEach(function(item) {
-         if(target.classList.contains(item)) {
-            _class[item](event);
+         }else{
+            fgFull(event.target)
          }
       })
-      Object.keys(id).forEach(function(item) {
-         if(target.id == item) {
-            id[item](event);
-         }
-      })
+   })
+   window.addEventListener("mousemove", function(event) {
+      e("#app").setTransform(event)
    })
 }
 
 
-function userLogin() {
-   setTimeout(function() {
-      fgFull(e("#user"))
-   }, 200)
+
+function webStart() {
+   e("#app").setTransform = function(event) {
+      var rx = (event.clientX / window.innerWidth * 2 - 1) * 8 + 1
+      var ry = (event.clientY / window.innerHeight * 2 - 1) * 8 + 1
+      this.style.transform = `perspective(1920px) rotateX(${-ry}deg) rotateY(${rx}deg)`
+   }
 }
 
 function fgNormal(dom) {
-   if(dom.parent() && !dom.parent().classList.contains("fg-box")) {
+   if(dom.parent() && !dom.parent().classList.contains("f-box")) {
       fgNormal(dom.parent())
    }
    dom.siblings().forEach(item => {
@@ -93,7 +78,7 @@ function fgNormal(dom) {
    fgRemove(dom, "active")
 }
 function fgFull(dom) {
-   if(dom.parent() && !dom.parent().classList.contains("fg-box")) {
+   if(dom.parent() && !dom.parent().classList.contains("f-box")) {
       fgFull(dom.parent())
    }
    dom.siblings().forEach(item => {
@@ -106,4 +91,21 @@ function fgAdd(dom, className) {
 }
 function fgRemove(dom, className) {
    dom.classList.remove(className)
+}
+
+
+/**
+ *  debug
+ */
+function debug() {
+   es("body *").forEach(function(item) {
+      item.setBGColor(`rgba(${rand(0, 255)}, ${rand(0, 255)}, ${rand(0, 255)}, 0.2)`)
+   })
+}
+
+/**
+ *  math
+ */
+function rand(min, max){
+   return min + Math.floor(Math.random() * (max - min + 1))
 }
