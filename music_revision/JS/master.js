@@ -37,14 +37,26 @@ HTMLElement.prototype.setBGColor = function(color) {
    return this
 }
 
-window.onload = function() {
-   webStart();
+
+!function __main() {
+   window.onload = function() {
+      init();
+      // debug();
+   }
+}()
+
+function init() {
+   e("#app").setTransform = function(event) {
+      var rx = (event.clientX / window.innerWidth * 2 - 1) * 8 + 1
+      var ry = (event.clientY / window.innerHeight * 2 - 1) * 8 + 1
+      this.style.transform = `perspective(1920px) rotateX(${-ry}deg) rotateY(${rx}deg)`
+   }
    bindEvent();
-   debug();
+   getMusic(e(".music-list"));
 }
 
 function bindEvent() {
-   es(".f-box").forEach(function(item) {
+   es(".active-music").forEach(function(item) {
       item.addEventListener("click", function(event) {
          if(event.target.classList.contains("active")) {
             fgNormal(event.target)
@@ -58,14 +70,8 @@ function bindEvent() {
    })
 }
 
-
-
-function webStart() {
-   e("#app").setTransform = function(event) {
-      var rx = (event.clientX / window.innerWidth * 2 - 1) * 8 + 1
-      var ry = (event.clientY / window.innerHeight * 2 - 1) * 8 + 1
-      this.style.transform = `perspective(1920px) rotateX(${-ry}deg) rotateY(${rx}deg)`
-   }
+function getMusic(list) {
+   
 }
 
 function fgNormal(dom) {
