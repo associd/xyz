@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+   <style>
+      a{
+         color: inherit;
+         text-decoration: inherit;
+         display: block;
+         width: 100%;
+      }
+      ul{
+         list-style: none;
+         font-size: 16px;
+      }
+      li{
+         background: url("https://s1.hdslb.com/bfs/static/jinkela/home/asserts/icons2.png") no-repeat 12px -1613px;
+         padding: 5px 15px 5px 25px;
+         width: 200px;
+         position: relative;
+         transition: all .2s;
+         overflow: hidden;
+      }
+      li::after{
+         content: "";
+         display: block;
+         background: url("https://s1.hdslb.com/bfs/static/jinkela/home/asserts/icons2.png") no-repeat 0px -1581px;
+         width: 15px;
+         height: 18px;
+         top: 5px;
+         right: -100px;
+         position: absolute;
+         transition: all .2s;
+      }
+      li:hover{
+         transform: translateX(15px);
+      }
+      li:hover::after{
+         right: 112px;
+      }
+   </style>
+</head>
+<body>
+   <ul>
+      <li><a href="#">我桑晨最小</a></li>
+      <li><a href="#">我桑晨最小</a></li>
+      <li><a href="#">我桑晨最小</a></li>
+      <li><a href="#">我桑晨最小</a></li>
+      <li><a href="#">我桑晨最小</a></li>
+   </ul>
+</body>
+</html>
