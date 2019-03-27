@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+   <style>
+      .flexbox {
+        display: flex;
+        flex-wrap:wrap;
+      }
+
+      div.flexbox::after {
+        content: "X";
+      }
+
+      .item {
+        flex:1 0 30%;
+        height: 200px;
+      }
+
+      .red {
+        background-color: red;
+      }
+
+      .blue {
+        background-color: blue;
+      }
+
+      .green {
+        background-color: green;
+      }
+   </style>
+</head>
+<body>
+   <div class="flexbox">
+      <div class="">
+         <div class="flexbox">
+            <div class="item red"></div>
+            <div class="item blue"></div>
+            <div class="item green"></div>
+         </div>
+      </div>
+   </div>
+</body>
+</html>

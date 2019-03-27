@@ -1,3 +1,5 @@
+@import url(./button.css);
+
 body{
    overflow: hidden;
 }
@@ -9,12 +11,8 @@ body{
    height: 90%;
    background-color: rgba(255,255,255,0.2);
    transform: perspective(1920px) rotateX(0deg) rotateY(0deg);
-   transition: all 0.1s linear;
+   transition: none;
 }
-::selection{
-   color: none;
-}
-
 .btn{
    font-size: 30px;
    padding: 0.8em;
@@ -50,7 +48,7 @@ body{
 }
 
 .music-list{
-   overflow: auto;
+   overflow: initial;
 }
 
 .music-list .music{

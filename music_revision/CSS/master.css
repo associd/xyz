@@ -1,5 +1,6 @@
 :root{
    color: white;
+   user-select: none;
 }
 html,body{
    height: 100%;

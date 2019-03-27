@@ -3,6 +3,13 @@
    width: 100%;
    height: 100%;
 }
+.flex.col{
+   flex-direction: column;
+}
+
+.flex{
+   display: flex;
+}
 
 .f-tr,.f-td,.f-box{
    position: relative;
@@ -10,7 +17,6 @@
 }
 
 .f-tr, .f-td{
-   display: flex;
    flex: 1 1 0;
 }
 
@@ -26,8 +32,4 @@
       background-color: rgba(255,255,255,0.1)!important;
       cursor: pointer;
    }
-}
-
-.f-td.col, .f-box.col{
-   flex-direction: column;
 }

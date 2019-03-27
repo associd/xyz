@@ -1,0 +1,23 @@
+.music-list::after{
+   content: "";
+   display: block;
+   width: 60px;
+   height: 30px;
+   position: absolute;
+   left: 0;
+   top: 50%;
+   background-image: url(../IMG/arrow.png);
+   background-color: inherit;
+   background-repeat: no-repeat;
+   background-position: center;
+   border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+   transform-origin: center;
+   transform: rotate(-90deg) translateY(0);
+   filter: opacity(0);
+   transition: all 0.2s;
+}
+
+.music-list:hover::after {
+   transform: rotate(-90deg) translateY(-150%);
+   filter: opacity(1);
+}
