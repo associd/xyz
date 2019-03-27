@@ -1,5 +1,7 @@
-.music-list::after{
-   content: "";
+button{
+   outline: none;
+}
+.arrow{
    display: block;
    width: 60px;
    height: 30px;
@@ -7,17 +9,26 @@
    left: 0;
    top: 50%;
    background-image: url(../IMG/arrow.png);
-   background-color: inherit;
+   background-color: var(--theme-color);
    background-repeat: no-repeat;
    background-position: center;
+   border: none;
    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
    transform-origin: center;
-   transform: rotate(-90deg) translateY(0);
-   filter: opacity(0);
-   transition: all 0.2s;
+   transition: opacity 0.2s;
+   cursor: pointer;
 }
 
-.music-list:hover::after {
+.music-list .arrow.left{
+   filter: opacity(0);
    transform: rotate(-90deg) translateY(-150%);
+   pointer-events: none;
+}
+.music-list .arrow.right{
+   filter: opacity(0);
+   transform: rotate(90deg) translateY(50%);
+}
+.music-list:hover .arrow{
    filter: opacity(1);
+   pointer-events: auto;
 }

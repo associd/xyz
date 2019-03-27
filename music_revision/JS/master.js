@@ -36,6 +36,11 @@ HTMLElement.prototype.setBGColor = function(color) {
    this.style.backgroundColor = color
    return this
 }
+HTMLElement.prototype.fullParent = function() {
+   this.width = this.parent().offsetWidth
+   this.height = this.parent().offsetHeight
+   return this
+}
 
 
 !function __main() {
@@ -46,32 +51,59 @@ HTMLElement.prototype.setBGColor = function(color) {
 }()
 
 function init() {
+   window.sound = new Sound();
+   window.frequency = new FrequencySpectrum(e("#spectrum"));
+   window.sound.connect(window.frequency)
+   window.frequency.setup_style()
+   setDom();
+   bindEvent();
+   getMusic(e(".music-list"));
+}
+
+function setDom() {
    e("#app").setTransform = function(event) {
       var rx = (event.clientX / window.innerWidth * 2 - 1) * 8 + 1
       var ry = (event.clientY / window.innerHeight * 2 - 1) * 8 + 1
       this.style.transform = `perspective(1920px) rotateX(${-ry}deg) rotateY(${rx}deg)`
    }
-   bindEvent();
-   getMusic(e(".music-list"));
+   e("#spectrum").fullParent()
 }
 
 function bindEvent() {
-   es(".active-music").forEach(function(item) {
+   es(".active-music, .music-list .arrow").forEach(function(item) {
       item.addEventListener("click", function(event) {
          if(event.target.classList.contains("active")) {
             fgNormal(event.target)
          }else{
             fgFull(event.target)
          }
+         if(event.target.classList.contains("left")) {
+            event.target.classList.add("right")
+            event.target.classList.remove("left")
+         }else{
+            event.target.classList.add("left")
+            event.target.classList.remove("right")
+         }
       })
+      e("#spectrum").fullParent()
    })
    window.addEventListener("mousemove", function(event) {
       e("#app").setTransform(event)
    })
+   window.addEventListener("resize", function(event) {
+      e("#spectrum").fullParent()
+   })
+   window.addEventListener("click", function(event) {
+      var dom = event.target
+      if(dom.classList.contains("music")) {
+         var src = dom.dataset.url
+         window.sound.play(src)
+      }
+   })
 }
 
 function getMusic(list) {
-   
+
 }
 
 function fgNormal(dom) {
