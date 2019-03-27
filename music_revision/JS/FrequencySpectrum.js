@@ -214,7 +214,6 @@ class FrequencySpectrum {
                o.centerDistance = 50;
                o.frequencyHeight = 100;
                o.maxFrequency = 255;
-               log(o)
                return o
             },
             draw: (o) => {
