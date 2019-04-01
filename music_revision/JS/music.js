@@ -23,6 +23,7 @@ for (i = 0; i < max ; i++) {
    for(j = 0; j < 3; j++) {
       html += `
          <div class="f-td music" data-url="${data[i*3+j]["src"]}" style="background-image: url(${data[i*3+j]["img"]})">
+            <div class="layer full"></div>
          </div>
       `
    }

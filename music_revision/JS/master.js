@@ -70,22 +70,14 @@ function setDom() {
 }
 
 function bindEvent() {
-   es(".active-music, .music-list .arrow").forEach(function(item) {
+   es(".active-music").forEach(function(item) {
       item.addEventListener("click", function(event) {
          if(event.target.classList.contains("active")) {
             fgNormal(event.target)
          }else{
             fgFull(event.target)
          }
-         if(event.target.classList.contains("left")) {
-            event.target.classList.add("right")
-            event.target.classList.remove("left")
-         }else{
-            event.target.classList.add("left")
-            event.target.classList.remove("right")
-         }
       })
-      e("#spectrum").fullParent()
    })
    window.addEventListener("mousemove", function(event) {
       e("#app").setTransform(event)
