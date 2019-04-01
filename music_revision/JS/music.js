@@ -10,20 +10,27 @@ var music2 = {
    img: "./IMG/2.jpg",
    src: "./RESOURCE/Seven Lions,Kerli - Worlds Apart.mp3",
 }
-var data =  [music,music2,music,music2,music,music2,music,music2,music,music,music2,music,music,];
+var music3 = {
+   name: "音乐家",
+   author: "徐梦圆",
+   img: "./IMG/3.jpg",
+   src: "./RESOURCE/徐梦圆 - 音乐家（Feat.徐梦圆）.mp3",
+}
+var data =  [music,music3,music3,music2,music,music3,music,music2,music3,music,music2,music3,music,];
 
 
+var musicNumber = 1;
 
-var max = Math.floor(data.length / 3);
+var max = Math.floor(data.length / musicNumber);
 
 
 var html = "";
 for (i = 0; i < max ; i++) {
-   html += "<section class='f-tr flex'>"
-   for(j = 0; j < 3; j++) {
+   html += "<section class='flex'>"
+   for(j = 0; j < musicNumber; j++) {
       html += `
-         <div class="f-td music" data-url="${data[i*3+j]["src"]}" style="background-image: url(${data[i*3+j]["img"]})">
-            <div class="layer full"></div>
+         <div class="music" data-url="${data[i*musicNumber+j]["src"]}">
+            <img src="${data[i*musicNumber+j]["img"]}" alt="shit" class="img">
          </div>
       `
    }

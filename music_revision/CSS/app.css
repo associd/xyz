@@ -1,4 +1,6 @@
 @import url(./button.css);
+@import url(./mouse-focus.css);
+@import url(./music-list.css);
 
 *{
    user-select: none;
@@ -15,9 +17,6 @@ body{
 #app{
    width: 90%;
    height: 90%;
-   background-color: rgba(255,255,255,0.2);
-   transform: perspective(1920px) rotateX(0deg) rotateY(0deg);
-   transition: none;
 }
 .btn{
    font-size: 30px;
@@ -51,64 +50,4 @@ body{
    position: absolute;
    right: 0;
    bottom: 0;
-}
-
-.music-list{
-   overflow: hidden;
-   --font-size: 40px;
-}
-.music-list:hover, .active-music:hover{
-   overflow: initial;
-}
-
-.music-list .music{
-   width: 33.333333333%;
-   height: 100%;
-   flex: 0 1 auto;
-   background-position: center;
-   background-size: cover;
-   background-repeat: no-repeat;
-   background-origin: content-box;
-   margin: 0 20px;
-   border-radius: 10px;
-   filter: opacity(0.9);
-}
-
-.music-list .f-tr{
-   width: 100%;
-   height: 25%;
-   flex: 0 1 auto;
-   margin: 20px 0;
-}
-
-.music .name::before, .music .author::before{
-   content: "";
-   display: block;
-   position: absolute;
-   right: 0;
-   top: 0;
-   height: 100%;
-   width: 10px;
-   border-radius: 0 20px 20px 0 / 0 20px 20px 0;
-   transform: translateX(100%);
-   background-color: rgba(255,255,255,0.5);
-}
-.music .name, .music .author{
-   font-size: var(--font-size);
-   position: absolute;
-   left: 0;
-   transform: translateX(-100%);
-}
-.music .name:hover, .music .author:hover{
-   transform: translateX(10px);
-}
-.music .name{
-   top: 20%;
-}
-.music .author{
-   top: calc(20% + var(--font-size));
-}
-
-.layer{
-   background: linear-gradient(#ffffff80, transparent);
 }

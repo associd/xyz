@@ -1,0 +1,15 @@
+.music-list{
+   --font-size: 40px;
+   overflow: hidden;
+}
+
+.music-list .music{
+   padding: 20px;
+   filter: opacity(0.9);
+}
+
+.music .img{
+   height: 200px;
+   width: 200px;
+   border-radius: 50%;
+}

@@ -236,10 +236,10 @@ class FrequencySpectrum {
                o.ctx.translate(o.center.x, o.center.y);
                o.ctx.rotate(Math.PI / 2)
 
-               o.ctx.beginPath();
-               pathOfCake(o.Farr.slice(300, 601), 300)
-               o.ctx.fill()
-               o.ctx.closePath()
+               // o.ctx.beginPath();
+               // pathOfCake(o.Farr.slice(300, 601), 300)
+               // o.ctx.fill()
+               // o.ctx.closePath()
 
                o.ctx.beginPath();
                pathOfCake(getPiece(o.Farr.slice(80, 141)), 180)

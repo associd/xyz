@@ -52,7 +52,7 @@ HTMLElement.prototype.fullParent = function() {
 
 function init() {
    window.sound = new Sound();
-   window.frequency = new FrequencySpectrum(e("#spectrum"));
+   window.frequency = new FrequencySpectrum(e("#music-analysis"));
    window.sound.connect(window.frequency)
    window.frequency.setup_style()
    setDom();
@@ -61,30 +61,28 @@ function init() {
 }
 
 function setDom() {
-   e("#app").setTransform = function(event) {
-      var rx = (event.clientX / window.innerWidth * 2 - 1) * 8 + 1
-      var ry = (event.clientY / window.innerHeight * 2 - 1) * 8 + 1
-      this.style.transform = `perspective(1920px) rotateX(${-ry}deg) rotateY(${rx}deg)`
-   }
-   e("#spectrum").fullParent()
+   es(".mouse-focus").forEach(function(item) {
+      var angle = item.dataset.angle
+      item.setTransform = function(event) {
+         var rx = (event.clientX / window.innerWidth * 2 - 1) * angle + 1
+         var ry = (event.clientY / window.innerHeight * 2 - 1) * angle + 1
+         this.style.transform = `perspective(1920px) rotateX(${-ry}deg) rotateY(${rx}deg)`
+      }
+   })
 }
 
 function bindEvent() {
-   es(".active-music").forEach(function(item) {
-      item.addEventListener("click", function(event) {
-         if(event.target.classList.contains("active")) {
-            fgNormal(event.target)
-         }else{
-            fgFull(event.target)
-         }
+   window.addEventListener("mousemove", function(event) {
+      es(".mouse-focus").forEach(function(item) {
+         item.setTransform(event)
       })
    })
-   window.addEventListener("mousemove", function(event) {
-      e("#app").setTransform(event)
-   })
+
+   e("#music-analysis").fullParent()
    window.addEventListener("resize", function(event) {
-      e("#spectrum").fullParent()
+      e("#music-analysis").fullParent()
    })
+
    window.addEventListener("click", function(event) {
       var dom = event.target
       if(dom.classList.contains("music")) {
