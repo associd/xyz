@@ -1,5 +1,15 @@
 button{
    outline: none;
+   width: 100%;
+   padding: 0.5em;
+   color: inherit;
+   border: inherit;
+   font-size: inherit;
+   background-color: transparent;
+   cursor: pointer;
+}
+button:hover{
+   background-color: inherit;
 }
 .arrow{
    display: block;

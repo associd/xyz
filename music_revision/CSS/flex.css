@@ -6,20 +6,23 @@
    display: flex;
 }
 
-.flex>div{
+.flex>*{
    position: relative;
    flex: 1 1 0;
 }
 
-.flex>div.hide{
+.flex>*.hide{
    flex-grow: 0;
 }
+.flex>*.base{
+   flex-basis: auto;
+}
 
-.flex>div.active{
+.flex>*.active{
    flex: 1.2 1 0;
 }
 @media (hover: hover) {
-   .flex>div:hover{
+   .flex>*:hover{
       background-color: rgba(255,255,255,0.1)!important;
       cursor: pointer;
    }

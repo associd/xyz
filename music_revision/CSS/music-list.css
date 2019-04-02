@@ -2,7 +2,6 @@
    --font-size: 40px;
    --img-space: 20px;
    --img-size: 200px;
-   overflow-y: scroll;
 }
 
 .music-list .music{
