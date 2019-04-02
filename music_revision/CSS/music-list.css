@@ -1,15 +1,19 @@
 .music-list{
    --font-size: 40px;
-   overflow: hidden;
+   --img-space: 20px;
+   --img-size: 200px;
+   overflow-y: scroll;
 }
 
 .music-list .music{
-   padding: 20px;
+   height: var(--img-size);
+   padding: var(--img-space);
    filter: opacity(0.9);
 }
 
-.music .img{
-   height: 200px;
-   width: 200px;
+.music-list .music .img{
+   height: var(--img-size);
+   width: var(--img-size);
    border-radius: 50%;
+   pointer-events: none;
 }

@@ -15,20 +15,18 @@
 <body class="bg3">
    <main id="app" class="p-center flex transition">
       <div class="spectrum-box">
-         <canvas id="music-analysis" class="mouse-focus" data-angle="90" width="300" height="300"></canvas>
+         <canvas id="music-analysis" class="mouse-focus" data-angle="45" width="300" height="300"></canvas>
          <img src="" alt="">
       </div>
-      <div class="music-list">
-            <section id="music-container" class="flex col">
-               <section class="flex">
-                  <div class="music">
-                     <div class="name"></div>
-                     <div class="author"></div>
-                     <img class="img" src="" alt="">
-                  </div>
-               </section>
-            </section>
-         </div>
+      <div class="music-list flex col" id="music-container">
+         <section class="flex">
+            <div class="music">
+               <div class="name"></div>
+               <div class="author"></div>
+               <img class="img" src="" alt="">
+            </div>
+         </section>
+      </div>
    </main>
    <script src="./JS/master.js"></script>
    <script src="./JS/music.js"></script>

@@ -83,12 +83,8 @@ function bindEvent() {
       e("#music-analysis").fullParent()
    })
 
-   window.addEventListener("click", function(event) {
-      var dom = event.target
-      if(dom.classList.contains("music")) {
-         var src = dom.dataset.url
-         window.sound.play(src)
-      }
+   e(".music-list").addEventListener("click", function(event) {
+      window.sound.play(event.target.dataset.url)
    })
 }
 

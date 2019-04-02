@@ -8,7 +8,6 @@
 
 .flex>div{
    position: relative;
-   overflow: hidden;
    flex: 1 1 0;
 }
 
