@@ -211,60 +211,22 @@ class FrequencySpectrum {
                o.fat = 10;
                o.cvs = canvas;
                o.ctx = canvas.getContext("2d");
-               o.centerDistance = 50;
                o.frequencyHeight = 100;
                o.maxFrequency = 255;
-               return o
-            },
-            draw: (o) => {
-               o.center = {
-                  x: o.cvs.width / 2,
-                  y: o.cvs.height / 2,
-               }
-               // var piece = o.Farr.slice(o.startF, o.endF);
-               // console.log(o.Farr)
-
-               /**      |
-                *  -----+------->x
-                *       |
-                *       |
-                *       v y
-                */
-               o.ctx.fillStyle = o.color;
-               o.ctx.save();
-               o.ctx.beginPath();
-               o.ctx.translate(o.center.x, o.center.y);
-               o.ctx.rotate(Math.PI / 2)
-
-               // o.ctx.beginPath();
-               // pathOfCake(o.Farr.slice(300, 601), 300)
-               // o.ctx.fill()
-               // o.ctx.closePath()
-
-               o.ctx.beginPath();
-               pathOfCake(getPiece(o.Farr.slice(80, 141)), 180)
-               o.ctx.fill()
-               o.ctx.closePath()
-
-               o.ctx.beginPath();
-               pathOfCake(getPiece(o.Farr.slice(40, 81)), 100)
-               o.ctx.fillStyle = "white"
-               o.ctx.fill()
-               o.ctx.fillStyle = o.color
-               o.ctx.closePath()
-
-               o.ctx.restore();
-
-               function getPiece(tarr) {
-                  var piece = []
-                  tarr.forEach(function(item, index) {
-                     piece.push(item)
-                     piece.unshift(item)
-                  })
-                  return piece
-               }
-
-               function pathOfCake(piece, centerDistance = o.centerDistance, fat = o.fat, freH = o.frequencyHeight) {
+               o.pathOfCake = function(piece, cake, fat = o.fat, freH = o.frequencyHeight) {
+                  var isEmpty = !(piece.reduce(function(total, num) {return total + num}))
+                  if(isEmpty) {
+                     if(cake.size > 0) {
+                        cake.size--
+                     }
+                  }else{
+                     if(cake.size < cake.maxSize) {
+                        cake.size++
+                     }
+                  }
+                  if(cake.size == 0 ) {
+                     return
+                  }
                   var offsetRadian = 360 / piece.length / 180 * Math.PI;
                   var origin = {
                      x: 0,
@@ -277,8 +239,8 @@ class FrequencySpectrum {
                   for(let i = 0, j = piece.length - 1; i < piece.length; i++,j = (j+1)%piece.length) {
                      var lastFqc = piece[j] / o.maxFrequency * freH;
                      var fqc = piece[i] / o.maxFrequency * freH;
-                     var lastPH = centerDistance + lastFqc;
-                     var curPH = centerDistance + fqc;
+                     var lastPH = cake.size + lastFqc;
+                     var curPH = cake.size + fqc;
                      var rotateRadian_1 = i * offsetRadian;
                      var rotateRadian_2 = j * offsetRadian;
                      var halfOfThePI = Math.PI / 2
@@ -312,6 +274,70 @@ class FrequencySpectrum {
                      node = end
                   }
                }
+               o.cakes = [
+                  {
+                     start: 80,
+                     end: 141,
+                     color: "default",
+                     size: 230,
+                     maxSize: 230,
+                     path: o.pathOfCake,
+                  },
+                  {
+                     start: 40,
+                     end: 81,
+                     color: "white",
+                     size: 150,
+                     maxSize: 150,
+                     path: o.pathOfCake,
+                  },
+               ]
+
+               return o
+            },
+            draw: (o) => {
+               o.center = {
+                  x: o.cvs.width / 2,
+                  y: o.cvs.height / 2,
+               }
+               // var piece = o.Farr.slice(o.startF, o.endF);
+               // console.log(o.Farr)
+
+               /**      |
+                *  -----+------->x
+                *       |
+                *       |
+                *       v y
+                */
+               o.ctx.fillStyle = o.color;
+               o.ctx.save();
+               o.ctx.beginPath();
+               o.ctx.translate(o.center.x, o.center.y);
+               o.ctx.rotate(Math.PI / 2)
+
+               o.cakes.forEach(function(item) {
+                  o.ctx.beginPath();
+                  item.path(getPiece(o.Farr.slice(item.start, item.end)), item)
+                  if(item.color == "default") {
+
+                  }else{
+                     o.ctx.fillStyle = item.color
+                  }
+                  o.ctx.fill()
+                  o.ctx.closePath()
+               })
+
+               o.ctx.restore();
+
+               function getPiece(tarr) {
+                  var piece = []
+                  tarr.forEach(function(item, index) {
+                     piece.push(item)
+                     piece.unshift(item)
+                  })
+                  return piece
+               }
+
             },
             // control: (o) => {
             //    return [

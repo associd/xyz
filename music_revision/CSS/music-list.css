@@ -2,6 +2,8 @@
    --font-size: 40px;
    --img-space: 20px;
    --img-size: 200px;
+   transform-style:preserve-3d;
+   perspective: 1920px;
 }
 
 .music-list .music{

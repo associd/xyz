@@ -78,13 +78,9 @@ function bindEvent() {
       })
    })
 
-   e("#music-analysis").fullParent()
-   window.addEventListener("resize", function(event) {
-      e("#music-analysis").fullParent()
-   })
-
    e(".music-list").addEventListener("click", function(event) {
-      window.sound.play(event.target.dataset.url)
+      window.sound.play(window.data[event.target.dataset.url]["src"])
+      e(".spectrum-box img").src = window.data[event.target.dataset.url]["img"]
    })
 }
 

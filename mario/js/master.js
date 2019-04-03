@@ -1,12 +1,8 @@
 var log = console.log.bind(console);
 window.onload = function() {
-   import("./drawSprite.js").then(module => {
-      const drawSprite = module.drawSprite;
-   })
    ajax({
       method: "GET",
       url: "./超级马里奥.nes",
-      // url: "./test.txt",
       asyn: true,
       success: (data) => {
          window.bytes = new Uint8Array(data);
@@ -21,7 +17,12 @@ window.onload = function() {
          let ctx = canvas.getContext("2d");
          bindEvent(ctx);
          drawNes(ctx, window.bytes, window.offset);
-         // drawSprite(e("#mario-canvas").getContext("2d"), window.bytes)
+
+         let offset = 0
+         setInterval(function() {
+            drawSprite(e("#mario-canvas").getContext("2d"), window.bytes, window.offset + offset)
+            offset += 128
+         }, 1000)
       }
    })
 }
@@ -99,6 +100,34 @@ function drawPixel(context, data, x, y) {
          var py = y + i * 10
          context.fillStyle = window.color[pxColor]
          context.fillRect(px, py, 10, 10);
+      }
+   }
+}
+
+// function drawSprite(ctx, bytes, offset = 0) {
+//    let spriteOffset = 32784
+//    let numberOfBytesPerBlock = 16
+//    let marioOfBlock = 8
+//    let marioOfBytes = numberOfBytesPerBlock*marioOfBlock
+//    setInterval(() => {
+//       let origin = offset
+//       for(let i = 0; i < 4; i++) {
+//          for(let j = 0; j < 2; j++) {
+//             drawPixel(ctx, bytes.slice(spriteOffset + offset), j * 80, i * 80)
+//             offset += 16
+//          }
+//       }
+//       offset = origin
+//       offset = (offset + marioOfBytes) % (marioOfBytes * 3);
+//    }, 200)
+// }
+
+function drawSprite(ctx, bytes, spriteOffset = 32784) {
+   let offset = 0
+   for(let i = 0; i < 4; i++) {
+      for(let j = 0; j < 2; j++) {
+         drawPixel(ctx, bytes.slice(spriteOffset + offset), j * 80, i * 80)
+         offset += 16
       }
    }
 }

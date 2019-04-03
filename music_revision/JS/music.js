@@ -16,7 +16,7 @@ var music3 = {
    img: "./IMG/3.jpg",
    src: "./RESOURCE/徐梦圆 - 音乐家（Feat.徐梦圆）.mp3",
 }
-var data =  [music,music3,music3,music2,music,music3,music,music2,music3,music,music2,music3,music,];
+window.data =  [music,music3,music3,music2,music,music3,music,music2,music3,music,music2,music3,music,];
 
 
 var musicNumber = 1;
@@ -29,8 +29,10 @@ for (i = 0; i < max ; i++) {
    html += "<section class='flex'>"
    for(j = 0; j < musicNumber; j++) {
       html += `
-         <div class="music" data-url="${data[i*musicNumber+j]["src"]}">
-            <img src="${data[i*musicNumber+j]["img"]}" alt="shit" class="img">
+         <div class="music"  data-url="${i*musicNumber+j}">
+            <div class="name">${data[i*musicNumber+j]["name"]}</div>
+            <div class="author">${data[i*musicNumber+j]["author"]}</div>
+            <img class="img" src="${data[i*musicNumber+j]["img"]}" alt="shit">
          </div>
       `
    }
