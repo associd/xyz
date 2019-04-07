@@ -3,12 +3,15 @@
 
 
 int main() {
-   char s[] = "abc";
-   char s2[] = "def";
+   unsigned char a = 63;
 
-   strcat(s, s2);
-
-   printf("%s\n", s);
+   printf("%c", a);
+   printf("%c", a);
+   printf("%c", a);
+   printf("%c", a);
+   printf("%c", a);
+   printf("%c", a);
+   printf("%c", a);
 
    return 0;
 }
