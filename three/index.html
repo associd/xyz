@@ -19,7 +19,7 @@
       var scene = new THREE.Scene();
 
       //参数一:视野角度, 参数二:长宽比, 参数三:远剪切面, 参数四:近剪切面
-      var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
 
       var renderer = new THREE.WebGLRenderer();
       renderer.setSize(window.innerWidth, window.innerHeight);
@@ -28,8 +28,20 @@
       var geometry = new THREE.BoxGeometry(1,1,1);
       var material = new THREE.MeshBasicMaterial({color: 0x00ff00});
       var cube = new THREE.Mesh(geometry, material);
+
+
+      var m = new THREE.LineBasicMaterial({color: 0x0000ff});
+      var g = new THREE.Geometry();
+      g.vertices.push(new THREE.Vector3( -10, 0, 0) );
+      g.vertices.push(new THREE.Vector3( 0, 10, 0) );
+      g.vertices.push(new THREE.Vector3( 10, 0, 0) );
+      var line = new THREE.Line(g, m);
+      scene.add(line);
+
+
       scene.add(cube);
-      camera.position.z = 5
+      camera.position.set(0, 0, 100);
+      camera.lookAt(0,0,0);
 
       function animate() {
          requestAnimationFrame(animate);
