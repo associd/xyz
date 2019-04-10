@@ -47,7 +47,7 @@
                 getList() {
                     return new Promise(function (resolve, reject) {
                         let xhr = new XMLHttpRequest();
-                        xhr.open("POST", "./returnProjectList.php")
+                        xhr.open("POST", "./getFilesAndFolders.php")
                         xhr.onload = () => {
                             resolve(xhr.responseText)
                         }

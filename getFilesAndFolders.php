@@ -8,7 +8,7 @@
  $list = scandir(".");
  $res = array();
  foreach ($list as $key => $val) {
-     if(preg_match("/[.]+/", $val)) {
+     if(preg_match("/^[.]+/", $val)) {
          continue;
      }else{
         array_push($res, $val);
