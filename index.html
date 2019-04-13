@@ -29,7 +29,7 @@
             template: "<div class='list-group'><a " +
             "v-for='(item, index) in list' " +
             "v-bind:href='item'" +
-            "class='list-group-item list-group-item-action'><span class='font-weight-bold'>{{item}}</span></a></div>",
+            "class='list-group-item list-group-item-action'><span class='font-weight-bold'>{{item.substr(1)}}</span></a></div>",
             data: function () {
                 return {
                     list: null,
@@ -38,7 +38,9 @@
             created: function () {
                 let p = this.getList();
                 p.then((text) => {
-                    this.list = JSON.parse(text);
+                    this.list = JSON.parse(text).map( function( item ) {
+                       return "?" + item;
+                    } );
                 }).catch((text) => {
                     this.list = ["请求失败","祝你好运", "再见"];
                 })
