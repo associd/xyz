@@ -5,13 +5,20 @@
  * Date: 2019/2/9/0009
  * Time: 下午 5:01
  */
- $list = scandir(".");
- $res = array();
- foreach ($list as $key => $val) {
-     if(preg_match("/^[.]+/", $val)) {
+$path = $_POST["path"];
+$res = array();
+
+if(is_file($path)) {
+   echo "isFile";
+}else {
+   $list = scandir($path);
+   foreach ($list as $key => $val) {
+      if(preg_match("/^[.]+/", $val)) {
          continue;
-     }else{
-        array_push($res, $val);
-     }
- }
- echo JSON_encode($res);
+      }else{
+         array_push($res, "/" . $val);
+      }
+   }
+   array_unshift($res, "../");
+   echo JSON_encode($res);
+}
