@@ -35,6 +35,7 @@
                 return {
                     list: null,
                     RelativeUrl: "",
+                    OriginUrl: window.location.href,
                 }
             },
             created: function () {
@@ -43,11 +44,9 @@
             methods: {
                 getList(data = ".") {
                     let scope = this
-                    console.log(this.RelativeUrl)
                     if(data === "../") {
                         let i = this.RelativeUrl.lastIndexOf("/")
                         this.RelativeUrl = this.RelativeUrl.slice(0, i)
-                        console.log(this.RelativeUrl)
                     }else{
                        this.RelativeUrl += data;
                     }
@@ -64,15 +63,17 @@
                         xhr.send(`path=${scope.RelativeUrl}`)
                     })
                     p.then((text) => {
-                       console.log(text)
                        if(text === "isFile") {
-                          window.location.href += this.RelativeUrl
+                          if(this.RelativeUrl.indexOf("/") == this.RelativeUrl.lastIndexOf("/")) {
+                             let i = this.RelativeUrl.lastIndexOf("/")
+                             this.RelativeUrl = this.RelativeUrl.slice(0, i)
+                          }
+                          window.location.href = this.OriginUrl + this.RelativeUrl
+                       }else{
+                          this.list = JSON.parse(text);
                        }
-
-                        this.list = JSON.parse(text);
                     }).catch((text) => {
                         this.list = ["请求失败","祝你好运", "再见",];
-                        console.log(text)
                     })
                 },
             }
