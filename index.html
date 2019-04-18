@@ -4,20 +4,22 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+   <link href="./bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+   <script src="./bootstrap-3.3.7-dist/js/bootstrap.js"></script>
    <script src="vue.js"></script>
    <title>Document</title>
-    <style>
-        .list-group{
-            list-style: decimal-leading-zero inside;
-        }
-        .list-group-item{
-            display: list-item;
-        }
-    </style>
+   <style media="screen">
+      body{
+         font-family: consolas;
+         font-size: 24px;
+      }
+      .dir .badge{
+         background-color: orange;
+      }
+      .file .badge{
+         background-color: #00c0ff;
+      }
+   </style>
 </head>
 <body>
     <div>
@@ -26,33 +28,54 @@
     <div></div>
     <script>
         let list = Vue.component("practice-list", {
-            template: "<div class='list-group'><a " +
-            "v-for='(item, index) in list' " +
-            "v-bind:href='item'" +
-            "v-on:click.prevent='getList(item)'" +
-            "class='list-group-item list-group-item-action'><span class='font-weight-bold'>{{item}}</span></a></div>",
+            template: `
+            <div class="list-group">
+               <a class="list-group-item"
+                  v-for='(item, index) in list'
+                  v-bind:class="item.type"
+                  v-bind:href="getPath(item)"
+                  v-on:click.prevent='route(item)'>
+                  <strong>{{getPath(item)}}</strong>
+                  <span class="badge">{{item.type}}</span>
+               </a>
+            </div>`,
             data: function () {
                 return {
                     list: null,
                     RelativeUrl: "",
                     OriginUrl: window.location.href,
+                    action: {
+                       dir: function() {
+                           this.list = JSON.parse(text);
+                       },
+                       file: function() {
+                          if(this.isRoot()) {
+                             let i = this.RelativeUrl.lastIndexOf("/")
+                             this.RelativeUrl = this.RelativeUrl.slice(0, i)
+                          }
+                          window.location.href = this.OriginUrl + this.RelativeUrl
+                       }
+                    }
                 }
             },
             created: function () {
                this.getList()
             },
             methods: {
-                getList(data = ".") {
+                getList(data = ".", type = "dir") {
                     let scope = this
-                    if(data === "../") {
+                    if(data === "/../") {
                         let i = this.RelativeUrl.lastIndexOf("/")
                         this.RelativeUrl = this.RelativeUrl.slice(0, i)
                     }else{
                        this.RelativeUrl += data;
                     }
+
+                    console.log(this.RelativeUrl)
+
                     let p = new Promise(function (resolve, reject) {
                         let xhr = new XMLHttpRequest()
-                        xhr.open("POST", "./getFilesAndFolders.php")
+                        xhr.open("POST", "./GetFilesAndFolders.php")
                         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                         xhr.onload = () => {
                             resolve(xhr.responseText)
@@ -63,18 +86,20 @@
                         xhr.send(`path=${scope.RelativeUrl}`)
                     })
                     p.then((text) => {
-                       if(text === "isFile") {
-                          if(this.RelativeUrl.indexOf("/") == this.RelativeUrl.lastIndexOf("/")) {
-                             let i = this.RelativeUrl.lastIndexOf("/")
-                             this.RelativeUrl = this.RelativeUrl.slice(0, i)
-                          }
-                          window.location.href = this.OriginUrl + this.RelativeUrl
-                       }else{
-                          this.list = JSON.parse(text);
-                       }
+                       console.log(type, this, this.action)
+                       this.action[type]();
                     }).catch((text) => {
-                        this.list = ["请求失败","祝你好运", "再见",];
+                        this.list = [{type: "mes", mes: "请求失败祝你好运再见"}];
                     })
+                },
+                getPath(data) {
+                  return data[data.type];
+                },
+                route(data) {
+                  this.getList("/" + this.getPath(data), data.type)
+                },
+                isRoot() {
+                   return this.RelativeUrl.indexOf("/") == this.RelativeUrl.lastIndexOf("/")
                 },
             }
         });

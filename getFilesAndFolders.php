@@ -16,9 +16,13 @@ if(is_file($path)) {
       if(preg_match("/^[.]+/", $val)) {
          continue;
       }else{
-         array_push($res, "/" . $val);
+         if(is_file($path . "/" . $val)) {
+            array_push($res, ["file" => $val, "type" => "file"]);
+         }else if(is_dir($path . "/" . $val)) {
+            array_push($res, ["dir" => $val, "type" => "dir"]);
+         }
       }
    }
-   array_unshift($res, "../");
+   array_unshift($res, ["dir" => "../", "type" => "dir"]);
    echo JSON_encode($res);
 }
