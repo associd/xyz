@@ -13,6 +13,12 @@
          font-family: consolas;
          font-size: 24px;
       }
+      .dir {
+         background-color: #ffd27d;
+      }
+      .file{
+         background-color: #b7edff;
+      }
       .dir .badge{
          background-color: orange;
       }
@@ -45,10 +51,11 @@
                     RelativeUrl: "",
                     OriginUrl: window.location.href,
                     action: {
-                       dir: function() {
+                       dir: text => {
+                          console.log(text, this)
                            this.list = JSON.parse(text);
                        },
-                       file: function() {
+                       file: text => {
                           if(this.isRoot()) {
                              let i = this.RelativeUrl.lastIndexOf("/")
                              this.RelativeUrl = this.RelativeUrl.slice(0, i)
@@ -86,9 +93,9 @@
                         xhr.send(`path=${scope.RelativeUrl}`)
                     })
                     p.then((text) => {
-                       console.log(type, this, this.action)
-                       this.action[type]();
+                       this.action[type](text);
                     }).catch((text) => {
+                       console.log(text)
                         this.list = [{type: "mes", mes: "请求失败祝你好运再见"}];
                     })
                 },
