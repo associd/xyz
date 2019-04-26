@@ -1,0 +1,31 @@
+*{
+   margin: 0;
+   padding: 0;
+}
+html,body{
+   height: 100%;
+   width: 100%;
+}
+.music-box{
+   font-size: 30px;
+}
+.container{
+   width: 100%;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+.music-box .name, .music-box .artist, .music-box .course{
+   text-align: center;
+}
+.frequency-box{
+   height: 60px;
+}
+.frequency-box canvas{
+   display: block;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}

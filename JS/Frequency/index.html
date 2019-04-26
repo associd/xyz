@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <script src="Sound.js"></script>
+   <script src="FrequencySpectrum.js"></script>
+   <style media="screen">
+      @import url(music-box.css);
+   </style>
+   <title>Document</title>
+</head>
+<body>
+   <section class="container music-box">
+      <div class="name">
+         oh shit
+      </div>
+      <div class="artist">
+         Cao Ni Ma
+      </div>
+      <div class="frequency-box">
+         <canvas id="frequency" width="600" height="600"></canvas>
+      </div>
+      <div class="course">
+         <span class="completed">留03:07</span>
+         <span class="uncompleted">05:32逝</span>
+      </div>
+      <div id="frequency-setting">
+         <div class="f-menu"></div>
+      </div>
+   </section>
+   <script>
+      const e = sel => document.querySelector(sel);
+      const es = sel => document.querySelectorAll(sel);
+      const log = console.log.bind(console)
+      // Pianoboy高至豪 - The truth that you leave.mp3
+      const canvas = e("#frequency")
+      const sound = new Sound()
+      const frequencySpectrum = new FrequencySpectrum(canvas)
+
+      sound.connect(frequencySpectrum)
+      frequencySpectrum.SetStyle("Electrocardiograph")
+      sound.play("Pianoboy高至豪 - The truth that you leave.mp3")
+   </script>
+</body>
+</html>
