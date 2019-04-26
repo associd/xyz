@@ -86,7 +86,7 @@
                         xhr.send(`path=${scope.RelativeUrl}`)
                     })
                     p.then((text) => {
-                       console.log(type, this, this.action)
+                       console.log(text)
                        this.action[type]();
                     }).catch((text) => {
                         this.list = [{type: "mes", mes: "请求失败祝你好运再见"}];
