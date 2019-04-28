@@ -10,6 +10,7 @@
          --text-color: #000000;
          color: var(--text-color);
          text-align: center;
+         background-color: black;
       }
       a{
          text-decoration: inherit;
@@ -69,23 +70,59 @@
       const e = sel => document.querySelector(sel);
       const es = sel => document.querySelectorAll(sel);
       const log = console.log.bind(console)
+
       var color = {
-         r: 0,
-         g: 0,
-         b: 0,
-         a: 0,
+         r: 218,
+         g: 218,
+         b: 218,
+         a: 218,
       }
-      e("html")style.setProperty("--text-color", `rgba(${rand()})`)
+
+      update()
 
       function rand(min, max) {
           return min + Math.floor( Math.random() * ( max - min + 1 ) )
       }
       function update() {
           requestAnimationFrame( () => {
-             color.r = {
+             var r = rand(-10, 10) / 2
+             var g = rand(-10, 10) / 2
+             var b = rand(-10, 10) / 2
+             var a = rand(-10, 10) / 2
 
-             }
-             update();
+            color.r += r
+            color.g += g
+            color.b += b
+            color.a += a
+
+            if(color.r < 0) {
+               color.r = 0
+            }
+            if(color.g < 0) {
+               color.g = 0
+            }
+            if(color.b < 0) {
+               color.b = 0
+            }
+            if(color.a < 0) {
+               color.a = 0
+            }
+
+            if(color.r > 255) {
+               color.r = 255
+            }
+            if(color.g > 255) {
+               color.g = 255
+            }
+            if(color.b > 255) {
+               color.b = 255
+            }
+            if(color.a > 255) {
+               color.a = 255
+            }
+
+            e("html").style.setProperty("--text-color", `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`)
+            update();
           } )
       }
    </script>
