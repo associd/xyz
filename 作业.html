@@ -10,7 +10,7 @@
          --text-color: #000000;
          color: var(--text-color);
          text-align: center;
-         background-color: black;
+         background-color: white;
       }
       a{
          text-decoration: inherit;
@@ -187,7 +187,7 @@
          r: 218,
          g: 218,
          b: 218,
-         a: 218,
+         a: 1,
       }
 
       update()
@@ -198,10 +198,10 @@
       }
       function update() {
           requestAnimationFrame( () => {
-             var r = rand(-10, 10) / 2
-             var g = rand(-10, 10) / 2
-             var b = rand(-10, 10) / 2
-             var a = rand(-10, 10) / 2
+             var r = rand(-10, 10) / 10
+             var g = rand(-10, 10) / 10
+             var b = rand(-10, 10) / 10
+             var a = rand(-10, 10) / 100
 
             color.r += r
             color.g += g
@@ -217,8 +217,8 @@
             if(color.b < 0) {
                color.b = 0
             }
-            if(color.a < 0) {
-               color.a = 0
+            if(color.a < 0.2) {
+               color.a = 0.2
             }
 
             if(color.r > 255) {
@@ -230,8 +230,8 @@
             if(color.b > 255) {
                color.b = 255
             }
-            if(color.a > 255) {
-               color.a = 255
+            if(color.a > 1) {
+               color.a = 1
             }
 
             e("html").style.setProperty("--text-color", `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`)
