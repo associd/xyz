@@ -7,6 +7,8 @@
    <title>Document</title>
    <style media="screen">
       :root{
+         --text-color: #000000;
+         color: var(--text-color);
          text-align: center;
       }
       a{
@@ -48,7 +50,7 @@
          </div>
       </section>
       <section>
-         <p>页面含有动态效果, 请根据如图所示的效果进行制作</p>
+         <p><strong>拓展:</strong> 如果可能的话, 页面含有动态效果, 请根据如图所示的效果进行制作</p>
          <div class="imgbox">
             <img class="effect" src="img/effect.gif" alt="">
          </div>
@@ -63,5 +65,29 @@
          </div>
       </section>
    </main>
+   <script type="text/javascript">
+      const e = sel => document.querySelector(sel);
+      const es = sel => document.querySelectorAll(sel);
+      const log = console.log.bind(console)
+      var color = {
+         r: 0,
+         g: 0,
+         b: 0,
+         a: 0,
+      }
+      e("html")style.setProperty("--text-color", `rgba(${rand()})`)
+
+      function rand(min, max) {
+          return min + Math.floor( Math.random() * ( max - min + 1 ) )
+      }
+      function update() {
+          requestAnimationFrame( () => {
+             color.r = {
+
+             }
+             update();
+          } )
+      }
+   </script>
 </body>
 </html>
