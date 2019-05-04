@@ -39,18 +39,21 @@
          padding: 10px 15px;
       }
 
-      #canvas{
+      iframe{
          position: fixed;
          z-index: -1;
-         left: 0;
+         overflow: hidden;
          top: 0;
+         right: 0;
+         width: 100%;
+         height: 100%;
       }
    </style>
 </head>
 <body>
    <header>
       <h1>作业</h1>
-      <canvas id="canvas"></canvas>
+      <iframe src="./JS/Module/test-module.html"></iframe>
    </header>
    <main>
       <section>
@@ -75,168 +78,5 @@
          </div>
       </section>
    </main>
-   <script type="text/javascript">
-      class Scene {
-           constructor() {
-               this.elements = []
-               this.context = null
-               this.update()
-           }
-           update() {
-               requestAnimationFrame( () => {
-                   if( this.context ) {
-                       this.context.clearRect(0,0, 1920, 1080)
-                   }
-                   this.elements.forEach( (item) => {
-                       if( item.update ) {
-                           item.update()
-                       }
-                       if( item.draw ) {
-                           item.draw()
-                       }
-                   } )
-                   this.update();
-               } )
-           }
-      }
-      class Partical {
-           constructor(x = 0, y = 0) {
-               this.position = {
-                   x: x,
-                   y: y,
-               }
-               this.speed = {
-                   x: 1,
-                   y: 1,
-               }
-               this.context = null
-               this.color = {
-                   r: 0,
-                   g: 0,
-                   b: 0,
-                   a: 0,
-               }
-           }
-           update() {
-               this.position.x = this.position.x + this.speed.x
-               this.position.y = this.position.y + this.speed.y
-               this.speed.x = rand(-10, 10) / 10
-               this.speed.y = rand(-10, 10) / 10
-               this.color.r += rand(-10, 10)
-               this.color.g += rand(-10, 10)
-               this.color.b += rand(-10, 10)
-               this.color.a += rand(-10, 10) / 1000
-               if(this.color.r < 0) {
-                   this.color.r = 0
-               }
-               if(this.color.r > 255) {
-                   this.color.r = 255
-               }
-               if(this.color.b < 0) {
-                   this.color.b = 0
-               }
-               if(this.color.b > 255) {
-                   this.color.b = 255
-               }
-               if(this.color.g < 0) {
-                   this.color.g = 0
-               }
-               if(this.color.g > 255) {
-                   this.color.g = 255
-               }
-               if(this.color.a < 0) {
-                   this.color.g = 0
-               }
-               if(this.color.a > 1) {
-                   this.color.a = 1
-               }
-           }
-           draw() {
-               if( this.context ) {
-                   var ctx = this.context
-                   ctx.beginPath()
-                   ctx.arc(this.position.x, this.position.y, 20, 0, Math.PI * 2)
-                   ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.color.a})`
-                   ctx.fill()
-               }
-           }
-      }
-      const e = sel => document.querySelector(sel);
-      const es = sel => document.querySelectorAll(sel);
-      const log = console.log.bind(console)
-      const __main = function() {
-           let canvas = e("#canvas")
-           canvas.width = window.innerWidth
-           canvas.height = window.innerHeight
-           let scene = new Scene()
-           scene.context = canvas.getContext("2d")
-
-           for(let i = 0; i < 100; i++) {
-               let p = new Partical()
-               p.position.x = rand(0, canvas.width)
-               p.position.y = rand(0, canvas.height)
-               p.context = canvas.getContext("2d")
-               scene.elements.push(p)
-           }
-
-
-      }
-      __main();
-
-
-      var color = {
-         r: 88,
-         g: 88,
-         b: 88,
-         a: 1,
-      }
-
-      update()
-
-
-      function rand(min, max) {
-          return min + Math.floor( Math.random() * ( max - min + 1 ) )
-      }
-      function update() {
-          requestAnimationFrame( () => {
-             var r = rand(-10, 10) / 4
-             var g = rand(-10, 10) / 4
-             var b = rand(-10, 10) / 4
-
-            color.r += r
-            color.g += g
-            color.b += b
-
-            if(color.r < 0) {
-               color.r = 0
-            }
-            if(color.g < 0) {
-               color.g = 0
-            }
-            if(color.b < 0) {
-               color.b = 0
-            }
-            if(color.a < 0.2) {
-               color.a = 0.2
-            }
-
-            if(color.r > 255) {
-               color.r = 255
-            }
-            if(color.g > 255) {
-               color.g = 255
-            }
-            if(color.b > 255) {
-               color.b = 255
-            }
-            if(color.a > 1) {
-               color.a = 1
-            }
-
-            e("html").style.setProperty("--text-color", `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`)
-            update();
-          } )
-      }
-   </script>
 </body>
 </html>
