@@ -32,19 +32,19 @@ function main () {
       for( var i = 0; i < numberOfcardPerWeft[j]; i++ ) {
          var div = document.createElement("div")
          div.className = "card"
-         div.style.transform = `rotateY(${angleX * i}deg) rotateX(${(j - 5) * angleY}deg) translateZ(700px)`;
+         div.style.transform = `rotateY(${angleX * i}deg) rotateX(${(j - 5) * angleY}deg) translateZ(800px)`;
          container.append(div)
          cards.push({
             element: div,
             transform: {
                rotateY: angleX * i,
                rotateX: (j - 5) * angleY,
-               translateZ: "700px",
+               translateZ: "800px",
             },
             direction: direction,
             update: function() {
                this.transform.rotateY += this.direction
-               this.element.style.transform = `rotateY(${this.transform.rotateY}deg) rotateX(${this.transform.rotateX}deg) translateZ(700px)`;
+               this.element.style.transform = `rotateY(${this.transform.rotateY}deg) rotateX(${this.transform.rotateX}deg) translateZ(800px)`;
             },
          })
       }
