@@ -365,16 +365,23 @@ class FrequencySpectrum {
                ctx.beginPath()
                ctx.moveTo(0, center.y)
 
+               var iv = 0;
+               var sum = 0;
+               o.Farr.forEach(function(item) {
+                  if(item > 0) {
+                     iv++
+                     sum += item
+                  }
+               })
+               var average = sum / iv;
 
-               var average = o.Farr.reduce(function(nextSum, num) {
-                  return nextSum + num
-               }) / o.Farr.length
-
+               var x = 0
                for (var i = 0, s = 1; i < o.Farr.length; i++) {
-                  var y = center.y * ((o.Farr[i + o.offset] - average) / 255)
+                  var y = center.y * ((o.Farr[i + o.offset] - average * 1.5) / 255)
                   y = ( y <= 0 ? 0 : y )
                   s *= -1
-                  ctx.lineTo( i * 3, center.y - (y * s) );
+                  x += 10;
+                  ctx.lineTo( x, center.y - (y * s) );
                }
                ctx.stroke()
             },

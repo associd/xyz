@@ -13,11 +13,11 @@
    height: 0;
 }
 .container:hover>*{
-   transition: all 0.5s cubic-bezier(.77,0,.18,1);
+   transition: all 1s cubic-bezier(.77,0,.18,1);
 }
 .container .card:hover{
    flex: 2 1 0;
 }
 .transition, .transition>*{
-   transition: all 1.5s cubic-bezier(.77,0,.18,1);
+   transition: all 1s cubic-bezier(.77,0,.18,1);
 }

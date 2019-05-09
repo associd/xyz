@@ -13,22 +13,22 @@
 </head>
 <body>
    <section class="container music-box">
-      <div class="name">
+      <!-- <div class="name">
          oh shit
       </div>
       <div class="artist">
          Cao Ni Ma
-      </div>
+      </div> -->
       <div class="frequency-box">
-         <canvas id="frequency" width="600" height="600"></canvas>
+         <canvas id="frequency" width="1920" height="1080"></canvas>
       </div>
-      <div class="course">
+      <!-- <div class="course">
          <span class="completed">留03:07</span>
          <span class="uncompleted">05:32逝</span>
       </div>
       <div id="frequency-setting">
          <div class="f-menu"></div>
-      </div>
+      </div> -->
    </section>
    <script>
       const e = sel => document.querySelector(sel);
@@ -41,7 +41,10 @@
 
       sound.connect(frequencySpectrum)
       frequencySpectrum.SetStyle("Electrocardiograph")
-      sound.play("Pianoboy高至豪 - The truth that you leave.mp3")
+      // frequencySpectrum.SetStyle("circle")
+      window.addEventListener("click", function() {
+         sound.play("MitiS,Tedy - By My Side.mp3")
+      })
    </script>
 </body>
 </html>
