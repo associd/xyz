@@ -352,38 +352,47 @@ class FrequencySpectrum {
                   Farr: Farr,
                   Tarr: this.Tarr,
                   offset: 64,
+                  drawWith: function(type = "frequency") {
+                     var frequencies = this.Farr
+                     var center = {
+                        x: this.cvs.width / 2,
+                        y: this.cvs.height / 2,
+                     }
+                     if(type == "time") {
+                        frequencies = this.Tarr
+                     }
+                     if(type == "frequency") {
+                        frequencies = this.Farr
+                     }
+
+                     this.ctx.beginPath()
+                     this.ctx.moveTo(0, center.y)
+
+                     var iv = 0;
+                     var sum = 0;
+                     frequencies.forEach(function(item) {
+                        if(item > 0) {
+                           iv++
+                           sum += item
+                        }
+                     })
+                     var average = sum / iv;
+
+                     var x = 0
+                     for (var i = 0, s = 1; i < frequencies.length; i++) {
+                        var y = center.y * ((frequencies[i + this.offset] - average) / 255)
+                        // var y = 100 * ((frequencies[i + this.offset]) / 255)
+                        y = ( y <= 0 ? 0 : y )
+                        s *= -1
+                        x += 10;
+                        this.ctx.lineTo( x, center.y - (y * s) );
+                     }
+                     this.ctx.stroke()
+                  }
                }
             },
             draw: (o) => {
-               var cvs = o.cvs
-               var ctx = o.ctx
-               var center = {
-                  x: cvs.width / 2,
-                  y: cvs.height / 2,
-               }
-
-               ctx.beginPath()
-               ctx.moveTo(0, center.y)
-
-               var iv = 0;
-               var sum = 0;
-               o.Farr.forEach(function(item) {
-                  if(item > 0) {
-                     iv++
-                     sum += item
-                  }
-               })
-               var average = sum / iv;
-
-               var x = 0
-               for (var i = 0, s = 1; i < o.Farr.length; i++) {
-                  var y = center.y * ((o.Farr[i + o.offset] - average * 1.5) / 255)
-                  y = ( y <= 0 ? 0 : y )
-                  s *= -1
-                  x += 10;
-                  ctx.lineTo( x, center.y - (y * s) );
-               }
-               ctx.stroke()
+               o.drawWith();
             },
             control: (o) => {
                return [
