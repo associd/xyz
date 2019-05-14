@@ -37,15 +37,12 @@
       // Pianoboy高至豪 - The truth that you leave.mp3
       const canvas = e("#frequency")
       const frequencySpectrum = new FrequencySpectrum(canvas)
-
-      var sound = null;
+      const sound = new Sound()
 
       canvas.addEventListener("drop", function(event) {
          if(sound) {
             sound.audioCtx.close()
             sound.setup()
-         }else{
-            window.sound = new Sound()
          }
          event.preventDefault()
          event.stopPropagation()
@@ -73,16 +70,16 @@
                frequencySpectrum.SetStyle("Electrocardiograph")
             })
          }
-         // sound.play("Approaching Nirvana - You.MP3")
       })
       window.addEventListener("click", function(event) {
-         // event.preventDefault()
-         // event.stopPropagation()
-         // console.log(event.dataTransfer.files[0])
-         // console.log("asdfdsaf")
-         // sound.audioCtx.resume()
-         // sound.play("ULY - 《从你的全世界路过》插曲扒带完整版.mp3")
-         sound.audioNode.start(0)
+         sound.audioCtx.resume()
+         if(typeof sound.audioNode.start == "function"){
+            sound.audioNode.start(0)
+         }else{
+            sound.play("Alan Walker Coldplay - Hymn For The Weekend ［Remix］.mp3")
+            sound.connect(frequencySpectrum)
+            frequencySpectrum.SetStyle("Electrocardiograph")
+         }
       })
       canvas.addEventListener("dragover", function(event) {
          event.preventDefault()

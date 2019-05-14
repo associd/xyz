@@ -5,6 +5,7 @@
 html,body{
    height: 100%;
    width: 100%;
+   background: linear-gradient(black, black, black);
 }
 .music-box{
    font-size: 30px;
