@@ -377,7 +377,7 @@ class FrequencySpectrum {
                         }
                      })
                      var average = sum / iv;
-
+                     document.querySelector("body").style.backgroundColor = `rgba(${average * 1.5}, ${average * 1.5}, ${average * 1.5}, 1)`
                      var x = 0
                      for (var i = 0, s = 1; i < frequencies.length; i++) {
                         var y = center.y * ((frequencies[i + this.offset] - average) / 255)

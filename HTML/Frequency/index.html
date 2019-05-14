@@ -75,14 +75,15 @@
          }
          // sound.play("Approaching Nirvana - You.MP3")
       })
-      // window.addEventListener("click", function(event) {
-      //    // event.preventDefault()
-      //    // event.stopPropagation()
-      //    // console.log(event.dataTransfer.files[0])
-      //    console.log("asdfdsaf")
-      //    sound.audioCtx.resume()
-      //    sound.play("ULY - 《从你的全世界路过》插曲扒带完整版.mp3")
-      // })
+      window.addEventListener("click", function(event) {
+         // event.preventDefault()
+         // event.stopPropagation()
+         // console.log(event.dataTransfer.files[0])
+         // console.log("asdfdsaf")
+         // sound.audioCtx.resume()
+         // sound.play("ULY - 《从你的全世界路过》插曲扒带完整版.mp3")
+         sound.audioNode.start(0)
+      })
       canvas.addEventListener("dragover", function(event) {
          event.preventDefault()
          event.stopPropagation()
