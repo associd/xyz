@@ -352,6 +352,8 @@ class FrequencySpectrum {
                   Farr: Farr,
                   Tarr: this.Tarr,
                   offset: 64,
+                  light: 2,
+                  dark: 100,
                   drawWith: function(type = "frequency") {
                      var frequencies = this.Farr
                      var center = {
@@ -379,9 +381,9 @@ class FrequencySpectrum {
                      var average = sum / iv;
                      document.querySelector("body").style.background = `
                         linear-gradient(
-                           rgba(${average}, ${average}, ${average}, 1),
-                           rgba(${average * 2}, ${average * 2}, ${average * 2}, 1),
-                           rgba(${average}, ${average}, ${average}, 1)
+                           rgba(${average - this.dark}, ${average - this.dark}, ${average - this.dark}, 1),
+                           rgba(${average * this.light}, ${average * this.light}, ${average * this.light}, 1),
+                           rgba(${average - this.dark}, ${average - this.dark}, ${average - this.dark}, 1)
                         )
                      `
                      var x = 0
@@ -403,8 +405,12 @@ class FrequencySpectrum {
             control: (o) => {
                return [
                   {
-                     des: "偏移量",
-                     dom: {propertyName: "offset", type: "number", value: o.offset,},
+                     des: "a1高闪",
+                     dom: {propertyName: "light", type: "number", value: o.light,},
+                  },
+                  {
+                     des: "黑暗降临",
+                     dom: {propertyName: "dark", type: "number", value: o.dark,},
                   },
                ]
             }

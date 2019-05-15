@@ -30,3 +30,7 @@ html,body{
    left: 50%;
    transform: translate(-50%, -50%);
 }
+#frequency-setting{
+   position: fixed;
+   z-index: 999;
+}
