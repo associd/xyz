@@ -7,19 +7,35 @@
    <title>Document</title>
    <style>
       :root{
-         --size: 20px;
+         cursor: none;
+         overflow: hidden;
+      }
+      html{
+         background-color: black;
       }
       .dot{
+         --size: 20px;
          width: var(--size);
          height: var(--size);
          position: fixed;
          border-radius: 50%;
-         background-color: #00bcd4;
+         background-color: lightgreen;
+      }
+      circle{
+         stroke:lightgreen;
+         stroke-width:1;
+         cx: 20;
+         cy: 20;
+         r: 20;
       }
    </style>
 
 </head>
 <body>
+   <svg id="cyc" data-name="cyc2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+      <circle/>
+   </svg>
+
    <div class="dot"></div>
    <div class="dot"></div>
    <div class="dot"></div>
@@ -36,96 +52,81 @@
    <div class="dot"></div>
    <div class="dot"></div>
    <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
+
    <script>
       var dots = document.querySelectorAll(".dot")
+      var circle = document.querySelector("circle")
+      var circle_r = 20
+      var circle_w = 1
+      document.querySelector("#cyc").setAttribute("viewBox", `0 0 ${window.innerWidth} ${window.innerHeight}`)
+      window.range = 10
+      window.mouse = {
+         x : window.innerWidth / 2,
+         y : window.innerHeight / 2
+      }
+      window.addEventListener("mousemove", event => {
+         window.mouse.x = event.clientX
+         window.mouse.y = event.clientY
+         document.querySelector("circle").style.cx = mouse.x
+         document.querySelector("circle").style.cy = mouse.y
+      })
+      window.addEventListener("resize", event => {
+         document.querySelector("#cyc").setAttribute("viewBox", `0 0 ${window.innerWidth} ${window.innerHeight}`)
+      })
+      window.addEventListener("wheel", event => {
+         if(event.wheelDelta > 0) {
+            circle_w += 1
+            circle_r += 5
+            circle.style.r = circle_r
+         }else{
+            circle_w -= 1
+            circle_r -= 5
+            if(circle_r < 1) {
+               circle_r = 1
+            }
+            if(circle_w < 1) {
+               circle_w = 1
+            }
+            circle.style.r = circle_r
+         }
+         circle.style.strokeWidth = circle_w
+      })
+      HTMLElement.prototype.setX = function(x) {
+         this.x = x;
+         this.style.left = `${x}px`;
+      }
+      HTMLElement.prototype.setY = function(y) {
+         this.y = y;
+         this.style.top = `${y}px`;
+      }
+      HTMLElement.prototype.getX = function(y) {
+         return this.x
+      }
+      HTMLElement.prototype.getY = function(y) {
+         return this.y
+      }
       dots.forEach((item) => {
          item.start = {
-            //固定位置
-            // x: 0,
-            // y: window.innerHeight / 2,
-
-            //随机位置
             x: random(0, window.innerWidth),
             y: random(0, window.innerHeight),
          }
          item.end = {
-            // x: window.innerWidth,
-            // y: window.innerHeight / 2,
-
-            //随机位置
-            x: random(0, window.innerWidth),
-            y: random(0, window.innerHeight),
+            x: item.start.x,
+            y: item.start.y,
+            rangeX: window.range,
+            rangeY: window.range,
          }
          item.cp1 = {
-            // x: window.innerWidth / 2,
-            // y: 0,
-
-            //随机位置
             x: random(0, window.innerWidth),
             y: random(0, window.innerHeight),
+            rangeX: 100,
+            rangeY: 100,
          }
-         item.timeOfDuration = random(5, 100)/10;
+         item.timeOfDuration = random(20, 50) / 10;
          item.frame = 1;
          item.curTime = 0;
+         item.x = 0;
+         item.y = 0;
       })
 
       /*
@@ -134,29 +135,42 @@
       */
 
       var fps = 60
-      setInterval(() => {
+      animation(() => {
          dots.forEach((item) => {
             item.frame = (item.frame + 1) % (item.timeOfDuration * fps);
             if(item.frame == 0) {
                item.start.x = item.end.x
                item.start.y = item.end.y
-               // item.timeOfDuration = random(5, 100) / 10;
-               disorder(item.cp1, item.end)
+               disorder(item.end, item.cp1)
             }
             item.curTime = (item.frame / (item.timeOfDuration * fps))
             var p = bezierCurve(item.start, item.cp1, item.end, item.curTime)
             item.setX(p.x)
             item.setY(p.y)
+            var breath = (Math.abs(item.frame - ( (item.timeOfDuration * fps) / 2 )) / (item.timeOfDuration * fps)) * 2
+            item.style.opacity = breath
+            item.style.boxShadow = `0 0 ${breath * 40}px ${breath * 5}px lightgreen`
+            item.style.setProperty("--size", `${breath * 20}px`)
          })
-      }, 1000 / fps)
+      })
 
-      function disorder(...args) {
-         args.forEach((item) => {
-            item.x = random(0, window.innerWidth)
-            item.y = random(0, window.innerHeight)
+
+
+      function animation(callback) {
+         callback()
+         requestAnimationFrame(function() {
+            animation(callback)
          })
       }
 
+      function disorder(...args) {
+         args.forEach((item) => {
+            var x = random(window.mouse.x - item.rangeX , window.mouse.x + item.rangeX)
+            var y = random(window.mouse.y - item.rangeY , window.mouse.y + item.rangeY)
+            item.x = x
+            item.y = y
+         })
+      }
       function random(min, max) {
          return min + Math.floor(Math.random() * (max - min + 1))
       }
@@ -165,13 +179,6 @@
          var x = Math.pow((1 - t), 2)*p0.x + 2 * t * (1-t)*p1.x + Math.pow(t, 2)*p2.x;
          var y = Math.pow((1 - t), 2)*p0.y + 2 * t * (1-t)*p1.y + Math.pow(t, 2)*p2.y;
          return {x:Math.floor(x), y:Math.floor(y)};
-      }
-
-      HTMLElement.prototype.setX = function(x) {
-         this.style.left = `${x}px`;
-      }
-      HTMLElement.prototype.setY = function(y) {
-         this.style.top = `${y}px`;
       }
    </script>
 </body>
