@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+        }
+        canvas{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+<script>
+    class CanvasNode {
+        constructor(canvas) {
+            this.canvas = canvas
+            this.context = canvas.getContext("2d")
+            this.setSize()
+            window.addEventListener("resize", () => {
+                this.setSize()
+            })
+        }
+        setSize() {
+            this.canvas.width = window.innerWidth
+            this.canvas.height = window.innerHeight
+        }
+    }
+    class Scene extends CanvasNode{
+        constructor(canvas) {
+            super(canvas)
+            this.elements = []
+            this.animation()
+        }
+        add(ele) {
+            ele.scene = this
+            ele.canvas = this.canvas
+            ele.context = this.context
+            this.elements.push(ele)
+        }
+        remove(ele) {
+            this.elements.splice(this.indexOf(ele))
+        }
+        update() {
+            this.elements.forEach( item => {
+                item.update()
+                item.draw()
+            } )
+        }
+        animation() {
+            this.update()
+            requestAnimationFrame( () => {
+                this.animation()
+            } )
+        }
+        outOfScene() {
+
+        }
+    }
+    class Partical{
+        constructor (des) {
+            Object.keys(des).forEach( key => {
+                this[key] = des[key]
+            } )
+        }
+        draw() {
+            this.context.beginPath()
+            this.context.arc(this.x, this.y, this.w, 0, Math.PI * 2)
+            this.context.closePath()
+            this.context.fillStyle = this.color
+            this.context.fill()
+        }
+        update() {
+            this.move()
+            this.w += 1
+        }
+        move() {
+            this.x += this.speed.x
+            this.y += this.speed.y
+        }
+    }
+
+    window.scene = new Scene(document.querySelector("#canvas"))
+    window.mouse = {
+        color: {
+            r: 255,
+            g: 10,
+            b: 10,
+            a: 0.2,
+        },
+        getColor: function() {
+            return `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.color.a})`
+        }
+    }
+    window.addEventListener("mousemove", function(event) {
+        scene.add(
+            new Partical({
+                color: window.mouse.getColor(),
+                x: event.clientX,
+                y: event.clientY,
+                w: 5,
+                h: 5,
+                speed: {
+                    x: 0,
+                    y: 0,
+                }
+            })
+        )
+    })
+    window.addEventListener("click", function(event) {
+        window.mouse.color.r += 10
+        window.mouse.color.g += 10
+        window.mouse.color.b += 10
+    })
+
+
+
+
+
+
+</script>
+</body>
+</html>
