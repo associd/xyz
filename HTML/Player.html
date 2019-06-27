@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+   <style media="screen">
+      *{
+         margin: 0;
+      }
+      canvas{
+         display: block;
+      }
+   </style>
+</head>
+<body>
+   <canvas id="scene"></canvas>
+   <script type="text/javascript">
+      const e = sel => document.querySelector(sel)
+      const es = sel => document.querySelectorAll(sel)
+      const log = console.log.bind(console)
+
+      class CanvasNode {
+         constructor(canvas) {
+            this.cvs = canvas
+            this.ctx = canvas.getContext("2d")
+            this.w = this.getW()
+         }
+         getW() {
+            return this.cvs.width
+         }
+         getH() {
+            return this.cvs.height
+         }
+         setW(w) {
+            this.cvs.width = w
+         }
+         setH(h) {
+            this.cvs.height = h
+         }
+         clear() {
+            this.ctx.clearRect(0, 0, this.getW(), this.getH())
+         }
+      }
+      class Scene extends CanvasNode {
+         constructor(canvas) {
+            super(canvas)
+            this.setup()
+            this.update()
+            window.addEventListener("resize", event => {
+               this.setSize(window.innerWidth, window.innerHeight)
+               this.updateCenter()
+            })
+         }
+         setup() {
+            this.ele = []
+            this.setSize(window.innerWidth, window.innerHeight)
+            this.center = {}
+            this.updateCenter()
+         }
+         add(ele) {
+            ele.cvs = this.cvs
+            ele.ctx = this.ctx
+            this.ele.push(ele)
+         }
+         remove(i) {
+            this.ele.splice(i,1)
+         }
+         update() {
+            this.clear()
+            this.ele.forEach((item,index) => {
+               item.update()
+               if(!item.exist) {
+                  this.remove(index)
+               }
+            })
+            requestAnimationFrame(() => {
+               this.update()
+            })
+         }
+         setSize(width, height) {
+            this.setW(width)
+            this.setH(height)
+         }
+         updateCenter() {
+            this.center.x = this.getW() / 2
+            this.center.y = this.getH() / 2
+         }
+      }
+      class BezierCircle {
+         /*
+            des{
+               x:
+               y:
+            }
+         */
+         constructor(des) {
+            this.exist = true
+            Object.keys(des).forEach(key => {
+               this[key] = des[key]
+            })
+            this.growthTop = 0
+            this.growthRight = 0
+            this.growthBottom = 0
+            this.growthLeft = 0
+         }
+         update() {
+            this.updateDot()
+            this.arc(this.x, this.y, this.r, this.color)
+         }
+         updateDot() {
+            this.top = {
+               x: this.x,
+               y: this.y - this.r - this.growthTop,
+            }
+            this.right = {
+               x: this.x + this.r + this.growthRight,
+               y: this.y,
+            }
+            this.bottom = {
+               x: this.x,
+               y: this.y + this.r + this.growthBottom,
+            }
+            this.left = {
+               x: this.x - this.r - this.growthLeft,
+               y: this.y,
+            }
+         }
+         /*
+            -
+          |   \
+            -
+         */
+         arc(x, y, r, color) {
+            var magicNumber = 0.55228475
+
+            this.ctx.beginPath()
+            this.ctx.moveTo(this.top.x, this.top.y)
+            this.ctx.bezierCurveTo(
+               this.top.x + r*magicNumber,
+               this.top.y,
+
+               this.right.x,
+               this.right.y - r*magicNumber,
+
+               this.right.x,
+               this.right.y,
+            )
+            this.ctx.bezierCurveTo(
+               this.right.x,
+               this.right.y + r*magicNumber,
+
+               this.bottom.x + r*magicNumber,
+               this.bottom.y,
+
+               this.bottom.x,
+               this.bottom.y,
+            )
+            this.ctx.bezierCurveTo(
+               this.bottom.x - r*magicNumber,
+               this.bottom.y,
+
+               this.left.x,
+               this.left.y + r*magicNumber,
+
+               this.left.x,
+               this.left.y,
+            )
+            this.ctx.bezierCurveTo(
+               this.left.x,
+               this.left.y - r*magicNumber,
+
+               this.top.x - r*magicNumber,
+               this.top.y,
+
+               this.top.x,
+               this.top.y,
+            )
+            this.ctx.fillStyle = color
+            this.ctx.fill()
+         }
+         moveUp() {
+            this.y -= this.speed.y
+            this.growthTop += 1
+         }
+         resumeUp() {
+            this.growthTop -= 1
+            if(this.growthTop <= 0) {
+               this.growthTop = 0
+            }
+         }
+         moveRight() {
+            this.x += this.speed.x
+            this.growthRight += 1
+         }
+         moveBottom() {
+            this.y += this.speed.y
+            this.growthBottom += 1
+         }
+         moveLeft() {
+            this.x -= this.speed.x
+            this.growthLeft += 1
+         }
+      }
+      class Player {
+         constructor() {
+            this.connectionElements = []
+            this.exist = true
+            this.keydown = {}
+            this.keydownAction = {}
+            this.keyupAction = {}
+            this.shiftChar = {
+               w: "W",
+               a: "A",
+               s: "S",
+               d: "D",
+
+               W: "w",
+               A: "a",
+               S: "s",
+               D: "d",
+            }
+            window.addEventListener("keydown", event => {
+               this.keydown[event.key] = true
+            })
+            window.addEventListener("keyup", event => {
+               if(this.shiftChar[event.key]) {
+                  this.keydown[this.shiftChar[event.key]] = false
+               }
+               this.keydown[event.key] = false
+            })
+            this.addKeydownAction(["w", "W"], (target, key) => {
+               target.moveUp()
+            })
+            this.addKeyupAction(["w", "W"], (target, key) => {
+               if(!this.keydown.w && !this.keydown.W) {
+                  target.resumeUp()
+               }
+            })
+            this.addKeydownAction(["a", "A"], (target, key) => {
+               target.moveLeft()
+            })
+            this.addKeydownAction(["s", "S"], (target, key) => {
+               target.moveBottom()
+            })
+            this.addKeydownAction(["d", "D"], (target, key) => {
+               target.moveRight()
+            })
+            this.addKeydownAction("ArrowUp", (target, key) => {
+               target.moveUp()
+            })
+            this.addKeydownAction("ArrowLeft", (target, key) => {
+               target.moveLeft()
+            })
+            this.addKeydownAction("ArrowDown", (target, key) => {
+               target.moveBottom()
+            })
+            this.addKeydownAction("ArrowRight", (target, key) => {
+               target.moveRight()
+            })
+            this.addKeydownAction("Shift", (target, key) => {
+               target.speed.x = target.speed.maxX
+               target.speed.y = target.speed.maxY
+            })
+            this.addKeyupAction("Shift", (target, key) => {
+               target.speed.x = target.speed.originX
+               target.speed.y = target.speed.originY
+            })
+         }
+         connect(ele) {
+            this.connectionElements.push(ele)
+            return ele
+         }
+         disconnect(i) {
+            this.connectionElements.splice(i,1)
+         }
+         update() {
+            Object.keys(this.keydown).forEach( key => {
+               this.connectionElements.forEach((item, index) => {
+                  if(item.exist) {
+                     if(this.keydown[key] && this.keydownAction[key]) {
+                        this.keydownAction[key](item, key)
+                     }else if(this.keyupAction[key]){
+                        this.keyupAction[key](item, key)
+                     }
+                  }else {
+                     this.disconnect(index)
+                  }
+               })
+            })
+         }
+         addKeydownAction(keys, callback) {
+            if(keys.forEach) {
+               keys.forEach(key => {
+                  this.keydownAction[key] = callback
+               })
+            }else{
+               this.keydownAction[keys] = callback
+            }
+         }
+         addKeyupAction(keys, callback) {
+            if(keys.forEach) {
+               keys.forEach(key => {
+                  this.keyupAction[key] = callback
+               })
+            }else{
+               this.keyupAction[keys] = callback
+            }
+         }
+      }
+
+      window.scene = new Scene(e("#scene"))
+      window.player = new Player()
+      scene.add(player)
+
+      scene.add(player.connect(new BezierCircle({
+         x: scene.center.x,
+         y: scene.center.y,
+         r: 200,
+         speed: {
+            x: 2,
+            y: 2,
+            originX: 2,
+            originY: 2,
+            maxX: 3,
+            maxY: 3,
+         },
+         color: "red",
+      })))
+
+      scene.add(new BezierCircle({
+         x: scene.center.x + 100,
+         y: scene.center.y + 100,
+         r: 20,
+         speed: {
+            x: 3,
+            y: 3,
+            originX: 3,
+            originY: 3,
+            maxX: 30,
+            maxY: 30,
+         },
+         color: "red",
+      }))
+
+   </script>
+</body>
+</html>
