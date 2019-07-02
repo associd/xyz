@@ -29,6 +29,12 @@
       padding: 20px 20px;
       font-size: 20px;
       font-family: monospace;
+      font-weight: bold;
+      color: white;
+      background-color: black;
+    }
+    .sort{
+       background-color: white;
     }
     button{
       padding: 5px 10px;
@@ -36,7 +42,19 @@
       outline: none;
       border: 1px solid lightblue;
       background-color: transparent;
+      cursor: pointer;
+      transition: all 0.4s;
     }
+    button:hover{
+       transform: scale(1.2);
+    }
+    button:active{
+      transform: scale(1.1);
+   }
+   .function{
+       color: purple;
+
+
   </style>
 </head>
 <body>
@@ -50,9 +68,9 @@
       <div class="square">6</div> -->
     </div>
     <div class="code">
-      <button type="button" name="button" onclick="let a = SelectSort(array); renderBoard(a)">sort</button>
+      <button class="sort" type="button" name="button" onclick="let a = SelectSort(array); renderBoard(a)">sort</button>
       <pre>
-        function SelectSort(arr) {
+        <span class="function">function</span> <span class="function-name">SelectSort</span>(arr) {
           let array = arr.slice()
           for(let i = 0; i < array.length; i++) {
             for(let j = i; j < array.length; j++) {
