@@ -11,6 +11,9 @@
          overflow: hidden;
       }
       html{
+         background-image: url(grass-firfly.png);
+         -webkit-background-size: contain;
+         background-size: contain;
          background-color: black;
       }
       .dot{
@@ -22,11 +25,13 @@
          background-color: lightgreen;
       }
       circle{
+         fill: transparent;
          stroke:lightgreen;
          stroke-width:1;
          cx: 20;
          cy: 20;
          r: 20;
+         background-color: transparent;
       }
    </style>
 
@@ -59,7 +64,7 @@
       var circle_r = 20
       var circle_w = 1
       document.querySelector("#cyc").setAttribute("viewBox", `0 0 ${window.innerWidth} ${window.innerHeight}`)
-      window.range = 10
+      window.range = 500
       window.mouse = {
          x : window.innerWidth / 2,
          y : window.innerHeight / 2
@@ -75,21 +80,28 @@
       })
       window.addEventListener("wheel", event => {
          if(event.wheelDelta > 0) {
-            circle_w += 1
-            circle_r += 5
+            circle_w += 5
+            circle_r += 10
+            if(circle_r > 500) {
+               circle_r = 500
+            }
+            if(circle_w > 10) {
+               circle_w = 10
+            }
             circle.style.r = circle_r
          }else{
-            circle_w -= 1
-            circle_r -= 5
+            circle_w -= 5
+            circle_r -= 10
             if(circle_r < 1) {
                circle_r = 1
             }
-            if(circle_w < 1) {
-               circle_w = 1
+            if(circle_w < 2) {
+               circle_w = 2
             }
             circle.style.r = circle_r
          }
          circle.style.strokeWidth = circle_w
+         window.range = circle_r
       })
       HTMLElement.prototype.setX = function(x) {
          this.x = x;
@@ -122,7 +134,7 @@
             rangeX: 100,
             rangeY: 100,
          }
-         item.timeOfDuration = random(20, 50) / 10;
+         item.timeOfDuration = random(4, 60) / 10;
          item.frame = 1;
          item.curTime = 0;
          item.x = 0;
@@ -165,8 +177,8 @@
 
       function disorder(...args) {
          args.forEach((item) => {
-            var x = random(window.mouse.x - item.rangeX , window.mouse.x + item.rangeX)
-            var y = random(window.mouse.y - item.rangeY , window.mouse.y + item.rangeY)
+            var x = random(window.mouse.x - window.range , window.mouse.x + window.range)
+            var y = random(window.mouse.y - window.range , window.mouse.y + window.range)
             item.x = x
             item.y = y
          })

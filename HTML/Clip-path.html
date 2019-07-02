@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+   <style media="screen">
+      shape{
+         display: block;
+         width: 100px;
+         height: 100px;
+         background-color: red;
+         /* transition: all 0.4s; */
+      }
+      .triangel{
+         clip-path: polygon(
+            0% 0%,
+            100% 0%,
+            100% 100%,
+            0% 100%
+         );
+      }
+      .triangel:hover{
+         animation: transfer 1s;
+      }
+      @keyframes transfer {
+         100%{
+            clip-path: polygon(
+               0% 0%,
+               25% 0%,
+               25% 25%,
+               0% 25%,
+
+               26% 0%,
+               50% 0%,
+               50% 50%,
+               0% 25%
+            );
+         }
+      }
+   </style>
+</head>
+<body>
+   <shape class="triangel"></shape>
+</body>
+</html>
