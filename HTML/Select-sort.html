@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Select-Sort</title>
+  <style media="screen">
+    .p-center{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .flex{
+      display: flex;
+    }
+    .square{
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      text-align: center;
+      line-height: 50px;
+      font-size: 16px;
+      font-weight: bold;
+      border: 1px solid black;
+    }
+    .code{
+      padding: 20px 20px;
+      font-size: 20px;
+      font-family: monospace;
+    }
+    button{
+      padding: 5px 10px;
+      font-size: 20px;
+      outline: none;
+      border: 1px solid lightblue;
+      background-color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <div class="p-center">
+    <div class="board flex">
+      <!-- <div class="square">1</div>
+      <div class="square">2</div>
+      <div class="square">3</div>
+      <div class="square">4</div>
+      <div class="square">5</div>
+      <div class="square">6</div> -->
+    </div>
+    <div class="code">
+      <button type="button" name="button" onclick="let a = SelectSort(array); renderBoard(a)">sort</button>
+      <pre>
+        function SelectSort(arr) {
+          let array = arr.slice()
+          for(let i = 0; i < array.length; i++) {
+            for(let j = i; j < array.length; j++) {
+              if(array[j] < array[i]) {
+                let t = array[j]
+                array[j] = array[i]
+                array[i] = t
+              }
+            }
+          }
+          return array
+        }
+      </pre>
+    </div>
+  </div>
+  <script>
+    const board = document.querySelector(".board")
+    let array = []
+    for (var i = 0; i < 10; i++) {
+      array[i] = rand(1, 10)
+    }
+    renderBoard(array)
+
+    function renderBoard(array) {
+      board.innerHTML = ''
+      for (var i = 0; i < array.length; i++) {
+        let div = document.createElement("div")
+        div.innerHTML = array[i]
+        div.className = "square"
+        div.style.background = `rgba(170, 210, 230, ${array[i] * 0.1})`
+        board.append(div)
+      }
+    }
+
+    function SelectSort(arr) {
+      let array = arr.slice()
+      for(let i = 0; i < array.length; i++) {
+        for(let j = i; j < array.length; j++) {
+          if(array[j] < array[i]) {
+            let t = array[j]
+            array[j] = array[i]
+            array[i] = t
+          }
+        }
+      }
+      return array
+    }
+
+    function rand(min, max) {
+      return min + Math.floor( Math.random() * (max - min + 1) )
+    }
+  </script>
+</body>
+</html>

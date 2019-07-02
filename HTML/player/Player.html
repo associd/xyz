@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+   <style media="screen">
+      *{
+         margin: 0;
+      }
+      canvas{
+         display: block;
+      }
+   </style>
+</head>
+<body>
+   <canvas id="scene"></canvas>
+   <script src="Canvas.js"></script>
+   <script src="Scene.js"></script>
+   <script src="Circle.js"></script>
+   <script src="Player.js"></script>
+   <script type="text/javascript">
+      const e = sel => document.querySelector(sel)
+      const es = sel => document.querySelectorAll(sel)
+      const log = console.log.bind(console)
+
+      window.scene = new Scene(e("#scene"))
+      window.player = new Player()
+
+      //stars
+      for (let i = 0; i < 600; i++) {
+         var randFactor = rand(1, 10)
+         scene.add(player.connect(new Circle({
+            x: rand(0, scene.getW()),
+            y: rand(0, scene.getH()),
+            r: (randFactor * 0.1),
+            speed: {
+               level1: {
+                  x: - randFactor * 0.1,
+                  y: - randFactor * 0.1,
+               },
+               level2: {
+                  x: - randFactor * 0.2,
+                  y: - randFactor * 0.2,
+               }
+            },
+            color: "lightblue",
+         })))
+      }
+
+      scene.add(player.connect(new Circle({
+         x: scene.center.x,
+         y: scene.center.y,
+         r: 20,
+         speed: {
+            level1: {
+               x: 10,
+               y: 10,
+            },
+            level2: {
+               x: 20,
+               y: 20,
+            }
+         },
+         color: "red",
+         draw: function() {
+            this.arc(
+               this.x - this.scene.viewBox.x,
+               this.y - this.scene.viewBox.y,
+               this.r,
+               this.color
+            )
+         },
+         update: function() {
+            this.isOutOf(this.scene, "impede")
+         }
+      })))
+      scene.add(player)
+
+      function rand(min, max) {
+         return min + Math.floor( Math.random() * (max - min + 1))
+      }
+   </script>
+</body>
+</html>
