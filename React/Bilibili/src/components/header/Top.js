@@ -9,24 +9,56 @@ class Top extends React.Component {
         <div className="mask"></div>
         <div className="nav flex flex-space-between">
           <ul className="left flex">
-            <li>主站 </li>
-            <li>音频</li>
-            <li>游戏中心直播</li>
-            <li>会员购 </li>
-            <li>漫画</li>
-            <li>BML </li>
-            <li>70年 </li>
-            <li>下载APP</li>
+            <li>
+              <a href="#">主站</a>
+            </li>
+            <li>
+              <a href="#">音频</a>
+            </li>
+            <li>
+              <a href="#">游戏中心直播</a>
+            </li>
+            <li>
+              <a href="#">会员购</a>
+            </li>
+            <li>
+              <a href="#">漫画</a>
+            </li>
+            <li>
+              <a href="#">BML</a>
+            </li>
+            <li>
+              <a href="#">70年</a>
+            </li>
+            <li>
+              <a href="#">下载APP</a>
+            </li>
           </ul>
           <ul className="right flex">
-            <li className="avatar"></li>
-            <li>大会员</li>
-            <li>消息</li>
-            <li>动态</li>
-            <li>稍后再看</li>
-            <li>收藏</li>
-            <li>历史</li>
-            <li>投稿</li>
+            <li className="avatar">
+              <a href="#"></a>
+            </li>
+            <li>
+              <a href="#">大会员</a>
+            </li>
+            <li>
+              <a href="#">消息</a>
+            </li>
+            <li>
+              <a href="#">动态</a>
+            </li>
+            <li>
+              <a href="#">稍后再看</a>
+            </li>
+            <li>
+              <a href="#">收藏</a>
+            </li>
+            <li>
+              <a href="#">历史</a>
+            </li>
+            <li>
+              <a href="#">投稿</a>
+            </li>
           </ul>
         </div>
       </section>

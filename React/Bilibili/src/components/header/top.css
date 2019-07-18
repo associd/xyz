@@ -24,5 +24,6 @@
   margin: auto;
 }
 .nav li{
-  margin: auto 5px;
+  height: 100%;
+  padding: auto 7px;
 }
