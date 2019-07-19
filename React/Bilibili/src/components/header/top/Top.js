@@ -7,16 +7,22 @@ class Top extends React.Component {
       <section className="app-top">
         <div className="blur-bg"></div>
         <div className="mask"></div>
-        <div className="nav flex flex-space-between">
+        <div className="nav media-box flex flex-space-between">
           <ul className="left flex">
             <li>
-              <a href="#">主站</a>
+              <a className="home" href="#">
+                <i className="home-icon icon"></i>
+                主站
+              </a>
             </li>
             <li>
               <a href="#">音频</a>
             </li>
             <li>
-              <a href="#">游戏中心直播</a>
+              <a href="#">游戏中心</a>
+            </li>
+            <li>
+              <a href="#">直播</a>
             </li>
             <li>
               <a href="#">会员购</a>
@@ -31,12 +37,17 @@ class Top extends React.Component {
               <a href="#">70年</a>
             </li>
             <li>
-              <a href="#">下载APP</a>
+              <a className="app" href="#">
+                <i className="app-icon icon"></i>
+                下载APP
+              </a>
             </li>
           </ul>
           <ul className="right flex">
             <li className="avatar">
-              <a href="#"></a>
+              <a className="face" href="#">
+                <img src="./img/logo.svg" width="32" height="32" alt=""/>
+              </a>
             </li>
             <li>
               <a href="#">大会员</a>
