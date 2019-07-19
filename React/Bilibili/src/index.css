@@ -17,6 +17,10 @@ ul,dl,ol{
   padding: 0;
   list-style: none;
 }
+a{
+  text-decoration: inherit;
+  color: inherit;
+}
 
 .flex{
   display: flex;
@@ -26,4 +30,11 @@ ul,dl,ol{
 }
 .flex-space-between{
   justify-content: space-between;
+}
+
+.icon{
+  --size: 30px;
+  width: var(--size);
+  height: var(--size);
+  background-size: var(--size);
 }
