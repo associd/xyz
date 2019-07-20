@@ -1,0 +1,13 @@
+.link-ranking-button{
+  line-height: 32px;
+  padding-right: 4px;
+  color: #ff4e8e;
+  transition: background-color .4s;
+}
+.link-ranking-button:hover{
+  background-color: rgba(255, 255, 255, 0.95)
+}
+.link-ranking-button span{
+  padding-left: 28px;
+  background: url(./img/icons.png) -659px -655px no-repeat;
+}

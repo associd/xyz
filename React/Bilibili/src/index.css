@@ -1,3 +1,7 @@
+*{
+  margin: 0;
+  padding: 0;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -13,13 +17,27 @@ code {
 }
 
 ul,dl,ol{
-  margin: 0;
-  padding: 0;
   list-style: none;
 }
 a{
   text-decoration: inherit;
   color: inherit;
+}
+button, input, .btn{
+  background-color: rgba(255, 255, 255, 0.88);
+  border: none;
+  border-radius: 3px;
+  outline:inherit;
+}
+button, .btn{
+  cursor: pointer;
+}
+
+.media-box{
+  position: relative;
+  width: 1200px;
+  font-size: 13px;
+  margin: auto;
 }
 
 .flex{
@@ -32,6 +50,9 @@ a{
   justify-content: space-between;
 }
 
+.with-background-icon{
+  display:block;
+}
 .icon{
   --size: 30px;
   width: var(--size);
