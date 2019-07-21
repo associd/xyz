@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from './Nav';
 import Search from './Search';
+import PrimaryMenu from './PrimaryMenu';
 import "./header.css"
 
 class Header extends React.Component {
@@ -19,11 +20,10 @@ class Header extends React.Component {
           </section>
           <a href="#" className="banner-link"></a>
         </div>
-        <div className="primary-menu"></div>
+        <PrimaryMenu></PrimaryMenu>
       </header>
     )
   }
-
 }
 
 export default Header;
