@@ -133,26 +133,31 @@ class PrimaryMenu extends React.Component {
         </li>
         <li className="flex flex-align-item-center">
           <a href="#" className="menu-content">
+            <div className="featrue"></div>
             专栏
           </a>
         </li>
         <li className="flex flex-align-item-center">
           <a href="#" className="menu-content">
+            <div className="plaza"></div>
             广场
           </a>
         </li>
         <li className="flex flex-align-item-center">
           <a href="#" className="menu-content">
+            <div className="plaza"></div>
             直播
           </a>
         </li>
         <li className="flex flex-align-item-center">
           <a href="#" className="menu-content">
+            <div className="black-house"></div>
             小黑屋
           </a>
         </li>
         <li className="flex flex-align-item-center">
           <a href="#" className="menu-content">
+            <div className="plaza"></div>
             <img src="" alt=""/>
           </a>
         </li>
