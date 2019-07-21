@@ -125,6 +125,9 @@ class PrimaryMenu extends React.Component {
         </li>
         <li className="flex flex-align-item-center">
           <a href="#" className="menu-content">
+            <div className="count">
+              <span>999+</span>
+            </div>
             放映厅
           </a>
         </li>
