@@ -49,6 +49,9 @@ button, .btn{
 .flex-space-between{
   justify-content: space-between;
 }
+.flex-align-item-center{
+  align-items: center;
+}
 
 .with-background-icon{
   display:block;

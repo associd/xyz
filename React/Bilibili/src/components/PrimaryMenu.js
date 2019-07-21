@@ -4,69 +4,154 @@ import "./PrimaryMenu.css"
 class PrimaryMenu extends React.Component {
   render() {
     return (
-      <ul className="primary-menu flex media-box">
-        <li>
-          首页
+      <ul className="primary-menu flex flex-space-between media-box">
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            <div className="home"></div>
+            首页
+          </a>
         </li>
-        <li>
-          动画
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            <div className="count">
+              <span>999+</span>
+            </div>
+            动画
+          </a>
         </li>
-        <li>
-          番剧 113
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            <div className="count">
+              <span>999+</span>
+            </div>
+            番剧
+          </a>
         </li>
-        <li>
-          国创 999+
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            <div className="count">
+              <span>999+</span>
+            </div>
+            国创
+          </a>
         </li>
-        <li>
-          音乐 306
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            <div className="count">
+              <span>999+</span>
+            </div>
+            音乐
+          </a>
         </li>
-        <li>
-          舞蹈 999+
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            <div className="count">
+              <span>999+</span>
+            </div>
+            舞蹈
+          </a>
         </li>
-        <li>
-          游戏 999+
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            <div className="count">
+              <span>999+</span>
+            </div>
+            游戏
+          </a>
         </li>
-        <li>
-          科技 316
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            <div className="count">
+              <span>999+</span>
+            </div>
+            科技
+          </a>
         </li>
-        <li>
-          数码 999+
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            <div className="count">
+              <span>999+</span>
+            </div>
+            数码
+          </a>
         </li>
-        <li>
-          生活 212
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            <div className="count">
+              <span>999+</span>
+            </div>
+            生活
+          </a>
         </li>
-        <li>
-          鬼畜 508
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            <div className="count">
+              <span>999+</span>
+            </div>
+            鬼畜
+          </a>
         </li>
-        <li>
-          时尚 75
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            <div className="count">
+              <span>999+</span>
+            </div>
+            时尚
+          </a>
         </li>
-        <li>
-          广告 999+
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            <div className="count">
+              <span>999+</span>
+            </div>
+            广告
+          </a>
         </li>
-        <li>
-          娱乐 99+
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            <div className="count">
+              <span>999+</span>
+            </div>
+            娱乐
+          </a>
         </li>
-        <li>
-          影视 187
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            <div className="count">
+              <span>999+</span>
+            </div>
+            影视
+          </a>
         </li>
-        <li>
-          放映厅
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            放映厅
+          </a>
         </li>
-        <li>
-          专栏
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            专栏
+          </a>
         </li>
-        <li>
-          广场
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            广场
+          </a>
         </li>
-        <li>
-          直播
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            直播
+          </a>
         </li>
-        <li>
-          小黑屋
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            小黑屋
+          </a>
         </li>
-        <li>
-          <img src="" alt=""/>
+        <li className="flex flex-align-item-center">
+          <a href="#" className="menu-content">
+            <img src="" alt=""/>
+          </a>
         </li>
       </ul>
     )
