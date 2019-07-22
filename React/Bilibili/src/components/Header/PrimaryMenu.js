@@ -6,13 +6,13 @@ class PrimaryMenu extends React.Component {
     return (
       <ul className="primary-menu flex flex-space-between media-box">
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="home"></div>
             首页
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="count">
               <span>999+</span>
             </div>
@@ -20,7 +20,7 @@ class PrimaryMenu extends React.Component {
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="count">
               <span>999+</span>
             </div>
@@ -28,7 +28,7 @@ class PrimaryMenu extends React.Component {
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="count">
               <span>999+</span>
             </div>
@@ -36,7 +36,7 @@ class PrimaryMenu extends React.Component {
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="count">
               <span>999+</span>
             </div>
@@ -44,7 +44,7 @@ class PrimaryMenu extends React.Component {
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="count">
               <span>999+</span>
             </div>
@@ -52,7 +52,7 @@ class PrimaryMenu extends React.Component {
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="count">
               <span>999+</span>
             </div>
@@ -60,7 +60,7 @@ class PrimaryMenu extends React.Component {
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="count">
               <span>999+</span>
             </div>
@@ -68,7 +68,7 @@ class PrimaryMenu extends React.Component {
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="count">
               <span>999+</span>
             </div>
@@ -76,7 +76,7 @@ class PrimaryMenu extends React.Component {
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="count">
               <span>999+</span>
             </div>
@@ -84,7 +84,7 @@ class PrimaryMenu extends React.Component {
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="count">
               <span>999+</span>
             </div>
@@ -92,7 +92,7 @@ class PrimaryMenu extends React.Component {
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="count">
               <span>999+</span>
             </div>
@@ -100,7 +100,7 @@ class PrimaryMenu extends React.Component {
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="count">
               <span>999+</span>
             </div>
@@ -108,7 +108,7 @@ class PrimaryMenu extends React.Component {
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="count">
               <span>999+</span>
             </div>
@@ -116,7 +116,7 @@ class PrimaryMenu extends React.Component {
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="count">
               <span>999+</span>
             </div>
@@ -124,7 +124,7 @@ class PrimaryMenu extends React.Component {
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="count">
               <span>999+</span>
             </div>
@@ -132,31 +132,31 @@ class PrimaryMenu extends React.Component {
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="featrue"></div>
             专栏
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="plaza"></div>
             广场
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="plaza"></div>
             直播
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="black-house"></div>
             小黑屋
           </a>
         </li>
         <li className="flex flex-align-item-center">
-          <a href="#" className="menu-content">
+          <a href="/" className="menu-content">
             <div className="plaza"></div>
             <img src="" alt=""/>
           </a>

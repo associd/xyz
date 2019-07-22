@@ -18,7 +18,7 @@ class Header extends React.Component {
             <p className="head-title">BML直播间向你发来连接邀请</p>
             <Search/>
           </section>
-          <a href="#" className="banner-link"></a>
+          <a href="/" className="banner-link"></a>
         </div>
         <PrimaryMenu></PrimaryMenu>
       </header>
