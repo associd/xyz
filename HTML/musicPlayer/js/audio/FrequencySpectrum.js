@@ -236,18 +236,18 @@ class FrequencySpt {
                o.ctx.translate(o.center.x, o.center.y);
                o.ctx.rotate(Math.PI / 2)
 
-               o.ctx.beginPath();
-               pathOfCake(o.Farr.slice(300, 601), 300)
-               o.ctx.fill()
-               o.ctx.closePath()
+               // o.ctx.beginPath();
+               // pathOfCake(o.Farr.slice(300, 601), 300)
+               // o.ctx.fill()
+               // o.ctx.closePath()
+               //
+               // o.ctx.beginPath();
+               // pathOfCake(getPiece(o.Farr.slice(80, 141)), 180)
+               // o.ctx.fill()
+               // o.ctx.closePath()
 
                o.ctx.beginPath();
-               pathOfCake(getPiece(o.Farr.slice(80, 141)), 180)
-               o.ctx.fill()
-               o.ctx.closePath()
-
-               o.ctx.beginPath();
-               pathOfCake(getPiece(o.Farr.slice(40, 81)), 100)
+               pathOfCake(getPiece(o.Farr.slice(40, 81)), 150)
                o.ctx.fillStyle = "white"
                o.ctx.fill()
                o.ctx.fillStyle = o.color
