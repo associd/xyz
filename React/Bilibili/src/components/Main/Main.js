@@ -8,7 +8,7 @@ class Main extends React.Component {
   render() {
     return (
       <main className="media-box">
-        <div className="chief">
+        <div className="chief flex">
           <Carousel/>
           <Reacommend/>
         </div>

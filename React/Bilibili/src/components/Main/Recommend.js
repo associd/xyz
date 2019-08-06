@@ -2,20 +2,34 @@ import React from 'react';
 import "./Recommend.css";
 
 class Recommend extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      data: [],
+    }
+  }
+  componentDidMount() {
+    fetch("./data.json")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          let list = result.recommend.map((item, index) => {
+            return <li className="recommend-item" key={index}><img src={item} alt=""/></li>
+          })
+          this.setState({
+            data: list
+          })
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+  }
   render() {
     return (
       <section className="recommend">
-        <ul className="flex">
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
-        </ul>
-        <ul className="flex">
-          <li>5</li>
-          <li>6</li>
-          <li>7</li>
-          <li>8</li>
+        <ul className="flex flex-wrap">
+          {this.state.data}
         </ul>
       </section>
     )
