@@ -1,0 +1,9 @@
+.zone-wraper{
+  margin-bottom: 20px;
+}
+.zone-wraper .left{
+  margin-right: 10px;
+}
+.zone-wraper .right{
+  margin-left: 10px;
+}

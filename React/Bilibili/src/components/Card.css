@@ -14,15 +14,33 @@
   border-radius: 5px;
   overflow: hidden;
 }
+.card:hover .pic{
+  background-color: rgba(0,0,0,.5);
+}
+.card .lazing-img{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.card .lazing-img img{
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: all .4s;
+}
+.card:hover .front-img{
+  filter: opacity(0);
+}
 .card .mask{
   color: white;
-  left: 0;
-  bottom: 0;
+}
+.card .info{
+  width: auto;
   height: 34px;
+  padding: 0 5px;
   background: linear-gradient(transparent,transparent,rgba(0,0,0,.5));
 }
-.card .mask>*{
-  padding: 0 4px;
+.card .info .author, .card .info .online{
   margin-top: auto;
 }
 .card .online{
@@ -46,4 +64,26 @@
 }
 .card:hover .sort{
   transform: translateY(-20px);
+}
+/* recommend */
+.card .info.recommend{
+  left: 0;
+  top: 66px;
+  line-height: 20px;
+  background: linear-gradient(transparent,rgba(0,0,0,.1) 20%,rgba(0,0,0,.2) 35%,rgba(0,0,0,.6) 65%,rgba(0,0,0,.9));
+}
+.card:hover .info.recommend{
+  height: 100%;
+  top: 0;
+  background: rgba(0,0,0,.7);
+}
+.card .recommend .title{
+  padding: 10px 0 5px 0
+}
+.card .info.recommend .author, .card .info.recommend .play {
+  color: transparent; 
+  transition: color .4s;
+}
+.card:hover .info.recommend .author, .card:hover .info.recommend .play{
+  color: #99a2aa;
 }
