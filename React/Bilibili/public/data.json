@@ -1,12 +1,44 @@
 {
 	"recommend": [
-		"./img/1.jpg",
-		"./img/2.png",
-		"./img/1.jpg",
-		"./img/2.png",
-		"./img/1.jpg",
-		"./img/2.png",
-		"./img/1.jpg",
-		"./img/2.png"
+		{
+			"img": "./img/1.jpg",
+			"link": "/",
+			"title": "akjdsklfjadsfjklasjdklfjdasjfkldasjklf"
+		},
+		{
+			"img": "./img/1.jpg",
+			"link": "/",
+			"title": "akjdsklfjadsfjklasjdklfjdasjfkldasjklf"
+		},
+		{
+			"img": "./img/1.jpg",
+			"link": "/",
+			"title": "akjdsklfjadsfjklasjdklfjdasjfkldasjklf"
+		},
+		{
+			"img": "./img/1.jpg",
+			"link": "/",
+			"title": "akjdsklfjadsfjklasjdklfjdasjfkldasjklf"
+		},
+		{
+			"img": "./img/1.jpg",
+			"link": "/",
+			"title": "akjdsklfjadsfjklasjdklfjdasjfkldasjklf"
+		},
+		{
+			"img": "./img/1.jpg",
+			"link": "/",
+			"title": "akjdsklfjadsfjklasjdklfjdasjfkldasjklf"
+		},
+		{
+			"img": "./img/1.jpg",
+			"link": "/",
+			"title": "akjdsklfjadsfjklasjdklfjdasjfkldasjklf"
+		},
+		{
+			"img": "./img/1.jpg",
+			"link": "/",
+			"title": "akjdsklfjadsfjklasjdklfjdasjfkldasjklf"
+		}
 	]
 }

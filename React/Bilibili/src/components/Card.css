@@ -1,0 +1,49 @@
+.card{
+  width: 160px;
+  overflow: hidden;
+}
+.card a{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.card .pic{
+  position: relative;
+  width: 160px;
+  height: 100px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.card .mask{
+  color: white;
+  left: 0;
+  bottom: 0;
+  height: 34px;
+  background: linear-gradient(transparent,transparent,rgba(0,0,0,.5));
+}
+.card .mask>*{
+  padding: 0 4px;
+  margin-top: auto;
+}
+.card .online{
+  padding-left: 14px;
+  background: left center no-repeat url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAKCAYAAABv7tTEAAAAAXNSR0IArs4c6QAAAM1JREFUKBVtjz0KwkAQhUMKi4BCLNJY2EiOY+EBvIKQIrcwpLT2AGmsFcwBBC9gq5WFdSR+b5mFGHbhy868Nz+bKOL0fZ9DAx9DcS4vdGIzW8wrLA3FrTyYww1qmKC7LZq6c8ngIw0aq8mIT1C7EgI9KR3Uez2V53XiBbyVx/D1RuDuApprOmNsA6a0i3Q2ZFwHOCqXsIIX6B/0JKH4CfJm8IAONq7JGguE8Sl8AcYU1nCHvTZVlkiUqcm+oPKNNjzBK9VUQjI0/wrGBvkPlcve4C7jgwAAAAAASUVORK5CYII=);
+}
+.card .description{
+  position: relative;
+  height: 40px;
+}
+.card .title{
+  line-height: 20px;
+  height: 40px;
+  word-wrap: break-word;
+}
+.card .sort{
+  color: #9ba3ab;
+  background-color: #fff;
+  transform: translateY(0px);
+  transition: all .2s;
+}
+.card:hover .sort{
+  transform: translateY(-20px);
+}
