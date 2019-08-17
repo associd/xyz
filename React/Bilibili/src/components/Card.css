@@ -1,5 +1,6 @@
 .card{
   width: 160px;
+  margin-bottom: 20px;
   overflow: hidden;
 }
 .card a{
@@ -81,9 +82,21 @@
   padding: 10px 0 5px 0
 }
 .card .info.recommend .author, .card .info.recommend .play {
-  color: transparent; 
+  color: transparent;
   transition: color .4s;
+  white-space: nowrap;
 }
 .card:hover .info.recommend .author, .card:hover .info.recommend .play{
   color: #99a2aa;
+}
+
+/* promotion */
+.card-promotion .mask{
+  transition: all 0.4s;
+}
+.card-promotion:hover .title{
+  color: #00a1d6;
+}
+.card-promotion:hover .mask{
+  background: rgba(0,0,0,.2);
 }

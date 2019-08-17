@@ -11,17 +11,9 @@ function App() {
     <>
       <Header/>
       <main className="media-box">
-        <ZoneWraper
-          id="recommend"
-          className="chief-recommend flex"
-          left={<Carousel/>}
-          right={
-            <CardBox content={"recommend"}/>
-          }
-        />
-        <ZoneWraper
-          id="live"
-          left={<CardBox content={"live"}/>}
+        <ZoneWraper id="recommend" className="chief-recommend flex" left={<Carousel/>} right={ <CardBox content={"recommend"} />}/>
+        <ZoneWraper id="promotion" className="promotion" left={<CardBox content={"promotion"} />}/>
+        <ZoneWraper id="live" left={<CardBox content={"live"} />}
         />
       </main>
     </>

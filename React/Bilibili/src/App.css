@@ -11,3 +11,25 @@
   width: 100%;
   height: 100%;
 }
+.promotion .top{
+  padding-bottom: 15px;
+}
+.promotion .top .icon-promotion{
+  width: 40px;
+  height: 40px;
+  margin-bottom: -5px;
+  margin-right: 10px;
+  background-image: url(//static.hdslb.com/images/base/icons.png);
+  background-position: -141px -75px;
+}
+.promotion .top .name{
+  font-size: 24px;
+  line-height: 24px;
+  margin-right: 32px;
+}
+.promotion .top .fire{
+  color: #6d757a;
+}
+.promotion .top .fire:hover{
+  color: #00a1d6;
+}

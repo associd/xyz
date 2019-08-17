@@ -14,18 +14,20 @@ class CardBox extends React.Component {
       .then(res => res.json())
       .then(
         (result) => {
-          let list = result.recommend.map((item, index) => {
-            return (
-              <Card className="recommend-item"
-                key={index}
-                data={{...item}}
-                content={this.props.content}
-              />
-            )
-          })
-          this.setState({
-            data: list
-          })
+          if (result[this.props.content]) {
+            let list = result[this.props.content].map((item, index) => {
+              return (
+                <Card className="recommend-item"
+                  key={index}
+                  data={{...item}}
+                  content={this.props.content}
+                  />
+              )
+            })
+            this.setState({
+              data: list
+            })
+          }
         },
         (error) => {
           console.log(error)
@@ -34,7 +36,7 @@ class CardBox extends React.Component {
   }
   render() {
     return (
-      <section className="card-box flex flex-wrap between-x between-y">
+      <section className={`card-box flex flex-wrap between-x between-y ${this.props.content}`}>
         {this.state.data}
       </section>
     )

@@ -6,22 +6,35 @@ class Card extends Component {
     super(props)
     this.dom = {
       lazingImg: {
-          recommend: <img className="content-img" src={this.props.data.img} alt=""/>
+          recommend: <img className="content-img" src={this.props.data.img} alt=""/>,
+          promotion: <img className="content-img" src={this.props.data.img} alt=""/>,
       },
       info: {
-          recommend: (
-            <div className="info recommend mask">
-              <p className="title">【湊あくあ一周年纪念】Letter Song【翻唱】</p>
-              <p className="author">up主：囧仙</p>
-              <p className="play">播放：9.2万</p>
-            </div>
-          )
+        recommend: (
+          <div className="info recommend mask">
+            <p className="title">{this.props.data.title}</p>
+            <p className="author">{this.props.data.author}</p>
+            <p className="play">{this.props.data.play}</p>
+          </div>
+        ),
+        promotion: (
+          <div className="info">
+            
+          </div>
+        ),
+      },
+      description: {
+        promotion: (
+          <div className="description">
+            <div className="title">{this.props.data.title}</div>
+          </div>
+        )
       }
     }
   }
   render() {
     return (
-      <div className="card">
+      <div className={`card card-${this.props.content}`}>
         <a href={this.props.data.link} title={this.props.data.title}>
           <div className="pic">
             <div className="lazing-img">
@@ -33,14 +46,7 @@ class Card extends Component {
               {this.dom.info[this.props.content]}
             </div>
           </div>
-          {this.props.content.des
-            ? <div className="description">
-                <div className="title">abc asdf fdkasf dsf abc asdf fdk asf dsf</div>
-                <div className="sort">网游 · 英雄联盟</div>
-              </div>
-            : ""
-          }
-
+          {this.dom.description[this.props.content]}
         </a>
       </div>
     )
