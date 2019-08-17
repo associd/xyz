@@ -33,6 +33,7 @@ class CardBox extends React.Component {
           console.log(error)
         }
       )
+      console.log(this)
   }
   render() {
     return (

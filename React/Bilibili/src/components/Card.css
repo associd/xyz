@@ -36,10 +36,7 @@
   color: white;
 }
 .card .info{
-  width: auto;
-  height: 34px;
   padding: 0 5px;
-  background: linear-gradient(transparent,transparent,rgba(0,0,0,.5));
 }
 .card .info .author, .card .info .online{
   margin-top: auto;
@@ -56,6 +53,7 @@
   line-height: 20px;
   height: 40px;
   word-wrap: break-word;
+  word-break: break-all;
 }
 .card .sort{
   color: #9ba3ab;
@@ -68,6 +66,8 @@
 }
 /* recommend */
 .card .info.recommend{
+  width: auto;
+  height: 34px;
   left: 0;
   top: 66px;
   line-height: 20px;
@@ -99,4 +99,7 @@
 }
 .card-promotion:hover .mask{
   background: rgba(0,0,0,.2);
+}
+.card-promotion .info{
+  width: 100%;
 }

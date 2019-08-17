@@ -18,8 +18,9 @@ class Card extends Component {
           </div>
         ),
         promotion: (
-          <div className="info">
-            
+          <div className="info flex between-x item-center">
+            <div className="time">03:34</div>
+            <div className="mark">mark</div>
           </div>
         ),
       },
@@ -39,8 +40,6 @@ class Card extends Component {
           <div className="pic">
             <div className="lazing-img">
               {this.dom.lazingImg[this.props.content]}
-              {this.props.content.contentImg ? <img className="content-img" src={this.props.data.img} alt=""/> : ""}
-              {this.props.content.frontImg ? <img className="front-img" src="./img/2.png" alt=""/> : ""}
             </div>
             <div className="mask flex item-bottom">
               {this.dom.info[this.props.content]}
