@@ -1,12 +1,36 @@
 {
 	"recommend": [
-		"./img/1.jpg",
-		"./img/2.png",
-		"./img/1.jpg",
-		"./img/2.png",
-		"./img/1.jpg",
-		"./img/2.png",
-		"./img/1.jpg",
-		"./img/2.png"
+		{
+			"img": "./img/1.jpg",
+			"title": "AAAAAAAA",
+		}
+		{
+			"img": "./img/2.png",
+			"title": "AAAAAAAA",
+		}
+		{
+			"img": "./img/1.jpg",
+			"title": "AAAAAAAA",
+		}
+		{
+			"img": "./img/2.png",
+			"title": "AAAAAAAA",
+		}
+		{
+			"img": "./img/1.jpg",
+			"title": "AAAAAAAA",
+		}
+		{
+			"img": "./img/2.png",
+			"title": "AAAAAAAA",
+		}
+		{
+			"img": "./img/1.jpg",
+			"title": "AAAAAAAA",
+		}
+		{
+			"img": "./img/2.png"
+			"title": "AAAAAAAA",
+		}
 	]
 }

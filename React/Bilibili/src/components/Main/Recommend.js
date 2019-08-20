@@ -14,7 +14,14 @@ class Recommend extends React.Component {
       .then(
         (result) => {
           let list = result.recommend.map((item, index) => {
-            return <li className="recommend-item" key={index}><img src={item} alt=""/></li>
+            return (
+              <li className="recommend-item" key={index}>
+                <a href="/">
+                  <img src={item.img} alt=""/>
+                  <span className="intro">{item.title}</span>
+                </a>
+              </li>
+            )
           })
           this.setState({
             data: list
