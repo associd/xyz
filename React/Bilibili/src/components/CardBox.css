@@ -1,0 +1,8 @@
+.card-box {
+  width: 700px;
+  overflow: hidden;
+}
+.promotion .card-box{
+  width: 880px;
+  height: 168px;
+}

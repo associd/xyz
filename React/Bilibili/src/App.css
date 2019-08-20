@@ -1,33 +1,35 @@
-.App {
-  text-align: center;
+.media-box{
+  position: relative;
+  width: 1160px;
+  font-size: 12px;
+  margin: auto;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.mask{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.promotion .top{
+  padding-bottom: 15px;
 }
-
-.App-link {
-  color: #61dafb;
+.promotion .top .icon-promotion{
+  width: 40px;
+  height: 40px;
+  margin-bottom: -5px;
+  margin-right: 10px;
+  background-image: url(//static.hdslb.com/images/base/icons.png);
+  background-position: -141px -75px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.promotion .top .name{
+  font-size: 24px;
+  line-height: 24px;
+  margin-right: 32px;
+}
+.promotion .top .fire{
+  color: #6d757a;
+}
+.promotion .top .fire:hover{
+  color: #00a1d6;
 }
