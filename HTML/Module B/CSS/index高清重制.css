@@ -1,0 +1,18 @@
+header{
+	background: url(../IMG/bg.png) center 0 no-repeat;
+	width: 100%;
+	height: 450px;
+}
+.top{
+	width: 100%;
+	height: 32px;
+	background:rgba(0,0,0,0.2);
+}
+header>.top>.box{
+	width: 1110px;
+}
+.top>.box>left>span{
+	background: url(../IMG/top.png) 0 center no-repeat;
+	padding-left: 13px;
+	line-height: 32px;
+}

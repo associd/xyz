@@ -1,4 +1,11 @@
 .card-box {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  -ms-align-items: center;
+  align-items: center;
   width: 700px;
   overflow: hidden;
 }

@@ -35,11 +35,11 @@ class Card extends Component {
   }
   render() {
     return (
-      <div className={`card card-${this.props.content}`}>
+      <div className="card">
         <a href={this.props.data.link} title={this.props.data.title}>
           <div className="pic">
             <div className="lazing-img">
-              {this.dom.lazingImg[this.props.content]}
+              <img className="content-img" src={this.props.data.img} alt=""/>
             </div>
             <div className="mask flex item-bottom">
               {this.dom.info[this.props.content]}

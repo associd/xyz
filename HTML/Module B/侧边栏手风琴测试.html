@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			text-align:center;
+		}
+		ul{
+			list-style:none;
+		}
+		.wraper{
+			width: 600px;
+			background:black;
+			border:1px solid blue;
+			margin:auto;
+		}
+		li li:hover
+		{
+			background:skyblue;
+		}
+		li li{
+			height: 30px;
+			background:red;
+			border:2px solid black;
+			line-height:30px;
+		}
+		.lihead{
+			background:white;
+		}
+		li li:not(.lihead){
+			display:none;
+		}
+	</style>
+</head>
+<body>
+	<div class="wraper">
+		<ul>
+			<li class="inner1">
+				<ul>
+					<li class="lihead">h1</li>
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+					<li>4</li>
+				</ul>
+			</li>
+			<li class="inner2">
+				<ul>
+					<li class="lihead">h2</li>
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+					<li>4</li>
+					<li>5</li>
+				</ul>
+			</li>
+			<li class="inner3">
+				<ul>
+					<li class="lihead">h3</li>
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+					<li>4</li>
+					<li>5</li>
+				</ul>
+			</li>
+			<li class="inner4">
+				<ul>
+					<li class="lihead">h4</li>
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+					<li>4</li>
+					<li>5</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<script type="text/javascript" src="JS/jquery-2.1.1.js"></script>
+	<script>
+		$(function()
+		{
+			$(".lihead").click(function()
+			{
+				$(this).siblings().slideToggle("slow").end().parents().eq(1).siblings().find(".lihead").siblings().hide("slow")
+				console.log($(".lihead").next())
+				// console.log($(".lihead").parents().eq(1).siblings().children(".lihead").siblings())
+				// console.log($(".lihead").parents().eq(1).siblings().children(".lihead"))
+				// console.log($(this).parents().eq(1).siblings().find(".lihead").siblings().toggle())
+				// var p=$(this).parent()
+				// console.log(p)
+				// var p=$(this).parents()
+				// console.log(p)
+				// var p=$(this).parents().eq(2)
+				// console.log(p)
+				// var p=$(this).parents().eq(3)
+				// console.log(p)
+				// var p=$(this).parents().eq(4)
+				// console.log($(this))
+
+			})
+			// var a=$("li li")
+			// console.log(a)
+			// for(var i=0;i<a.length;i++)
+			// {
+			// 	a[i].style.background="green"
+			// }
+		})
+	</script>
+</body>
+</html>

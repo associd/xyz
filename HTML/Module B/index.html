@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+	<link rel="stylesheet" type="text/css" href="CSS/index.css">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<style>
+		#carousel img{
+			position:absolute;
+			margin-left: 120px;
+			bottom: 0;
+			transition:all 0.5s;
+			z-index:0;
+		}
+		#shadow_a{
+			left: 300px;
+		}
+		#shadow_b{
+			left: 0;
+		}
+		.header .activenav{
+			background:orange;
+		}
+		.activeman{
+			left: 120px;
+			z-index:10;
+			opacity:1;
+			width: 300px;
+			height: 354px;
+		}
+		#carousel img.right{
+			left: 300px;
+			width: 227px;
+			height: 297px;
+			opacity:0;
+		}
+		#carousel img.left{
+			width: 227px;
+			height: 297px;
+			opacity:0;
+			left: 0;
+		}
+		/*轮播字符样式*/
+		.dazhe>div{
+			position:absolute;
+			left:0px;
+			top: 30px;
+			font-size: 45px;
+			line-height:16px;
+			opacity:0;
+			transition:all 1s;
+		}
+		.zhekou{
+			font-size:1em;
+			color: orange;
+			line-height:45px;
+		}
+		.baifenbi{
+			font-size:0.5em;
+			color: orange;
+		}
+		.dazhexiangqing{
+			color: white;
+			font-size: 16px;
+		}
+		.dazhe .activechar{
+			font-size: 45px;
+			left: 70px;
+			top: 100px;
+			opacity:1;
+		}
+		.dazhe #yibai .zhekou{
+			font-size: 100px;
+			line-height:100px;
+		}
+		/*控制轮播*/
+		.header #control>i{
+			height: 52px;
+			width: 52px;
+			position: absolute;
+			bottom: 40px;
+			left:70px;
+			margin-left: 0;
+			transition:all 1s;
+			opacity:0;
+		}
+		.header #control .stop{
+			background: url(IMG/stop.png) 0 0 no-repeat;
+		}
+		.header #control .no_stop{
+			background: url(IMG/no_stop.png) 0 0 no-repeat;
+		}
+		/*平板端*/
+		@media screen and (min-width:500px) and (max-width:800px){
+			.main .leftmain{
+				display:initial;
+				position:fixed;
+				right:-412px;
+				top:0;
+				background:rgba(255,255,255,0.8);
+				z-index:80;
+				transition:all 1s;
+			}
+			#sidebar{
+				display:inline-block;
+			}
+			#nav_but{
+				display: none;
+			}
+			.header{
+				width: 758px;
+				padding-left: 10px;
+			}
+			.box{
+				width:768px;
+			}
+			.header #control>i{
+				left:358px;
+			}
+			.dazhe .activechar{
+				left:initial;
+				right:-80px;
+			}
+			/*轮播位置*/
+			#carousel{
+				right: 120px;
+			}
+			/*轮播字符样式*/
+			.dazhe>div{
+				left:initial;
+				right:-100px;
+			}
+			/*main*/
+			.main{
+				width: 768px;
+			}
+			.leftmain{
+				display: none;
+			}
+			.rightmain{
+				margin-left: 40px;
+			}
+			.footer{
+				width: 768px;
+			}
+			.topright{
+				position:fixed;
+				top:-30px;
+				right: 0;
+				background:rgba(0,0,0,0.8);
+				color:white;
+				z-index: 80;
+				transition:all 1s;
+			}
+			.topright a{
+				color:white;
+			}
+		}
+	</style>
+</head>
+<body>
+	<!-- ***************头部******* -->
+	<div class="header">
+		<div class="top">
+				<div class="topbox">
+					<div class="topleft ">
+					<a href="" class="topnav">Sign-in/Register</a>
+					<a href="" class="topnav">Customer</a>
+					<a href="" class="topnav">ServiceTrack</a>
+					<a href="" class="topnav">OrderMy</a>
+					<a href="" class="topnav">Account</a>
+					</div>
+					<span class="topright topnav"><a href="">MY SHOPPING BAG 0 ITEMS(<span>$0.00</span>)</a></span>
+				</div>
+		</div>
+		<div class="box">
+			<div class="boxnav">
+				<ul>
+				<li><a href="">MEN</a></li>
+				<li><a href="">WOMEN</a></li>
+				<li><a href="">KIDS</a></li>
+				<li><a href="">HOME</a></li>
+				<li><a href="">WATCHES</a></li>
+				<li><a href="">SALE</a></li>
+				<li><a href="">BLOG</a></li>
+				<li><a href="">OCEAN2OCEAN</a></li></ul>
+			</div>
+			<img class="brand" src="IMG/brand.png" alt="">
+			<!-- 轮播 -->
+			<div id="carousel">
+				<img id="shadow_a" src="IMG/shadow.png" alt="">
+				<img id="shadow_b" src="IMG/shadow.png" alt="">
+				<!-- 三人组 -->
+				<div class="three">
+					<img class="activeman" src="IMG/banner_1.png" alt="">
+					<img class="right" src="IMG/banner_2.png" alt="">
+					<img class="left" src="IMG/banner_3.png" alt="">
+				</div>
+				<!-- 三人组end -->
+				<!-- 字符轮播 -->
+				<div class="dazhe">
+					<div class="activechar" id="yibai"><span class="zhekou">50</span><span class="baifenbi">%</span><br>
+						<span class="dazhexiangqing">Nautica,a modern American</span><br>
+						<span class="dazhexiangqing">classic,offers quality</span></div>
+					<div class="charright"><span class="zhekou">TOP<br>SALE</span><br>
+						<span class="dazhexiangqing">Nautica,a modern American</span><br>
+						<span class="dazhexiangqing">classic,offers quality</span></div>
+					<div class="charleft"><span class="zhekou">NEW<br>FWERTK</span><br>
+						<span class="dazhexiangqing">Nautica,a modern American</span><br>
+						<span class="dazhexiangqing">classic,offers quality</span></div>
+				</div>
+				<!-- 字符轮播end -->
+				<div id="control">
+					<i class="stop"></i>
+				</div>
+			</div><!-- 轮播 -->
+			<!-- 搜索 -->
+			<div class="search">
+				<form>
+				<input type="text" name="search" placeholder="keyword.." class="inputsearch"/>
+				<input type="submit" class="GO" value="GO">
+				</form>
+			</div><!-- 搜索 -->
+			<!-- 轮播状态 -->
+		</div><!-- 盒子 -->
+		<div class="bottom">
+			<div class="transbox">
+				<div id="a" class="activenav"></div>
+				<div id="b"></div>
+				<div id="c"></div>
+			</div>
+		</div>
+	</div>
+	<!-- ***********中间******** -->
+	<div class="main">
+		<div class="leftmain">
+			<div class="upbox">
+				<ul>
+					<li class="lihead"><a href="#">FATHER'S DAY GIFT GUIDE</a></li>
+					<li><a href="#">All Gifts</a></li>
+					<li><a href="#">Men's Swim Shop</a></li>
+					<li><a href="#">Gifts Under $75</a></li>
+					<li><a href="#">Father &amp; Son</a></li>
+				</ul>
+			</div>
+			<div class="belowbox">
+				<ul>
+					<li class="lihead"><a href="#">SPECIAL FEATURES</a></li>
+					<li><a href="#">New Arrivals</a></li>
+					<li><a href="#">Catch of the Week</a></li>
+					<li><a href="#">Nautica Jeans Co</a></li>
+					<li><a href="#">Swim Shop</a></li>
+					<li><a href="#">Watch Event</a></li>
+					<li><a href="#">Into the tropics</a></li>
+					<li><a href="#">Big&amp;Tall</a></li>
+					<li><a href="#">Sale</a></li>
+				</ul>
+			</div>
+			<div class="belowbox">
+				<ul>
+					<li class="lihead"><a href="#">COLLECTIONS APPAREL BY CATEGORY</a></li>
+					<li><a href="#">Polos</a></li>
+					<li><a href="#">Activewear</a></li>
+					<li><a href="#">Sweaters</a></li>
+					<li><a href="#">Outerwear</a></li>
+					<li><a href="#">Button-Down Shirts</a></li>
+					<li><a href="#">Tees</a></li>
+					<li><a href="#">Pants</a></li>
+					<li><a href="#">Jeans</a></li>
+					<li><a href="#">Shorts</a></li>
+					<li><a href="#">Swim</a></li>
+					<li><a href="#">Underwear &amp; Sleepwear</a></li>
+					<li><a href="#">Suit Separates</a></li>
+					<li class="lihead"><a href="#">ACCESSORIES &amp; FRAGRABCE</a></li>
+					<li class="lihead"><a href="#">SPECIAL SIZES</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="rightmain">
+			<!-- 第一栏 -->
+			<h4 class="new"><span>NEW</span><span>FEATURED</span><span><a href="#">more>></a></span></h4>
+			<span class="first">
+				<!-- 手机端导航开始-->
+					<div class="nav">
+						<i class="curr"></i>
+						<i></i>
+						<i></i>
+					</div>
+				<!-- 手机端导航结束 -->
+				<img class="cloth" src="IMG/goods_1.png" alt="">
+				<p class="money">$49.50</p>
+				<p class="jieshao">Fine Stripe Polo</p>
+				<p class="tuijianzhishu">★★★☆</p>
+				<img src="IMG/new.png" alt="" class="rednew">
+				<div class="buy"><a href="#">Buy</a></div>
+				<p class="free">Free shippong on all <br>orders$50+</p>
+			</span>
+			<span>
+				<img class="cloth" src="IMG/goods_2.png" alt="">
+				<p class="money">$49.50</p>
+				<p class="jieshao">Fine Stripe Polo</p>
+				<p class="tuijianzhishu">★★★☆</p>
+				<img src="IMG/new.png" alt="" class="rednew">
+				<div class="buy"><a href="#">Buy</a></div>
+				<p class="free">Free shippong on all <br>orders$50+</p>
+			</span>
+			<span>
+				<img class="cloth" src="IMG/goods_3.png" alt="">
+				<p class="money">$49.50</p>
+				<p class="jieshao">Fine Stripe Polo</p>
+				<p class="tuijianzhishu">★★★☆</p>
+				<img src="IMG/new.png" alt="" class="rednew">
+				<div class="buy"><a href="#">Buy</a></div>
+				<p class="free">Free shippong on all <br>orders$50+</p>
+			</span>
+			<!-- 第二栏 -->
+			<h4 class="new"><span>PRODUCTS</span><span>FEATURED</span><span><a href="#">more>></a></span></h4>
+			<span class="first">
+				<!-- 手机端导航开始-->
+					<div class="nav">
+						<i class="curr"></i>
+						<i></i>
+						<i></i>
+					</div>
+				<!-- 手机端导航结束 -->
+				<img class="cloth" src="IMG/goods_1.png" alt="">
+				<p class="money">$49.50</p>
+				<p class="jieshao">Fine Stripe Polo</p>
+				<p class="tuijianzhishu">★★★☆</p>
+				<!-- <img src="images/new.png" alt="" class="rednew"> -->
+				<div class="buy"><a href="#">Buy</a></div>
+				<p class="free">Free shippong on all <br>orders$50+</p>
+			</span>
+			<span>
+				<img class="cloth" src="IMG/goods_2.png" alt="">
+				<p class="money">$49.50</p>
+				<p class="jieshao">Fine Stripe Polo</p>
+				<p class="tuijianzhishu">★★★☆</p>
+				<!-- <img src="images/new.png" alt="" class="rednew" -->
+				<div class="buy"><a href="#">Buy</a></div>
+				<p class="free">Free shippong on all <br>orders$50+</p>
+			</span>
+			<span>
+				<img class="cloth" src="IMG/goods_3.png" alt="">
+				<p class="money">$49.50</p>
+				<p class="jieshao">Fine Stripe Polo</p>
+				<p class="tuijianzhishu">★★★☆</p>
+				<!-- <img src="images/new.png" alt="" class="rednew"> -->
+				<div class="buy"><a href="#">Buy</a></div>
+				<p class="free">Free shippong on all <br>orders$50+</p>
+			</span>
+			<!-- 第三栏 -->
+			<span>
+				<img class="cloth" src="IMG/goods_1.png" alt="">
+				<p class="money">$49.50</p>
+				<p class="jieshao">Fine Stripe Polo</p>
+				<p class="tuijianzhishu">★★★☆</p>
+				<!-- <img src="images/new.png" alt="" class="rednew"> -->
+				<div class="buy"><a href="#">Buy</a></div>
+				<p class="free">Free shippong on all <br>orders$50+</p>
+			</span>
+			<span>
+				<img class="cloth" src="IMG/goods_2.png" alt="">
+				<p class="money">$49.50</p>
+				<p class="jieshao">Fine Stripe Polo</p>
+				<p class="tuijianzhishu">★★★☆</p>
+				<!-- <img src="images/new.png" alt="" class="rednew"> -->
+				<div class="buy"><a href="#">Buy</a></div>
+				<p class="free">Free shippong on all <br>orders$50+</p>
+			</span>
+			<span>
+				<img class="cloth" src="IMG/goods_3.png" alt="">
+				<p class="money">$49.50</p>
+				<p class="jieshao">Fine Stripe Polo</p>
+				<p class="tuijianzhishu">★★★☆</p>
+				<!-- <img src="images/new.png" alt="" class="rednew"> -->
+				<div class="buy"><a href="#">Buy</a></div>
+				<p class="free">Free shippong on all <br>orders$50+</p>
+			</span>
+		</div>
+	</div>
+	<!-- 底部开始 -->
+	<footer class="footer">
+	<!-- 顶部导航开始 -->
+		<div class="up_nav">
+			<div>
+			<span><a href="">Corporate Responsibility</a></span>
+			<span><a href="">Terms and Conditions</a></span>
+			<span><a href="">Affiliates</a></span>
+			<span><a href="">Careers</a></span>
+			<span><a href="">Site Map</a></span>
+			<span><a href="">Privacy Policy</a></span>
+			</div>
+		</div><!-- 顶部部导航结束 -->
+		<!-- 中间导航开始 -->
+		<nav class="midnav">
+			<ul>
+				<li class="shop">
+					<div>SHOP</div>
+					<!-- ul.linknav>li*7 -->
+					<ul class="flexbox">
+						<li><a href="#">Men</a></li>
+						<li><a href="#">Women</a></li>
+						<li><a href="#">Kids</a></li>
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Watches</a></li>
+						<li><a href="#">Sale</a></li>
+						<li><a href="#">Gift Certificates</a></li>
+					</ul>
+				</li>
+				<li class="navth2">
+						<div>HELP</div>
+					<!-- ul.linknav>li*7 -->
+					<ul class="linknav">
+						<li><a href="#">Customer service</a></li>
+						<li><a href="#">Contacet Us</a></li>
+						<li><a href="#">About Nautica</a></li>
+						<li><a href="#">Watch Information</a></li>
+					</ul>
+				</li>
+				<li class="navth3">
+					<div>OFFERS BY EMAIL</div>
+					<!-- ul.linknav>li*7 -->
+					<ul class="linknav">
+						<li>
+							<form><input type="text" placeholder="Your email address">
+							<input type="submit" value="SUBMIT">
+							</form>
+						</li>
+						<li><a href="#">SIGN UP FOR NAUTICA TEXT ALERTS ></a></li>
+						<li><a href="#">STORE LOCATOR</a></li>
+						<li><a href="#">Find a Store</a></li>
+					</ul>
+				</li>
+				<li class="community">
+					<div>COMMUNITY</div>
+					<!-- ul.linknav>li*7 -->
+					<ul class="linknav">
+						<li class="fb"></li>
+						<li><a href=""></a></li>
+						<li><a href=""></a></li>
+						<li><a href=""></a></li>
+						<li><a href=""></a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav><!-- 中间导航结束 -->
+	</footer>
+	<!-- 底部copyright开始 -->
+	<div class="copyright">©2013 NAUTICA</div>
+	<!-- 结束 -->
+	<!-- 平板手机导航开始 -->
+	<div id="sidebar">
+		<a href=""><img id="return_top" src="IMG/return_top.png" alt=""></a>
+		<a href=""><img id="bag_btn" src="IMG/bag_btn.png" alt=""></a>
+		<a href=""><img id="nav_but" src="IMG/nav_but.png" alt=""></a>
+		<a href=""><img id="aside_btn" src="IMG/aside_btn.png" alt=""></a>
+	</div>
+	<!-- 平板手机导航结束 -->
+	<script type="text/javascript" src="JS/jquery-2.1.1.js"></script>
+	<script>
+	$(function(){
+		// 轮播
+		var a=document.querySelector("#shadow_a"),
+			b=document.querySelector("#shadow_b"),
+			mans=document.querySelectorAll("#carousel .three>img"),
+			dazhes=document.querySelectorAll("#carousel .dazhe>div"),
+			indexnav=0,
+			timer=null;
+			navs=$(".transbox>div"),
+			carousel=document.querySelector("#carousel"),
+			stops=document.querySelector("#control>i"),
+			t=0;
+		for(var i=0;i<navs.length;i++)
+		{
+			console.log(1)
+			navs[i].onclick=function()
+			{
+				if(navs[indexnav]!=this)
+				{
+					console.log(2)
+					shiftToshadow()
+					present(this)
+					shiftToman()
+					stops.className="stop"
+				}
+			}
+			navs[i].onmouseover = function()
+			{
+				clearInterval(timer)
+			}
+			navs[i].onmouseout = function()
+			{
+				autoplay()
+			}
+		}
+		//自动轮播
+		// autoplay()
+		function autoplay()
+		{
+			timer=setInterval(function()
+			{
+				indexnav=(indexnav+1)%navs.length
+				shiftToshadow()
+				shiftToman()
+				navs[indexnav].className="activenav"
+				navs[(indexnav+1)%navs.length].className=""
+				navs[(indexnav+2)%navs.length].className=""
+			},1000)
+		}
+		//影子滑动
+		function shiftToshadow()
+		{
+			console.log(3)
+			var t=a
+			a.style.left=0+'px'
+			b.style.left=300+'px'
+			a=b;
+			b=t;
+		}
+		//当前的导航位置
+		function present(obj)
+		{
+			for(var i=0;i<navs.length;i++)
+			{
+				if(navs[i]==obj)
+				{
+					indexnav=i
+					navs[i].className="activenav"
+				}else
+				{
+					navs[i].className=""
+				}
+			}
+		}
+		//人字滑动
+		function shiftToman()
+		{
+			mans[indexnav].className="activeman"
+			mans[(indexnav+1)%mans.length].className="right"
+			mans[(indexnav+2)%mans.length].className="left"
+			dazhes[indexnav].className="activechar"
+			dazhes[(indexnav+1)%dazhes.length].className="charright"
+			dazhes[(indexnav+2)%dazhes.length].className="charleft"
+		}
+		//控制轮播按钮
+		carousel.onmouseover=function()
+		{
+			console.log(6)
+			stops.style.opacity=1
+		}
+		carousel.onmouseout=function()
+		{
+			stops.style.opacity=0
+		}
+		stops.onclick=function()
+		{
+			if (stops.className=="stop")
+			{
+				clearInterval(timer)
+				stops.className="no_stop"
+			}else
+			{
+				autoplay()
+				stops.className="stop"
+			}
+		}
+		//小屏端回到顶部
+		$(window).scroll(function()
+		{
+			if($(window).scrollTop()>100)
+			{
+				$('#return_top').fadeIn(1500)
+			}else
+			{
+				$('#return_top').fadeOut(1500)
+			}
+		})
+		$('#return_top').click(function()
+		{
+			$('body,html').animate({scrollTop:0},1000)
+			return false
+		})
+		//侧边栏导航
+		$('#nav_but').click(function()
+		{
+			if(!t)
+			{
+				//打开导航
+				$('.header .boxnav').css({right:0+'px'})
+				$('#sidebar').css({width:224+'px'})
+				t=(!t)
+			}else
+			{
+				//关闭导航
+				$('.header .boxnav').css({right:-230+'px'})
+				$('#sidebar').css({width:54+'px'})
+				//关闭商品导航
+				$('.leftmain').css({right:-412+'px'})
+				$('#sidebar').css({right:0+'px'})
+				t=(!t)
+			}
+			console.log(209)
+			return false
+		})
+		//侧边栏商品导航
+		$('#aside_btn').click(function()
+		{
+			if(!t)
+			{
+				console.log(56)
+				//打开商品导航
+				$('.leftmain').css({right:-70+'px'})
+				$('#sidebar').css({right:342+'px'})
+				t=(!t)
+			}else
+			{
+				//关闭商品导航
+				$('.leftmain').css({right:-412+'px'})
+				$('#sidebar').css({right:0+'px'})
+				//关闭导航
+				$('.header .boxnav').css({right:-230+'px'})
+				$('#sidebar').css({width:54+'px'})
+				t=(!t)
+			}
+			return false
+		})
+		//侧边栏手风琴效果
+		$(".leftmain .lihead").click(function()
+		{
+			console.log(7788)
+			$(this).siblings().slideToggle("slow")
+		})
+		//侧边栏购物车
+		var y=0
+		$('#bag_btn').click(function()
+		{
+			if(!y)
+			{
+				// 打开购物车
+				$('.topright').css({top:0+"px"})
+				y=(!y)
+			}else
+			{
+				//关闭商品导航
+				$('.leftmain').css({right:-412+'px'})
+				$('#sidebar').css({right:0+'px'})
+				// 关闭购物车
+				$('.topright').css({top:-30+"px"})
+				y=(!y)
+			}
+			return false
+		})
+		//手鸡端轮播
+		var mobileindex=0,
+			mobilenav=$(".first .nav i");
+		mobilenav.click(function()
+		{
+			if(this!=mobilenav[mobileindex])
+			{
+				var span=$(".rightmain > span.first");
+				// span.css({marginLeft:-300+'px',opacity:0,transition:"all 1s"})
+				span.animate({marginLeft:-300+'px',opacity:0,transition:"all 2s"},500)
+				span.animate({marginLeft:400+'px',opacity:0,transition:"all 0s"},0)
+				span.animate({marginLeft:50+'px',opacity:1,transition:"all 1s"},500)
+				console.log(34)
+			}
+			for(var i=0;i<mobilenav.length;i++)
+			{
+				if(this==mobilenav[i])
+				{
+
+					mobilenav[i].className="curr"
+					mobileindex=i
+				}else
+				{
+					mobilenav[i].className=""
+				}
+			}
+		})
+	})
+	</script>
+</body>
+</html>

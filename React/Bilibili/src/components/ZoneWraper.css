@@ -7,3 +7,9 @@
 .zone-wraper .right{
   margin-left: 10px;
 }
+.zone-wraper .top{
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  align-items: flex-end;
+}
