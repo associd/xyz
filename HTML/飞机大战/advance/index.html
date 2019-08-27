@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Star Battle</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/jquery_moveable.js"></script>
+    <script src="js/jquery_createEle.js"></script>
+    <script src="js/jquery_audio.js"></script>
+    <script src="js/jquery_crash.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!--background planets: always loop in the game-->
+        <div class="planet-box">
+            <img src="imgs/planet-1.png" alt="planet" class="planet-item">
+            <img src="imgs/planet-2.png" alt="planet" class="planet-item">
+            <img src="imgs/planet-3.png" alt="planet" class="planet-item">
+            <img src="imgs/planet-4.png" alt="planet" class="planet-item">
+            <img src="imgs/planet-5.png" alt="planet" class="planet-item">
+        </div>
+
+        <!--game settings: play / pause button, audio buttons, font size buttons-->
+        <div class="setting-box">
+            <img src="imgs/setting-pause.png" alt="setting" class="setting-item controllable setting-play">
+            <img src="imgs/setting-audio-on.png" alt="setting" class="setting-item controllable setting-audio">
+            <img src="imgs/setting-font-plus.png" alt="setting" class="setting-item controllable setting-font-plus">
+            <img src="imgs/setting-font-minus.png" alt="setting" class="setting-item controllable setting-font-minus">
+        </div>
+
+        <!--top bar menu: to show the game informations-->
+        <div class="topbar">
+            <div class="logo-box">
+                <img src="imgs/logo.png" alt="logo" class="logo">
+            </div>
+            <div class="top-item">
+                <img src="imgs/icon-score.png" alt="icon">
+                <span class="score-info">0</span>
+            </div>
+            <div class="top-item">
+                <img src="imgs/icon-time.png" alt="icon">
+                <span class="time-info">0</span>
+            </div>
+            <div class="top-item">
+                <img src="imgs/icon-fuel.png" alt="icon">
+                <div class="fuel-counter-box">
+                    <div class="fuel-counter"></div>
+                </div>
+                <span class="fuel-info">15</span>
+            </div>
+        </div>
+
+
+
+        <!--instructions board: show with animations-->
+        <div class="board instructions-board">
+            <h2>How to Play Star Battle.</h2>
+            <p>1. Move the spaceship using the sensible areas in the screen;</p>
+            <p>2. The timer present the time lapsed;</p>
+            <p>3. The fuel counter show the remain fuel;</p>
+            <p>4. During the flight, the spaceship needs to destroy the asteroids and enemy spaceships that are presented in the space;</p>
+            <p>5. You can shoot pressing Space Bar;</p>
+            <p>6. If the spaceship hits a asteroid or another spaceship, you lose 15 points of fuel;</p>
+            <p>7. Enemy spaceship needs 1 shot to be destroyed, you will get 5 points for each enemy destroyed;</p>
+            <p>8. Asteroid needs 2 shots to be destroyed, you will get 10 points for each asteroid destroyed;</p>
+            <p>9. If you destroy a friendly spaceship, you lose 10 points;</p>
+            <p>10. During the flight, the spaceship needs to collect fuel in the space;</p>
+            <p>11. You can pause the game clicking in a button pause, or pressing the letter "p";</p>
+            <p>12. Go beyond all limits;</p>
+            <p>Battle in Space with Star Battle Championship...</p>
+            <button class="btn btn-start">Star Game</button>
+        </div>
+
+
+
+        <!--form board: to get player's name when the game over-->
+        <div class="board form-board">
+            <h2>Game Over!</h2>
+            <input type="text" placeholder="input your name here" class="input input-name">
+            <button class="btn btn-continue disabled">Continue</button>
+        </div>
+
+
+
+        <!--ranking board: to show all player's ranking-->
+        <div class="board ranking-board">
+            <table class="ranking-table">
+                <tr>
+                    <th>Position</th>
+                    <th>Name</th>
+                    <th>Score</th>
+                    <th>Time</th>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <button class="btn btn-restart">Start Game</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+
+        <!--game elements: spaceships, aestroids, fuel, red layer, score counter and shots-->
+        <div class="player"></div>
+        <!--<div class="friend"></div>-->
+        <!--<div class="enemy"></div>-->
+        <!--<div class="aestroid aestroid-1"></div>-->
+        <!--<div class="bullet"></div>-->
+        <!--<div class="fuel"></div>-->
+        <!--<div class="enemy-bullet"></div>-->
+        <!--<div class="score-counter score-minus">-10</div>-->
+        <!--<div class="layer-red"></div>-->
+    </div>
+</body>
+</html>
