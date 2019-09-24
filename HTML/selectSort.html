@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Select-Sort</title>
+  <style media="screen">
+    *{
+      transition: all .2s;
+    }
+    .gua{
+      margin: auto;
+      display: -webkit-flex;
+      display: -ms-flex;
+      display: flex;
+      justify-content: space-between;
+      -ms-align-items: center;
+      align-items: center;
+    }
+    .p-center{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .board{
+      height:300px;
+      width: 520px;
+      overflow: hidden;
+      margin-top: 20px;
+      position: relative;
+    }
+    .square{
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      line-height: 50px;
+      font-size: 20px;
+      font-weight: bold;
+      animation: 0.4s in;
+      transition: all .1s;
+    }
+    .square.active, .square:hover{
+      color: white;
+      background-color: #333;
+    }
+    button{
+      padding: 5px 10px;
+      font-size: 30px;
+      line-height: 30px;
+      outline: none;
+      border: 1px solid lightblue;
+      background-color: transparent;
+      cursor: pointer;
+      transition: all 0.4s;
+      background: linear-gradient(to bottom, #333 0%, #333 100%);
+      background-position: 0 40px;
+      background-repeat: no-repeat;
+      background-size: 100%;
+    }
+    button:hover{
+      color: white;
+      background-position: 0 0;
+    }
+    button:active{
+      background: linear-gradient(to bottom, #666 0%, #666 100%);
+    }
+    @keyframes in {
+      from{
+        filter: opacity(0);
+        transform: scale(1.8)
+      }
+      to{
+        filter: opacity(1);
+        transform: scale(1)
+      }
+    }
+    @keyframes out {
+      to{
+        filter: opacity(0);
+        transform: scale(1.8)
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="gua">
+    <div id="square-board" class="board">
+      <!-- <div class="square">1</div>
+      <div class="square">2</div>
+      <div class="square">3</div>
+      <div class="square">4</div>
+      <div class="square">5</div>
+      <div class="square">6</div> -->
+    </div>
+    <div class="board">
+      <div class="operation">
+        <button id="sort" class="sort" type="button" name="button">sort</button>
+        <button id="reset" class="sort" type="button" name="button">reset</button>
+        <input class="array-size" type="number" name="" value="10">
+      </div>
+    </div>
+  </div>
+  <script>
+    const e = sel => document.querySelector(sel)
+    const es = sel => document.querySelectorAll(sel)
+    const log = console.log.bind(console)
+    const rand = function(min, max) {
+      return min + Math.floor( Math.random() * (max - min + 1) )
+    }
+    const ensure = function(condition, message) {
+      if (!condition) {
+        log("**测试失败: ", message)
+      }
+    }
+    const numbers = []
+    const lineSize = 20
+    const squares = []
+    const squareConfig = {
+        width: 50,
+        margin: 10,
+        border: 2,
+    }
+    const createSquare = function(key, number) {
+      let {width, margin, border} = squareConfig
+      let board = e("#square-board")
+      let div = document.createElement("div")
+      div.className = "square"
+      div.innerHTML = number
+      div.key = key
+      div.board = board
+      div.number = number
+      div.boxW = width + margin + border
+      div.boxH = width + margin + border
+      div.style.left = (key % lineSize) * div.boxW + "px"
+      div.style.top = Math.floor(key / lineSize) * div.boxH + "px"
+      div.out = function() {
+        this.state = "remove"
+        this.style.animation = "0.4s out"
+      }
+      squares.push(div)
+      board.appendChild(div)
+      return div
+    }
+    const resize = function(size) {
+      if (size < 0) {
+        return
+      }
+      let {width, margin, border} = squareConfig
+      let len = numbers.length
+      let n = Math.abs(size - len)
+      if (len > size) {
+        for (var i = 0; i < n; i++) {
+          numbers.pop()
+          squares.pop().out()
+        }
+      } else if (len < size) {
+        for (var i = 0; i < n; i++) {
+          let num = rand(0, size)
+          numbers.push(num)
+          createSquare(len + i, num)
+        }
+      }
+      e("#square-board").style.height = Math.ceil(numbers.length / lineSize) * (width + margin + border) + "px"
+      e("#square-board").style.width = lineSize * (width + margin + border) + "px"
+      return numbers
+    }
+    const reset = function() {
+      numbers.forEach((item, index) => {
+         numbers[index] = rand(0, numbers.length)
+      })
+      update()
+    }
+    const update = function() {
+      numbers.forEach((item, index) => {
+        squares[index].innerHTML = item
+      })
+    }
+    const testResize = function() {
+      ensure(resize(10)["length"] == 10, "testResize 1 ")
+      ensure(resize(0)["length"] == 0, "testResize 1 ")
+    }
+    const swap = function(arr, ai, bi) {
+      let ti = arr[ai]
+      arr[ai] = arr[bi]
+      arr[bi] = ti
+    }
+    const swapAttr = function(attr, a, b) {
+      if (attr instanceof Array) {
+        for (let i = 0; i < attr.length - 1; i++) {
+          a = a[attr[i]]
+          b = b[attr[i]]
+        }
+        attr = attr[attr.length - 1]
+      }
+      let ta = a[attr]
+      a[attr] = b[attr]
+      b[attr] = ta
+    }
+    const minIndex = function(arr) {
+      let min = arr[0]
+      let minIndex = 0
+      arr.forEach((item, index) => {
+        if (item < min) {
+          min = item
+          minIndex = index
+        }
+      })
+      return minIndex
+    }
+    const sort = function*(arr) {
+      for(let i = 0; i < arr.length; i++) {
+        let mi = minIndex(arr.slice(i)) + i
+        swap(arr, i, mi)
+        yield [i, mi]
+      }
+    }
+    const swapSquare = function(idx) {
+      let [a, b] = idx
+      let sa = squares[a]
+      let sb = squares[b]
+      swap(squares, a, b)
+      return new Promise((resolve, reject) => {
+        let end = [false, false]
+        swapAttr(["style","left"], sa, sb)
+        swapAttr(["style","top"], sa, sb)
+        sa.classList.add("active")
+        sb.classList.add("active")
+        let delay = (parseFloat(window.getComputedStyle(sa)["transitionDuration"]) + parseFloat(window.getComputedStyle(sb)["transitionDuration"])) / 2
+        setTimeout(function() {
+          sa.classList.remove("active")
+          sb.classList.remove("active")
+          resolve()
+        }, delay * 1000)
+      })
+    }
+    const nextStep = function(iter, callback) {
+      let step = iter.next()
+      if (step.done) {
+        return
+      } else {
+        callback(step).then(function() {
+          nextStep(iter, callback)
+        })
+      }
+    }
+
+    const __main = function() {
+      window.addEventListener("input", event => {
+        let value = event.target.value
+        resize(value)
+      })
+      window.addEventListener("animationend", event => {
+        let target = event.target
+        if (target.state === "remove") {
+          target.remove()
+        }
+      })
+      window.onload = function() {
+        e("#sort").addEventListener("click", event => {
+          let sortNumber = sort(numbers)
+          let step = null
+          nextStep(sortNumber, function(step) {
+            let pro = swapSquare(step.value)
+            return pro
+          })
+        })
+        e("#reset").addEventListener("click", reset)
+        resize(10)
+      }
+    }
+    __main()
+  </script>
+</body>
+</html>

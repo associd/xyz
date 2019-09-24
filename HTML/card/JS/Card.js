@@ -1,4 +1,4 @@
-class XyzCard  {
+class Card  {
    constructor(element) {
       this.element = element;
    }
@@ -22,25 +22,25 @@ class XyzCard  {
       )`
    }
 }
-class XyzContainer {
+class CardBox {
    constructor(htmlElements = []) {
-      this.XyzCards = [];
+      this.cards = [];
       htmlElements.forEach((item) => {
-         this.push(new XyzCard(item));
+         this.push(new Card(item));
       })
    }
-   push(XyzCard) {
-      this.XyzCards.push(XyzCard);
+   push(card) {
+      this.cards.push(card);
    }
-   showXyzCard() {
-      this.XyzCards.forEach(function(item, index, array) {
+   showCard() {
+      this.cards.forEach(function(item, index, array) {
          setTimeout(function() {
             item.show()
          }, index * 100 + 500)
       })
    }
-   initXyzCard() {
-      this.XyzCards.forEach(function(item, index, array) {
+   initCard() {
+      this.cards.forEach(function(item, index, array) {
 
       })
    }
