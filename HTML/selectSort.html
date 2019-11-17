@@ -6,10 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Select-Sort</title>
   <style media="screen">
-    *{
-      transition: all .2s;
-    }
-    .gua{
+    .view{
       margin: auto;
       display: -webkit-flex;
       display: -ms-flex;
@@ -25,11 +22,10 @@
       transform: translate(-50%, -50%);
     }
     .board{
-      height:300px;
-      width: 520px;
       overflow: hidden;
-      margin-top: 20px;
-      position: relative;
+    }
+    #square-board{
+        position: relative;
     }
     .square{
       position: absolute;
@@ -40,7 +36,7 @@
       font-size: 20px;
       font-weight: bold;
       animation: 0.4s in;
-      transition: all .1s;
+      transition: all .4s;
     }
     .square.active, .square:hover{
       color: white;
@@ -54,7 +50,7 @@
       border: 1px solid lightblue;
       background-color: transparent;
       cursor: pointer;
-      transition: all 0.4s;
+      transition: all .4s;
       background: linear-gradient(to bottom, #333 0%, #333 100%);
       background-position: 0 40px;
       background-repeat: no-repeat;
@@ -83,48 +79,47 @@
         transform: scale(1.8)
       }
     }
+    .operation{
+        position: sticky;
+        top: 8px;
+        background-color: #fff;
+        z-index: 2;
+    }
   </style>
 </head>
 <body>
-  <div class="gua">
-    <div id="square-board" class="board">
-      <!-- <div class="square">1</div>
-      <div class="square">2</div>
-      <div class="square">3</div>
-      <div class="square">4</div>
-      <div class="square">5</div>
-      <div class="square">6</div> -->
-    </div>
-    <div class="board">
-      <div class="operation">
+    <div class="operation">
         <button id="sort" class="sort" type="button" name="button">sort</button>
         <button id="reset" class="sort" type="button" name="button">reset</button>
         <input class="array-size" type="number" name="" value="10">
-      </div>
     </div>
-  </div>
+    <div class="view">
+        <div id="square-board" class="board">
+
+        </div>
+    </div>
   <script>
     const e = sel => document.querySelector(sel)
     const es = sel => document.querySelectorAll(sel)
     const log = console.log.bind(console)
+
     const rand = function(min, max) {
       return min + Math.floor( Math.random() * (max - min + 1) )
     }
-    const ensure = function(condition, message) {
-      if (!condition) {
-        log("**测试失败: ", message)
-      }
-    }
+
     const numbers = []
-    const lineSize = 20
+
     const squares = []
+
     const squareConfig = {
         width: 50,
         margin: 10,
         border: 2,
+        lineSize: 20,
     }
+
     const createSquare = function(key, number) {
-      let {width, margin, border} = squareConfig
+      let {width, margin, border, lineSize} = squareConfig
       let board = e("#square-board")
       let div = document.createElement("div")
       div.className = "square"
@@ -144,11 +139,12 @@
       board.appendChild(div)
       return div
     }
+
     const resize = function(size) {
       if (size < 0) {
         return
       }
-      let {width, margin, border} = squareConfig
+      let {width, margin, border, lineSize} = squareConfig
       let len = numbers.length
       let n = Math.abs(size - len)
       if (len > size) {
@@ -167,26 +163,26 @@
       e("#square-board").style.width = lineSize * (width + margin + border) + "px"
       return numbers
     }
+
     const reset = function() {
       numbers.forEach((item, index) => {
          numbers[index] = rand(0, numbers.length)
       })
       update()
     }
+
     const update = function() {
       numbers.forEach((item, index) => {
         squares[index].innerHTML = item
       })
     }
-    const testResize = function() {
-      ensure(resize(10)["length"] == 10, "testResize 1 ")
-      ensure(resize(0)["length"] == 0, "testResize 1 ")
-    }
+
     const swap = function(arr, ai, bi) {
       let ti = arr[ai]
       arr[ai] = arr[bi]
       arr[bi] = ti
     }
+
     const swapAttr = function(attr, a, b) {
       if (attr instanceof Array) {
         for (let i = 0; i < attr.length - 1; i++) {
@@ -199,6 +195,7 @@
       a[attr] = b[attr]
       b[attr] = ta
     }
+
     const minIndex = function(arr) {
       let min = arr[0]
       let minIndex = 0
@@ -210,6 +207,7 @@
       })
       return minIndex
     }
+
     const sort = function*(arr) {
       for(let i = 0; i < arr.length; i++) {
         let mi = minIndex(arr.slice(i)) + i
@@ -217,6 +215,7 @@
         yield [i, mi]
       }
     }
+
     const swapSquare = function(idx) {
       let [a, b] = idx
       let sa = squares[a]
@@ -224,18 +223,32 @@
       swap(squares, a, b)
       return new Promise((resolve, reject) => {
         let end = [false, false]
-        swapAttr(["style","left"], sa, sb)
-        swapAttr(["style","top"], sa, sb)
         sa.classList.add("active")
         sb.classList.add("active")
         let delay = (parseFloat(window.getComputedStyle(sa)["transitionDuration"]) + parseFloat(window.getComputedStyle(sb)["transitionDuration"])) / 2
         setTimeout(function() {
-          sa.classList.remove("active")
-          sb.classList.remove("active")
-          resolve()
+            swapAttr(["style","left"], sa, sb)
+            swapAttr(["style","top"], sa, sb)
+            sa.classList.remove("active")
+            sb.classList.remove("active")
+            resolve()
         }, delay * 1000)
       })
     }
+
+    const updateLine = function() {
+        let wWidth = window.innerWidth
+        let {width, margin, border, lineSize} = squareConfig
+        squareConfig.lineSize = Math.floor(wWidth / (width + margin + border))
+        updatePosition()
+    }
+
+    const updatePosition = function() {
+        let size = e(".array-size").value
+        resize(0)
+        resize(size)
+    }
+
     const nextStep = function(iter, callback) {
       let step = iter.next()
       if (step.done) {
@@ -248,28 +261,30 @@
     }
 
     const __main = function() {
-      window.addEventListener("input", event => {
-        let value = event.target.value
-        resize(value)
-      })
-      window.addEventListener("animationend", event => {
-        let target = event.target
-        if (target.state === "remove") {
-          target.remove()
-        }
-      })
-      window.onload = function() {
-        e("#sort").addEventListener("click", event => {
-          let sortNumber = sort(numbers)
-          let step = null
-          nextStep(sortNumber, function(step) {
-            let pro = swapSquare(step.value)
-            return pro
-          })
+        window.addEventListener("input", event => {
+            let value = event.target.value
+            resize(value)
         })
-        e("#reset").addEventListener("click", reset)
-        resize(10)
-      }
+        window.addEventListener("animationend", event => {
+            let target = event.target
+            if (target.state === "remove") {
+              target.remove()
+            }
+        })
+        window.onload = function() {
+            updateLine()
+            e("#sort").addEventListener("click", event => {
+              let sortNumber = sort(numbers)
+              let step = null
+              nextStep(sortNumber, function(step) {
+                let pro = swapSquare(step.value)
+                return pro
+              })
+            })
+            e("#reset").addEventListener("click", reset)
+            resize(10)
+        }
+        window.addEventListener("resize", updateLine)
     }
     __main()
   </script>
